@@ -2,7 +2,7 @@ package org.khmeracademy.akd.services.impl;
 
 import java.util.ArrayList;
 
-import org.khmeracademy.akd.entities.User;
+import org.khmeracademy.akd.entities.Userss;
 import org.khmeracademy.akd.repositories.UserRepository;
 import org.khmeracademy.akd.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +25,24 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean insert(User user) {
+	public boolean insert(Userss user) {
 		
 		return userRepository.insert(user);
 		
 	}
 
 	@Override
-	public boolean update(User user) {
+	public boolean update(Userss user) {
 		return userRepository.update(user);
 	}
 
 	@Override
-	public ArrayList<User> findAll() {
+	public ArrayList<Userss> findAll() {
 		return userRepository.findAll();
 	}
 
 	@Override
-	public User findOne(int id) {
+	public Userss findOne(int id) {
 		return userRepository.findOne(id);
 	}
 

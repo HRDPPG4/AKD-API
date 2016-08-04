@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.khmeracademy.akd.entities.User;
+import org.khmeracademy.akd.entities.Userss;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -19,10 +19,10 @@ public interface UserRepository {
 	@Delete("DELETE FROM tbl_user WHERE id=#{id}")
 	boolean delete(int id);
 	@Update("UPDATE tbl_user SET name=#{name},gender=#{gender},email=#{email} WHERE id=#{id}")
-	boolean update(User user);
+	boolean update(Userss user);
 	
 	@Insert("INSERT INTO tbl_user(name, gender,email) VALUES(#{name}, #{gender},#{email})")
-	boolean insert(User user);
+	boolean insert(Userss user);
 	
 	
 	@Select("SELECT id, name, gender,email FROM tbl_user ORDER BY id DESC")
@@ -32,7 +32,7 @@ public interface UserRepository {
 		@Result(property="gender", column="gender"),
 		@Result(property="email", column="email")
 	})
-	ArrayList<User> findAll();
+	ArrayList<Userss> findAll();
 	
 	@Select("SELECT id, name, gender,email FROM tbl_user WHERE id=#{id} ORDER BY id DESC ")
 	@Results({
@@ -41,6 +41,6 @@ public interface UserRepository {
 		@Result(property="gender", column="gender"),
 		@Result(property="email", column="email")
 	})
-	User findOne(int id);
+	Userss findOne(int id);
 	
 }

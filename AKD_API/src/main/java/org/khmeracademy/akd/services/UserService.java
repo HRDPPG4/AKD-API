@@ -2,7 +2,7 @@ package org.khmeracademy.akd.services;
 
 import java.util.ArrayList;
 
-import org.khmeracademy.akd.entities.User;
+import org.khmeracademy.akd.entities.Userss;
 
 
 public interface UserService {
@@ -13,12 +13,12 @@ public interface UserService {
 	 */
 	boolean delete(int id);
 	
-	boolean insert(User user);
+	boolean insert(Userss user);
 	
-	boolean update(User user);
+	boolean update(Userss user);
 	
-	ArrayList<User> findAll();
+	ArrayList<Userss> findAll();
 	
-	User findOne(int id);
+	Userss findOne(int id);
 	
 }

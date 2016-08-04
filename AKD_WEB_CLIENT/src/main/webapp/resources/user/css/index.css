@@ -1,0 +1,387 @@
+/**/
+html,body {
+
+    width: 100%;
+    height: 100%;
+  font-weight: 300;
+    color: #666;
+    font-family:"NiDA Bayon";
+    background-color:#E9EBEE;
+}
+
+/*top menu*/
+#header{
+  width: 100%;
+ height: 100px;
+}
+.top-menu{
+  height: 60px;
+}
+.navbar-bg{
+  padding-top: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+}
+
+/*logo*/
+.navbar >  .navbar-logo .brand-logo{
+  position: relative;
+  left: 100px;
+  color: #3B5998;
+  font-weight: 400px;
+}
+.navbar >  .navbar-logo .brand-logo:hover{
+  position: relative;
+  color:gray;
+}
+/*////////////////////////////////////////////////////////////*/
+.main-menu-contain{
+  height:30px;
+}
+.navbar-main-menu{
+position: relative;
+  z-index: 300;
+  background-color: #3B5998;
+  border-width: 1px 0;
+  -webkit-border-radius: 0;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 0;
+  -moz-background-clip: padding;
+  border-radius: 0;
+  background-clip: padding-box;
+ }
+
+/*main-menu*/
+/* Remove margins and padding from the list, and add a black background color */
+ ul.menu-basic{
+ 	font-family:"NiDA Bayon";
+ 	text-transform: uppercase;
+ 	list-style-type: none;
+ 	margin: 0;
+ 	padding: 0;
+ 	overflow: hidden;
+ }
+ /* Float the list items side by side */
+ .main-menu{
+ 	position: relative;
+ 	margin-left: 170px;
+
+ }
+ul.menu-basic li{float: left;}
+ul.menu-basic li a{
+	display: inline-block;
+    color: #fff;
+    position: relative;
+    top: 4px;
+    text-align: center;
+    padding: 10px 16px;
+    text-decoration: none;
+    /*transition: 0.3s;*/
+    font-size: 18px;
+}
+
+/* Change background color of links on hover */
+ul.menu-basic li.active a{
+  background-color:#fff;
+  color:#000;
+  border-right: 1px solid #3B5998;
+}
+ul.menu-basic li.active a:visited{
+  background-color:#fff;
+  color:#000;
+}
+ul.menu-basic li a:hover{
+  background-color:#fff;
+  color:#424242;
+  border-right: 1px solid #3B5998;
+}
+/* Hide the list item that contains the link that should open and close the topnav on small screens */
+ul.menu-basic li.icon {display: none;}
+/*///////////////////////////////////////////////*/
+/*section education*/
+.topspace-second{
+	margin-top: 20px;
+    background-color: #fff;
+ /* border-left:1px solid #3B5998;
+  border-right:1px solid #3B5998;
+  border-bottom:1px solid #3B5998;*/
+	padding-bottom: 10px;
+}
+.section-title{
+	padding-top:10px;
+	padding-bottom:5px;
+	color:#fff;
+  display: block;
+  overflow: hidden;
+  font-weight: 400;
+  font-size: 16px;
+	line-height: 30px;
+  letter-spacing: 1px;
+	background-color:#3B5998;
+}
+.topspace-second > .section-title #left-title{
+	text-align:left;
+	float: left;
+	 border-bottom: 2px dashed #fff;
+}
+.topspace-second > .section-title #right-title{
+	text-align: right;
+	float: right;
+}
+
+.topspace-second > .section-title #right-title a{
+	color: #fff;
+	text-decoration: none;
+}
+.topspace-second > .section-title #right-title a:hover{
+	color: #fff;
+	text-decoration: none;
+}
+
+
+/*tab-content-second*/
+.topspace-second > .main-tab-content{
+		margin: auto;
+		padding: auto;
+}
+ul.tabs{
+			margin: 0px;
+			padding: 0px;
+       border-bottom: 2px solid #f9c100;
+			list-style: none;
+		}
+		ul.tabs li{
+			background:#3B5998;
+			color: #fff; 
+			display: inline-block;
+			padding: 10px 15px;
+			cursor: pointer;
+		}
+		ul.tabs li:hover{
+			background:#eee;
+			color: #000;
+			border-top-left-radius:15px;
+			border-bottom-right-radius:10px; 
+			display: inline-block;
+			padding: 10px 15px;
+			cursor: pointer;
+		}
+
+		ul.tabs li.current{
+			background: #fff;
+			color: #222;
+		}
+
+		.tab-content{
+			display: none;
+			background: #fff;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+
+/*section-content*/
+
+.thumbnail {
+  display: block;
+  -webkit-border-radius: 0;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 0;
+  -moz-background-clip: padding;
+  border-radius: 0;
+  background-clip: padding-box;
+  border: 0 none;
+  margin-bottom: 4px;
+  margin: 0px -7px -3px;
+  padding: 0px 0px 0px;
+  padding-bottom:30px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+}
+a.thumbnail{
+	text-decoration: none;
+  border: 1px solid #fff;
+ border-top-color: rgb(229, 230, 233);
+    border-right-color: rgb(223, 224, 228);
+    border-bottom-color: rgb(208, 209, 213);
+    border-left-color: rgb(223, 224, 228);
+}
+.thumbnail .img {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  height: 180px;
+  margin: 0 0 5px;
+  position: relative;
+  text-decoration: none;
+
+}
+/*.title-cover{
+  position: absolute;
+  right: 30px;
+  width: 100px;
+  color: #000;
+}*/
+/*.img .cover{
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  width: 100%;
+   height: 100%;
+  line-height: 32px;
+  padding: 0 150px;
+  -webkit-border-radius: 1px 0 0 1px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 1px 0 0 1px;
+  -moz-background-clip: padding;
+  border-radius: 1px 0 0 1px;
+  background-clip: padding-box;
+  font-size: 12px;
+  font-size: 1.20rem;
+  -webkit-transform:translate(-50%,0);
+  -moz-transform:translate(-50%,0);
+  -webkit-transition: all 3s ease;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0px #3B5998;
+  background: #3B5998;
+  color: black;
+}*/
+.img > img{
+  -webkit-transition: all 1s ease;
+}
+.img:hover > img{
+  width: 350px;
+  margin: -40px;
+  -webkit-transition: all 1s ease;
+}
+ /*.img .cover:hover{
+  position: absolute;
+  right: 0;
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
+  line-height: 32px;
+  padding: 0 150px;
+  -webkit-transform:translate(50%,0);
+  -moz-transform:translate(50%,0);
+  -webkit-transition: all 3s ease;
+  -webkit-border-radius: 1px 0 0 1px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 1px 0 0 1px;
+  -moz-background-clip: padding;
+  border-radius: 1px 0 0 1px;
+  background-clip: padding-box;
+  font-size: 12px;
+  font-size: 1.20rem;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0px #fff;
+  background: #fff;
+  color: black;
+}
+*/
+
+
+.thumbnail img {
+  width: 100%;
+  text-decoration: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.thumbnail .title {
+  text-transform: uppercase;
+  margin: 0 1em;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 400;
+  text-decoration: none;
+  margin-top: -1px;
+  display: block;
+  text-indent: 0;
+}
+.thumbnail .user-name{
+   margin: 0 1.1em;
+    text-transform: capitalize;
+   margin-bottom:10px;
+   line-height: 25px;
+   text-align: left;
+   font-size: 16px;
+   text-decoration: none;
+  display: block;
+  text-indent: 0;
+}
+.thumbnail .descript{
+   margin: 0 1.1em;
+   padding-bottom: 20px;
+   line-height: 25px;
+   text-align: left;
+   font-size: 16px;
+   text-decoration: none;
+  display: block;
+  text-indent: 0;
+  border-bottom: 0.1em solid #3B5998;
+}
+.thumbnail .socials{
+  position: relative;
+  padding-bottom: 35px;
+  margin: 0 2em;
+  display: block;
+  text-indent: 0;
+}
+.thumbnail .view-count{
+  position: relative;
+ top: 25px;
+  left: 25px;
+  color: #757575;
+  float: left;
+}
+.thumnail>a .fa-arrow-circle-o-down,
+a .fa-arrow-circle-o-down,
+a .fa-share-alt,
+a .fa-thumbs-up{
+  position: relative;
+  top: -40px;
+  float: right;
+  right: 20px;
+  color:#3B5998; 
+  font-size: 20px;
+  margin:0 0.4em; 
+}
+.thumnail>a .fa-arrow-circle-o-down,
+a .fa-arrow-circle-o-down:hover,
+a .fa-share-alt:hover,
+a .fa-thumbs-up:hover{
+  position: relative;
+  top: -40px;
+  float: right;
+  right: 20px;
+  color:#000; 
+  font-size: 20px;
+ margin:0 0.4em; 
+}
+.fa{
+  margin-right: 5px;
+}
+i.fa-bars{
+  position: relative;
+  top: 10px;
+  font-size: 25px;
+  color: white;
+}
+/*add class name .stick when scroll down*/
+.navbar.stick {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  left: 0;
+  opacity: 1;
+  z-index: 100;
+}
+
+/**/
+
+

@@ -1,25 +1,22 @@
 package org.khmeracademy.akd.entities;
 
 public class User {
-	private int id;
+	private int userID;
 	private String name;
-	private String gender;
+	private String password;
 	private String email;
-	public User(){
-		
-	}
+	private String phone;
+	private String createdDate;
+	private String remark;
+	private int status;
+	private String role;
 	
-	public User(int id, String name, String gender) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.gender = gender;
+	
+	public int getUserID() {
+		return userID;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	public String getName() {
 		return name;
@@ -27,19 +24,47 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getGender() {
-		return gender;
+	public String getPassword() {
+		return password;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 }
