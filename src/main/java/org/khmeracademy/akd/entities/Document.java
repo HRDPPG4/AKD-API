@@ -1,29 +1,48 @@
 package org.khmeracademy.akd.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Document {
-	private int docID;
-	private String name;
+	@JsonProperty("DOC_ID")
+	private String docID;
+	@JsonProperty("TITLE")
+	private String title;
+	@JsonProperty("DES")
+	private String des;
+	@JsonProperty("EMBEDED_LINK")
+	private String embedLink;
+	@JsonProperty("THUMBNAIL_URL")
+	private String thumbnailURL;
+	@JsonProperty("EXPORT_LINK")
+	private String exportLink;
+	@JsonProperty("VIEW")
 	private int view;
+	@JsonProperty("SHARE")
 	private int share;
-	private String URL;
+	@JsonProperty("CREATED_DATE")
 	private String createdDate;
-	private String remark;
+	@JsonProperty("DOC_TYPE_NUM")
 	private int docTypeNum;
+	@JsonProperty("USER_ID")
 	private int userID;
-	private int catID;
+	@JsonProperty("CAT_ID")
+	private String catID;
+	@JsonProperty("STATUS")
 	private int status;
 	
-	public int getDocID() {
+	
+	
+	public String getDocID() {
 		return docID;
 	}
-	public void setDocID(int docID) {
+	public void setDocID(String docID) {
 		this.docID = docID;
 	}
 	public String getName() {
-		return name;
+		return title;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.title = name;
 	}
 	public int getView() {
 		return view;
@@ -38,10 +57,10 @@ public class Document {
 		this.share = share;
 	}
 	public String getURL() {
-		return URL;
+		return embedLink;
 	}
 	public void setURL(String uRL) {
-		URL = uRL;
+		embedLink = uRL;
 	}
 	public String getCreatedDate() {
 		return createdDate;
@@ -50,10 +69,10 @@ public class Document {
 		this.createdDate = createdDate;
 	}
 	public String getRemark() {
-		return remark;
+		return des;
 	}
 	public void setRemark(String remark) {
-		this.remark = remark;
+		this.des = remark;
 	}
 	public int getDocTypeNum() {
 		return docTypeNum;
@@ -67,10 +86,10 @@ public class Document {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-	public int getCatID() {
+	public String getCatID() {
 		return catID;
 	}
-	public void setCatID(int catID) {
+	public void setCatID(String catID) {
 		this.catID = catID;
 	}
 	public int getStatus() {
@@ -78,6 +97,18 @@ public class Document {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public String getExportLink() {
+		return exportLink;
+	}
+	public void setExportLink(String exportLink) {
+		this.exportLink = exportLink;
+	}	
+	public String getThumbnailURL() {
+		return thumbnailURL;
+	}
+	public void setThumbnailURL(String thumbnailURL) {
+		this.thumbnailURL = thumbnailURL;
 	}
 	
 	

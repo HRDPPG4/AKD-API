@@ -1,7 +1,7 @@
 package org.khmeracademy.akd.entities;
 
 public class Category {
-	private int catID;
+	private String catID;
 	private String catName;
 	private String createdDate;
 	private String remark;
@@ -12,10 +12,10 @@ public class Category {
 	}
 	 
 	
-	public int getCatID() {
+	public String getCatID() {
 		return catID;
 	}
-	public void setCatID(int catID) {
+	public void setCatID(String catID) {
 		this.catID = catID;
 	}
 	public String getCatName() {

@@ -1,8 +1,5 @@
 package org.khmeracademy.akd.response;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Response {

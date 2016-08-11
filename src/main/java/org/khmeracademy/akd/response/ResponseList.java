@@ -2,6 +2,7 @@ package org.khmeracademy.akd.response;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,9 +19,9 @@ public class ResponseList<T> extends Response {
 		return data;
 	}
 	
-	public void setData(List<T> data)
+	public void setData(ArrayList doc)
 	{
-		this.data=data;
+		this.data=doc;
 	}
 	
 	public Paging getPaging()
