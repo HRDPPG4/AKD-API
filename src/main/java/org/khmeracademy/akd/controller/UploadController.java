@@ -3,6 +3,7 @@ package org.khmeracademy.akd.controller;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import org.khmeracademy.akd.repositories.DocumentRepository;
 import org.khmeracademy.akd.services.UploadService;
 import org.khmeracademy.akd.services.impl.GoogleUpload;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +19,30 @@ public class UploadController {
 	@Autowired
 	UploadService fileUpload;
 	
+	@Autowired
+	private DocumentRepository documentRepository;
+	
 	@RequestMapping(value="/api/uploadFile", method = RequestMethod.POST)
 	public String uploadFile(@RequestParam("files") MultipartFile file) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
 		String path = fileUpload.upload(file, null);
 		System.out.println("Path is: "+path);
 		
-		GoogleUpload up=new GoogleUpload();
-		up.upload(path);
-		
-		//SET CODE
-		//SET MESSAGE
+
+		if(path!=null)
+		{
+			/*GoogleUpload up=new GoogleUpload();
+			up.upload(path);*/
+			
+		//	Document document = new Document(); 
+			
+		//	System.out.println(document.getTitle());
+			
+		//	documentRepository.update(doc);
+			
+			//SET CODE
+			//SET MESSAGE
+		}
 		
 		return path;
 	}

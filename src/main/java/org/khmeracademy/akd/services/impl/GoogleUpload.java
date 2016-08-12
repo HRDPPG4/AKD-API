@@ -6,6 +6,7 @@ import java.security.GeneralSecurityException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.khmeracademy.akd.entities.Document;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.social.google.api.Google;
@@ -20,7 +21,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Service
 public class GoogleUpload {
-	public boolean upload(String path) throws GeneralSecurityException, IOException{
+	public String upload(String path) throws GeneralSecurityException, IOException{
 		
 		//TODO: TO SET THE SCOPE FOR ACCESSING TO OUR GOOGLE DRIVE
 				Set<String> scopes = new HashSet<>();
@@ -92,6 +93,17 @@ public class GoogleUpload {
 				System.out.println(" PPTX:		  https://docs.google.com/presentation/d/"+ file1.getId()+"/embed?start=false&loop=false&delayms=3000");
 				System.out.println(" PDF:		  https://drive.google.com/file/d/"+ file1.getId()+"/preview");
 		
-		return false;
+				/*Document doc = new Document();
+				doc.setDocID(file1.getId());
+				doc.setTitle(file1.getTitle());
+				doc.setDes(file1.getDescription());*/
+				
+			
+				
+				
+				
+				
+				
+		return path;
 	}
 }
