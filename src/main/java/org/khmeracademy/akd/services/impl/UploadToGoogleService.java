@@ -109,14 +109,6 @@ public class UploadToGoogleService {
 				doc.setUserID(1);
 				doc.setCatID("1");
 				doc.setStatus(1);
-				
-				System.out.println("Doc ID IS: "+doc.getDocID());
-				
-				
-				
-				
-				
-				
 		return doc;
 		
 	}
