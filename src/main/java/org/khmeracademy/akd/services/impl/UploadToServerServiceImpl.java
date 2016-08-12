@@ -3,12 +3,12 @@ package org.khmeracademy.akd.services.impl;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.khmeracademy.akd.services.UploadService;
+import org.khmeracademy.akd.services.UploadToServerService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class UploadServiceImpl implements UploadService{
+public class UploadToServerServiceImpl implements UploadToServerService{
 
 	@Override
 	public String upload(MultipartFile file, String folder) {

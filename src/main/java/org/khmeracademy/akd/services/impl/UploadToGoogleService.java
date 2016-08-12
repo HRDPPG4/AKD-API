@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.khmeracademy.akd.entities.Document;
+import org.khmeracademy.akd.services.UploadToDBService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.social.google.api.Google;
@@ -20,8 +21,8 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Service
-public class GoogleUpload {
-	public String upload(String path) throws GeneralSecurityException, IOException{
+public class UploadToGoogleService {
+	public Document upload(String path) throws GeneralSecurityException, IOException{
 		
 		//TODO: TO SET THE SCOPE FOR ACCESSING TO OUR GOOGLE DRIVE
 				Set<String> scopes = new HashSet<>();
@@ -93,17 +94,30 @@ public class GoogleUpload {
 				System.out.println(" PPTX:		  https://docs.google.com/presentation/d/"+ file1.getId()+"/embed?start=false&loop=false&delayms=3000");
 				System.out.println(" PDF:		  https://drive.google.com/file/d/"+ file1.getId()+"/preview");
 		
-				/*Document doc = new Document();
+				Document doc = new Document();
+				
 				doc.setDocID(file1.getId());
 				doc.setTitle(file1.getTitle());
-				doc.setDes(file1.getDescription());*/
+				doc.setDes(file1.getDescription());
+				doc.setEmbedLink("free");
+				doc.setThumbnailURL("https://drive.google.com/thumbnail?&sz=w320&id="+file1.getId());
+				doc.setExportLink("");
+				doc.setView(0);
+				doc.setShare(0);
+				doc.setCreatedDate(file1.getCreatedDate().toString());
+				doc.setDocTypeNum(1);
+				doc.setUserID(1);
+				doc.setCatID("1");
+				doc.setStatus(1);
 				
-			
+				System.out.println("Doc ID IS: "+doc.getDocID());
 				
 				
 				
 				
 				
-		return path;
+				
+		return doc;
+		
 	}
 }

@@ -3,9 +3,12 @@ package org.khmeracademy.akd.controller;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import org.khmeracademy.akd.entities.Document;
 import org.khmeracademy.akd.repositories.DocumentRepository;
-import org.khmeracademy.akd.services.UploadService;
-import org.khmeracademy.akd.services.impl.GoogleUpload;
+import org.khmeracademy.akd.services.DocumentService;
+import org.khmeracademy.akd.services.UploadToDBService;
+import org.khmeracademy.akd.services.UploadToServerService;
+import org.khmeracademy.akd.services.impl.UploadToGoogleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadController {
 
 	@Autowired
-	UploadService fileUpload;
+	UploadToServerService fileUpload;
+	
+	@Autowired
+	private UploadToDBService uploadToDBService;
 	
 	@Autowired
 	private DocumentRepository documentRepository;
@@ -31,14 +37,16 @@ public class UploadController {
 
 		if(path!=null)
 		{
-			/*GoogleUpload up=new GoogleUpload();
-			up.upload(path);*/
+			UploadToGoogleService up=new UploadToGoogleService();
+			//up.upload(path);
 			
-		//	Document document = new Document(); 
+			uploadToDBService.uploadFile(up.upload(path));
 			
-		//	System.out.println(document.getTitle());
+			/*Document doc = new Document(); 
 			
-		//	documentRepository.update(doc);
+			System.out.println(doc.getTitle());*/
+			
+		//	documentRepository.insert(doc);
 			
 			//SET CODE
 			//SET MESSAGE
