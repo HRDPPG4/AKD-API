@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Document;
 
 public interface DocumentService {	
-	boolean delete(int id);
+	boolean delete(String id);
 	
 	boolean insert(Document doc);
 	

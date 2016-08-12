@@ -38,12 +38,6 @@ public class Document {
 	public void setDocID(String docID) {
 		this.docID = docID;
 	}
-	public String getName() {
-		return title;
-	}
-	public void setName(String name) {
-		this.title = name;
-	}
 	public int getView() {
 		return view;
 	}
@@ -56,23 +50,12 @@ public class Document {
 	public void setShare(int share) {
 		this.share = share;
 	}
-	public String getURL() {
-		return embedLink;
-	}
-	public void setURL(String uRL) {
-		embedLink = uRL;
-	}
+	
 	public String getCreatedDate() {
 		return createdDate;
 	}
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
-	}
-	public String getRemark() {
-		return des;
-	}
-	public void setRemark(String remark) {
-		this.des = remark;
 	}
 	public int getDocTypeNum() {
 		return docTypeNum;

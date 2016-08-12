@@ -39,80 +39,79 @@ public class DocumentController {
 	}
 
 	
-//	@RequestMapping(value="/document/{id}",method=RequestMethod.GET)
-//	public ResponseObject<Userss> fineOne(@PathVariable("id") int id)
-//	{
-//		Userss user=documentService.findOne(id);
-//		ResponseObject<Userss> res=new ResponseObject<Userss>();
-//		if(documentService.findOne(id)!=null){
-//			res.setCode(ResponseCode.RECORD_FOUND);
-//			res.setMessage();
-//			res.setData(user);
-//		}
-//		else{
-//			res.setCode(ResponseCode.RECORD_NOT_FOUND);
-//			res.setMessage();
-//		}
-//		
-//		return res;
-//	}
-//	
-//	
-//	@RequestMapping(value="/document/{id}",method=RequestMethod.DELETE)
-//	public Response delete(@PathVariable("id") int id)
-//	{
-//	
-//		boolean status=documentService.delete(id);
-//		Response res=new Response();
-//		if(status){
-//			res.setCode(ResponseCode.DELETE_SUCCESS);
-//			res.setMessage();
-//		}
-//		else{
-//			res.setCode(ResponseCode.DELETE_FAIL);
-//			res.setMessage();
-//		}
-//		return res;
-//	}
-//	
-//	
-//	
-//	@RequestMapping(value="/document",method=RequestMethod.POST)
-//	public Response insert(@RequestBody Userss user)
-//	{
-//		Response res=new Response();
-//		if(documentService.insert(user)){
-//			res.setCode(ResponseCode.INSERT_SUCCESS);
-//			res.setMessage();
-//		}
-//		else{
-//			res.setCode(ResponseCode.INSERT_FAIL);
-//			res.setMessage();
-//		}
-//		
-//		return res;
-//		
-//	}
-//
-//	
-//	
-//	@RequestMapping(value="/document",method=RequestMethod.PUT)
-//	public Response update(@RequestBody Userss user)
-//	{
-//		Response res=new Response();
-//		
-//		if(documentService.update(user))
-//		{
-//			res.setCode(ResponseCode.UPDATE_SUCCESS);
-//			res.setMessage();
-//		}
-//		else
-//		{
-//			res.setCode(ResponseCode.UPDATE_FAIL);
-//			res.setMessage();
-//		}
-//	
-//		return res;
-//	}
+	@RequestMapping(value="/document/{id}",method=RequestMethod.GET)
+	public ResponseObject<Document> fineOne(@PathVariable("id") String id)
+	{
+		Document doc=documentService.findOne(id);
+		ResponseObject<Document> res=new ResponseObject<Document>();
+		if(documentService.findOne(id)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	
+	@RequestMapping(value="/document/{id}",method=RequestMethod.DELETE)
+	public Response delete(@PathVariable("id") String id)
+	{
+	
+		boolean status=documentService.delete(id);
+		Response res=new Response();
+		if(status){
+			res.setCode(ResponseCode.DELETE_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.DELETE_FAIL);
+			res.setMessage();
+		}
+		return res;
+	}
+	
+	
+	
+	@RequestMapping(value="/document",method=RequestMethod.POST)
+	public Response insert(@RequestBody Document doc)
+	{
+		Response res=new Response();
+		if(documentService.insert(doc)){
+			res.setCode(ResponseCode.INSERT_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.INSERT_FAIL);
+			res.setMessage();
+		}
+		
+		return res;
+		
+	}
+
+	
+	
+	@RequestMapping(value="/document",method=RequestMethod.PUT)
+	public Response update(@RequestBody Document doc)
+	{
+		Response res=new Response();
+		
+		if(documentService.update(doc))
+		{
+			res.setCode(ResponseCode.UPDATE_SUCCESS);
+			res.setMessage();
+		}
+		else
+		{
+			res.setCode(ResponseCode.UPDATE_FAIL);
+			res.setMessage();
+		}
+	
+		return res;
+	}
 	
 }

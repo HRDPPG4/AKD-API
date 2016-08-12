@@ -15,7 +15,7 @@ public class DocumentServiceImpl implements DocumentService{
 	private DocumentRepository documentRepository;
 	
 	@Override
-	public boolean delete(int id) {
+	public boolean delete(String id) {
 		try{
 			return documentRepository.delete(id);
 		}catch (Exception e) {

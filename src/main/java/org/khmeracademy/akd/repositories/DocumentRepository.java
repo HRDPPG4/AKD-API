@@ -17,12 +17,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DocumentRepository {
 	
-	@Delete("DELETE FROM akd_documents WHERE doc_id=#{id}")
-	boolean delete(int id);
-	@Update("UPDATE akd_documents SET name=#{name},gender=#{gender},email=#{email} WHERE id=#{id}")
+	//@Delete("DELETE FROM akd_documents WHERE doc_id=#{id}")
+	boolean delete(String id);
+	//@Update("UPDATE akd_documents SET title=#{title},des=#{des},embedLink=#{embed_link},thumbnailURL=#{thumbnail_url},exportLink=#{export_link},view=#{view},share=#{share},createdDate=#{created_date},docTypeNum=#{doc_type_num},userID=#{user_id},catID=#{cat_id},status=#{status} WHERE docID=#{id}")
 	boolean update(Document doc);
 	
-	@Insert("INSERT INTO tbl_user(name, gender,email) VALUES(#{name}, #{gender},#{email})")
+	//@Insert("INSERT INTO tbl_user(name, gender,email) VALUES(#{name}, #{gender},#{email})")
 	boolean insert(Document doc);
 	
 	
