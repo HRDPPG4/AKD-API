@@ -5,7 +5,7 @@ public class Log {
 	private String date;
 	private String remark;
 	private int userID;
-	private int docID;
+	private String docID;
 	private int status;
 	
 	
@@ -33,10 +33,10 @@ public class Log {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-	public int getDocID() {
+	public String getDocID() {
 		return docID;
 	}
-	public void setDocID(int docID) {
+	public void setDocID(String docID) {
 		this.docID = docID;
 	}
 	public int getStatus() {

@@ -14,48 +14,35 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LogRepository {
 	
-	//@Delete("DELETE FROM akd_documents WHERE doc_id=#{docID}")
+	@Delete("DELETE FROM akd_logs WHERE log_id=#{logID}")
 	boolean delete(int id);
-	//@Update("UPDATE akd_documents SET title=#{title},des=#{des},embed_link=#{embedLink},thumbnail_url=#{thumbnailURL},export_link=#{exportLink},view=#{view},share=#{share},created_date=#{createdDate},doc_type_num=#{docTypeNum},user_id=#{userID},cat_id=#{catID},status=#{status} WHERE doc_id=#{docID}")
+	@Update("UPDATE akd_logs SET date=#{date},remark=#{remark},user_id=#{userID},doc_id=#{docID},status=#{status} WHERE log_id=#{logID}")
 	boolean update(Log feed);
 	
-	//@Insert("INSERT INTO akd_documents VALUES(#{docID},#{title},#{des},#{embedLink},#{thumbnailURL},#{exportLink},#{view},#{share},#{createdDate},#{docTypeNum},#{userID},#{catID},#{status})")
+	@Insert("INSERT INTO akd_logs(date,remark,user_id,doc_id,status) VALUES(#{date},#{remark},#{userID},#{docID},#{status})")
 	boolean insert(Log feed);
 	
 	
-	//@Select("SELECT * from akd_documents")
+	@Select("SELECT * from akd_logs")
 	@Results({
-		@Result(property="docID", column="doc_id"),
-		@Result(property="title", column="title"),
-		@Result(property="des", column="des"),
-		@Result(property="embedLink", column="embed_link"),
-		@Result(property="thumbnailURL", column="thumbnail_url"),
-		@Result(property="exportLink", column="export_link"),
-		@Result(property="view", column="view"),
-		@Result(property="share", column="share"),		
-		@Result(property="createdDate", column="created_date"),
-		@Result(property="docTypeNum", column="doc_type_num"),
+		@Result(property="logID", column="log_id"),
+		@Result(property="date", column="date"),
+		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
-		@Result(property="catID", column="cat_id"),
-		@Result(property="status", column="status")		
+		@Result(property="docID", column="doc_id"),
+		@Result(property="status", column="status")
+		
 	})
 	ArrayList<Log> findAll();
 	
-	//@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
+	@Select("SELECT * from akd_logs WHERE log_id=#{logID}")
 	@Results({
-		@Result(property="docID", column="doc_id"),
-		@Result(property="title", column="title"),
-		@Result(property="des", column="des"),
-		@Result(property="embedLink", column="embed_link"),
-		@Result(property="thumbnailURL", column="thumbnail_url"),
-		@Result(property="exportLink", column="export_link"),
-		@Result(property="view", column="view"),
-		@Result(property="share", column="share"),		
-		@Result(property="createdDate", column="created_date"),
-		@Result(property="docTypeNum", column="doc_type_num"),
+		@Result(property="logID", column="log_id"),
+		@Result(property="date", column="date"),
+		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
-		@Result(property="catID", column="cat_id"),
-		@Result(property="status", column="status")	
+		@Result(property="docID", column="doc_id"),
+		@Result(property="status", column="status")
 	})
 	Log findOne(int id);
 	
