@@ -13,54 +13,41 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Category;
-import org.khmeracademy.akd.entities.Document;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoryRepository {
 	
-	//@Delete("DELETE FROM akd_documents WHERE doc_id=#{docID}")
+	@Delete("DELETE FROM akd_categories WHERE cat_id=#{catID}")
 	boolean delete(String id);
-	//@Update("UPDATE akd_documents SET title=#{title},des=#{des},embed_link=#{embedLink},thumbnail_url=#{thumbnailURL},export_link=#{exportLink},view=#{view},share=#{share},created_date=#{createdDate},doc_type_num=#{docTypeNum},user_id=#{userID},cat_id=#{catID},status=#{status} WHERE doc_id=#{docID}")
+	@Update("UPDATE akd_categories SET name=#{catName},created_date=#{createdDate},remark=#{remark},parent_id=#{parentID},status=#{status} WHERE cat_id=#{catID}")
 	boolean update(Category cat);
 	
-	//@Insert("INSERT INTO akd_documents VALUES(#{docID},#{title},#{des},#{embedLink},#{thumbnailURL},#{exportLink},#{view},#{share},#{createdDate},#{docTypeNum},#{userID},#{catID},#{status})")
+	@Insert("INSERT INTO akd_categories (cat_id,name,created_date,remark ,parent_id,status) VALUES(#{catID},#{catName},#{createdDate},#{remark},#{parentID},#{status})")
 	boolean insert(Category cat);
 	
 	
-	//@Select("SELECT * from akd_documents")
+	@Select("SELECT * FROM akd_categories")
 	@Results({
-		@Result(property="docID", column="doc_id"),
-		@Result(property="title", column="title"),
-		@Result(property="des", column="des"),
-		@Result(property="embedLink", column="embed_link"),
-		@Result(property="thumbnailURL", column="thumbnail_url"),
-		@Result(property="exportLink", column="export_link"),
-		@Result(property="view", column="view"),
-		@Result(property="share", column="share"),		
-		@Result(property="createdDate", column="created_date"),
-		@Result(property="docTypeNum", column="doc_type_num"),
-		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
-		@Result(property="status", column="status")		
+		@Result(property="catName", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="parentID", column="parent_id"),
+		@Result(property="status", column="status")
+			
 	})
-	ArrayList<Document> findAll();
+	ArrayList<Category>findAll();
 	
-	//@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
+	@Select("SELECT * from akd_categories WHERE cat_id=#{catID}")
 	@Results({
-		@Result(property="docID", column="doc_id"),
-		@Result(property="title", column="title"),
-		@Result(property="des", column="des"),
-		@Result(property="embedLink", column="embed_link"),
-		@Result(property="thumbnailURL", column="thumbnail_url"),
-		@Result(property="exportLink", column="export_link"),
-		@Result(property="view", column="view"),
-		@Result(property="share", column="share"),		
-		@Result(property="createdDate", column="created_date"),
-		@Result(property="docTypeNum", column="doc_type_num"),
-		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
-		@Result(property="status", column="status")	
+		@Result(property="catName", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="parentID", column="parent_id"),
+		@Result(property="status", column="status")
+			
 	})
 	Category findOne(String id);
 	

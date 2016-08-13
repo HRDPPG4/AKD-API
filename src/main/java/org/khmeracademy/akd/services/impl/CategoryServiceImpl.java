@@ -3,11 +3,11 @@ package org.khmeracademy.akd.services.impl;
 import java.util.ArrayList;
 
 import org.khmeracademy.akd.entities.Category;
-import org.khmeracademy.akd.entities.Document;
+
 import org.khmeracademy.akd.repositories.CategoryRepository;
-import org.khmeracademy.akd.repositories.DocumentRepository;
+
 import org.khmeracademy.akd.services.CategoryService;
-import org.khmeracademy.akd.services.DocumentService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
