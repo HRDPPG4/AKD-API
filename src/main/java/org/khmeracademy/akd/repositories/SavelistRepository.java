@@ -14,49 +14,73 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SavelistRepository {
 	
-	//@Delete("DELETE FROM akd_documents WHERE doc_id=#{docID}")
+	@Delete(SAVE_LIST_SQL.DELETE)
 	boolean delete(int id);
-	//@Update("UPDATE akd_documents SET title=#{title},des=#{des},embed_link=#{embedLink},thumbnail_url=#{thumbnailURL},export_link=#{exportLink},view=#{view},share=#{share},created_date=#{createdDate},doc_type_num=#{docTypeNum},user_id=#{userID},cat_id=#{catID},status=#{status} WHERE doc_id=#{docID}")
+
+	@Update(SAVE_LIST_SQL.UPDATE)
 	boolean update(Savelist list);
 	
-	//@Insert("INSERT INTO akd_documents VALUES(#{docID},#{title},#{des},#{embedLink},#{thumbnailURL},#{exportLink},#{view},#{share},#{createdDate},#{docTypeNum},#{userID},#{catID},#{status})")
+	@Insert(SAVE_LIST_SQL.INSERT)
 	boolean insert(Savelist list);
 	
 	
-	//@Select("SELECT * from akd_documents")
+	@Select(SAVE_LIST_SQL.SELECT)
 	@Results({
-		@Result(property="docID", column="doc_id"),
-		@Result(property="title", column="title"),
-		@Result(property="des", column="des"),
-		@Result(property="embedLink", column="embed_link"),
-		@Result(property="thumbnailURL", column="thumbnail_url"),
-		@Result(property="exportLink", column="export_link"),
-		@Result(property="view", column="view"),
-		@Result(property="share", column="share"),		
+		@Result(property="savelistID", column="save_list_id"),
+		@Result(property="name", column="name"),
 		@Result(property="createdDate", column="created_date"),
-		@Result(property="docTypeNum", column="doc_type_num"),
+		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
-		@Result(property="catID", column="cat_id"),
-		@Result(property="status", column="status")		
+		@Result(property="docID", column="doc_id"),
+		@Result(property="status", column="status")	
 	})
 	ArrayList<Savelist> findAll();
 	
-	//@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
+	@Select(SAVE_LIST_SQL.FIND_ONE)
 	@Results({
-		@Result(property="docID", column="doc_id"),
-		@Result(property="title", column="title"),
-		@Result(property="des", column="des"),
-		@Result(property="embedLink", column="embed_link"),
-		@Result(property="thumbnailURL", column="thumbnail_url"),
-		@Result(property="exportLink", column="export_link"),
-		@Result(property="view", column="view"),
-		@Result(property="share", column="share"),		
+		@Result(property="savelistID", column="save_list_id"),
+		@Result(property="name", column="name"),
 		@Result(property="createdDate", column="created_date"),
-		@Result(property="docTypeNum", column="doc_type_num"),
+		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
-		@Result(property="catID", column="cat_id"),
+		@Result(property="docID", column="doc_id"),
 		@Result(property="status", column="status")	
 	})
 	Savelist findOne(int id);
 	
 }
+
+interface SAVE_LIST_SQL{
+	String SELECT="SELECT * from akd_save_lists";
+	
+	String FIND_ONE="SELECT * from akd_save_lists WHERE save_list_id=#{savelistID}";
+	
+	String DELETE="DELETE FROM akd_save_lists WHERE save_list_id=#{savelistID}";
+	
+	String UPDATE="UPDATE akd_save_lists SET "
+			+ "name=#{name},"
+			+ "created_date=#{createdDate},"
+			+ "remark=#{remark},"
+			+ "user_id=#{userID},"
+			+ "doc_id=#{docID}, "
+			+ "status=#{status}"
+			+ "WHERE save_list_id=#{savelistID}";
+	
+	String INSERT="INSERT INTO "
+			+ "akd_save_lists(save_list_id,"
+			+ "name,"
+			+ "created_date,remark,user_id,doc_id,status)"
+			+ "VALUES"
+			+ "(#{savelistID},"
+			+ "#{name},"
+			+ "#{createdDate},"
+			+ "#{remark},"
+			+ "#{userID},"
+			+ "#{docID},"
+			+ "#{status})";
+}
+
+
+
+
+
