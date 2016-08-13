@@ -2,29 +2,25 @@ package org.khmeracademy.akd.repositories;
 
 import java.util.ArrayList;
 
-
-
-
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.khmeracademy.akd.entities.Category;
+import org.khmeracademy.akd.entities.Log;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CategoryRepository {
+public interface LogRepository {
 	
 	//@Delete("DELETE FROM akd_documents WHERE doc_id=#{docID}")
-	boolean delete(String id);
+	boolean delete(int id);
 	//@Update("UPDATE akd_documents SET title=#{title},des=#{des},embed_link=#{embedLink},thumbnail_url=#{thumbnailURL},export_link=#{exportLink},view=#{view},share=#{share},created_date=#{createdDate},doc_type_num=#{docTypeNum},user_id=#{userID},cat_id=#{catID},status=#{status} WHERE doc_id=#{docID}")
-	boolean update(Category cat);
+	boolean update(Log feed);
 	
 	//@Insert("INSERT INTO akd_documents VALUES(#{docID},#{title},#{des},#{embedLink},#{thumbnailURL},#{exportLink},#{view},#{share},#{createdDate},#{docTypeNum},#{userID},#{catID},#{status})")
-	boolean insert(Category cat);
+	boolean insert(Log feed);
 	
 	
 	//@Select("SELECT * from akd_documents")
@@ -43,7 +39,7 @@ public interface CategoryRepository {
 		@Result(property="catID", column="cat_id"),
 		@Result(property="status", column="status")		
 	})
-	ArrayList<Category> findAll();
+	ArrayList<Log> findAll();
 	
 	//@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
 	@Results({
@@ -61,6 +57,6 @@ public interface CategoryRepository {
 		@Result(property="catID", column="cat_id"),
 		@Result(property="status", column="status")	
 	})
-	Category findOne(String id);
+	Log findOne(int id);
 	
 }

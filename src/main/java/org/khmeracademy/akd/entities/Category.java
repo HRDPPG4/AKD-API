@@ -5,7 +5,7 @@ public class Category {
 	private String catName;
 	private String createdDate;
 	private String remark;
-	private int parentID;
+	private String parentID;
 	private int status;
 	public Category() {
 		
@@ -36,10 +36,10 @@ public class Category {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public int getParentID() {
+	public String getParentID() {
 		return parentID;
 	}
-	public void setParentID(int parentID) {
+	public void setParentID(String parentID) {
 		this.parentID = parentID;
 	}
 	public int getStatus() {
