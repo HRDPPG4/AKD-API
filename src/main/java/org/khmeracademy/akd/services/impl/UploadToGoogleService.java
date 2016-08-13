@@ -107,7 +107,7 @@ public class UploadToGoogleService {
 				doc.setCreatedDate(file1.getCreatedDate().toString());
 				doc.setDocTypeNum(1);
 				doc.setUserID(1);
-				doc.setCatID("1");
+				doc.setCatID("0B4RhbtI4DXY_QWVOWkFiSTlRY1E");
 				doc.setStatus(1);
 		return doc;
 		
