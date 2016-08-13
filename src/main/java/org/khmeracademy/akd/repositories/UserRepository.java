@@ -14,49 +14,78 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository {
 	
-	//@Delete("DELETE FROM akd_documents WHERE doc_id=#{docID}")
+	@Delete(USER_SQL.DELETE)
 	boolean delete(int id);
-	//@Update("UPDATE akd_documents SET title=#{title},des=#{des},embed_link=#{embedLink},thumbnail_url=#{thumbnailURL},export_link=#{exportLink},view=#{view},share=#{share},created_date=#{createdDate},doc_type_num=#{docTypeNum},user_id=#{userID},cat_id=#{catID},status=#{status} WHERE doc_id=#{docID}")
+	
+	@Update(USER_SQL.UPDATE)
 	boolean update(User user);
 	
-	//@Insert("INSERT INTO akd_documents VALUES(#{docID},#{title},#{des},#{embedLink},#{thumbnailURL},#{exportLink},#{view},#{share},#{createdDate},#{docTypeNum},#{userID},#{catID},#{status})")
+	@Insert(USER_SQL.INSERT)
 	boolean insert(User user);
 	
 	
-	//@Select("SELECT * from akd_documents")
+	@Select(USER_SQL.SELECT)
 	@Results({
-		@Result(property="docID", column="doc_id"),
-		@Result(property="title", column="title"),
-		@Result(property="des", column="des"),
-		@Result(property="embedLink", column="embed_link"),
-		@Result(property="thumbnailURL", column="thumbnail_url"),
-		@Result(property="exportLink", column="export_link"),
-		@Result(property="view", column="view"),
-		@Result(property="share", column="share"),		
-		@Result(property="createdDate", column="created_date"),
-		@Result(property="docTypeNum", column="doc_type_num"),
 		@Result(property="userID", column="user_id"),
-		@Result(property="catID", column="cat_id"),
-		@Result(property="status", column="status")		
+		@Result(property="name", column="name"),
+		@Result(property="password", column="password"),
+		@Result(property="email", column="email"),
+		@Result(property="phone", column="phone"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="status", column="status"),		
+		@Result(property="role", column="role")		
 	})
 	ArrayList<User> findAll();
 	
-	//@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
+	@Select(USER_SQL.FIND_ONE)
 	@Results({
-		@Result(property="docID", column="doc_id"),
-		@Result(property="title", column="title"),
-		@Result(property="des", column="des"),
-		@Result(property="embedLink", column="embed_link"),
-		@Result(property="thumbnailURL", column="thumbnail_url"),
-		@Result(property="exportLink", column="export_link"),
-		@Result(property="view", column="view"),
-		@Result(property="share", column="share"),		
-		@Result(property="createdDate", column="created_date"),
-		@Result(property="docTypeNum", column="doc_type_num"),
 		@Result(property="userID", column="user_id"),
-		@Result(property="catID", column="cat_id"),
-		@Result(property="status", column="status")	
+		@Result(property="name", column="name"),
+		@Result(property="password", column="password"),
+		@Result(property="email", column="email"),
+		@Result(property="phone", column="phone"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="status", column="status"),		
+		@Result(property="role", column="role")
 	})
 	User findOne(int id);
 	
 }
+
+interface USER_SQL{
+	String SELECT="SELECT * from akd_users";
+	
+	String FIND_ONE="SELECT * from akd_users WHERE user_id=#{userID}";
+	
+	String DELETE="DELETE FROM akd_users WHERE user_id=#{userID}";
+	
+	String UPDATE="UPDATE akd_users SET "
+			+ "name=#{name},"
+			+ "password=#{password},"
+			+ "email=#{email},"
+			+ "phone=#{phone},"
+			+ "created_date=#{createdDate}, "
+			+ "remark=#{remark},"
+			+ "status=#{status},"
+			+ "role=#{role}"
+			+ "WHERE user_id=#{userID}";
+	
+	String INSERT="INSERT INTO "
+			+ "akd_users(user_id,"
+			+ "name,"
+			+ "password,email,phone,created_date,remark,status,role)"
+			+ "VALUES"
+			+ "(#{userID},"
+			+ "#{name},"
+			+ "#{password},"
+			+ "#{email},"
+			+ "#{phone},"
+			+ "#{createdDate},"
+			+ "#{remark},"
+			+ "#{status},"
+			+ "#{role})";	
+}
+
+

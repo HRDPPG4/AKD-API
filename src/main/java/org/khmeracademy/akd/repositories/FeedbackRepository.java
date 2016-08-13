@@ -47,9 +47,17 @@ interface SQL{
 	String SELECT="SELECT * from akd_feedbacks";
 	String FIND_ONE="SELECT * from akd_feedbacks WHERE feed_id=#{feedbackID}";
 	String DELETE="DELETE FROM akd_feedbacks WHERE feed_id=#{feedbackID}";
-	String UPDATE="UPDATE akd_feedbacks SET feed_date=#{date},feed_des=#{des},status=#{status} WHERE feed_id=#{feedbackID}";
-	String INSERT="INSERT INTO akd_feedbacks(feed_id,feed_date,feed_des,status)VALUES(#{feedbackID},#{date},#{des},#{status})";
-	
+	String UPDATE="UPDATE akd_feedbacks SET "
+			+ "feed_date=#{date},"
+			+ "feed_des=#{des},"
+			+ "status=#{status} "
+			+ "WHERE "
+			+ "feed_id=#{feedbackID}";
+	String INSERT="INSERT INTO akd_feedbacks"
+			+ "(feed_id,feed_date,feed_des,status)"
+			+ "VALUES(#{feedbackID},"
+			+ "#{date},#{des},"
+			+ "#{status})";	
 }
 
 
