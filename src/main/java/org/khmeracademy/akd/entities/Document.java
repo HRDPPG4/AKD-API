@@ -5,40 +5,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Document {
 	@JsonProperty("DOC_ID")
 	private String docID;
-	
 	@JsonProperty("TITLE")
 	private String title;
-	
 	@JsonProperty("DES")
 	private String des;
-	
 	@JsonProperty("EMBEDED_LINK")
 	private String embedLink;
-	
 	@JsonProperty("THUMBNAIL_URL")
 	private String thumbnailURL;
-	
 	@JsonProperty("EXPORT_LINK")
 	private String exportLink;
-	
 	@JsonProperty("VIEW")
 	private int view;
-	
 	@JsonProperty("SHARE")
 	private int share;
-	
 	@JsonProperty("CREATED_DATE")
 	private String createdDate;
-	
 	@JsonProperty("DOC_TYPE_NUM")
 	private int docTypeNum;
-	
 	@JsonProperty("USER_ID")
 	private int userID;
-	
 	@JsonProperty("CAT_ID")
 	private String catID;
-	
 	@JsonProperty("STATUS")
 	private int status;
 	

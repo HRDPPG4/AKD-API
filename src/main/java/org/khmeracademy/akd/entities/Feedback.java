@@ -1,18 +1,9 @@
 package org.khmeracademy.akd.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class Feedback {	
-	@JsonProperty("FEEDBACK_ID")
+public class Feedback {
 	private int feedbackID;
-	
-	@JsonProperty("CREATED_DATE")
 	private String date;
-	
-	@JsonProperty("DES")
 	private String des;
-	
-	@JsonProperty("STATUS")
 	private int status;
 	
 	

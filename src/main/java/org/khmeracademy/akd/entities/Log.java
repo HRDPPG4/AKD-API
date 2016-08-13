@@ -1,24 +1,11 @@
 package org.khmeracademy.akd.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Log {
-	@JsonProperty("LOG_ID")
 	private int logID;
-	
-	@JsonProperty("CREATED_DATE")
 	private String date;
-	
-	@JsonProperty("REMARK")
 	private String remark;
-	
-	@JsonProperty("USER_ID")
 	private int userID;
-	
-	@JsonProperty("DOC_ID")
-	private String docID;
-	
-	@JsonProperty("STATUS")
+	private int docID;
 	private int status;
 	
 	
@@ -46,10 +33,10 @@ public class Log {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-	public String getDocID() {
+	public int getDocID() {
 		return docID;
 	}
-	public void setDocID(String docID) {
+	public void setDocID(int docID) {
 		this.docID = docID;
 	}
 	public int getStatus() {

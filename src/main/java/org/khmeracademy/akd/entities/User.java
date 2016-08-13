@@ -1,33 +1,14 @@
 package org.khmeracademy.akd.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class User {
-	@JsonProperty("USER_ID")
 	private int userID;
-	
-	@JsonProperty("USER_NAME")
 	private String name;
-	
-	@JsonProperty("PASSWORD")
 	private String password;
-	
-	@JsonProperty("EMAIL")
 	private String email;
-	
-	@JsonProperty("PHONE")
 	private String phone;
-	
-	@JsonProperty("CREATED_DATE")
 	private String createdDate;
-	
-	@JsonProperty("REMARK")
 	private String remark;
-	
-	@JsonProperty("STATUS")
 	private int status;
-	
-	@JsonProperty("USER_ROLE")
 	private String role;
 	
 	

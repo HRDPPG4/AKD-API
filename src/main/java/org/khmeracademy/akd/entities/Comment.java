@@ -1,24 +1,11 @@
 package org.khmeracademy.akd.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Comment {
-	@JsonProperty("COMMENT_ID")
 	private int commentID;
-	
-	@JsonProperty("CREATED_DATE")
 	private String createdDate;
-	
-	@JsonProperty("REMARK")
 	private String remark;
-	
-	@JsonProperty("USER_ID")
 	private int userID;
-	
-	@JsonProperty("DOC_ID")
 	private String docID;
-	
-	@JsonProperty("STATUS")
 	private int status;
 	
 	

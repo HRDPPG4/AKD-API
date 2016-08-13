@@ -1,26 +1,12 @@
 package org.khmeracademy.akd.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Category {
-	@JsonProperty("CAT_ID")
 	private String catID;
-	
-	@JsonProperty("CAT_NAME")
 	private String catName;
-	
-	@JsonProperty("CREATED_DATE")	
 	private String createdDate;
-	
-	@JsonProperty("REMARK")
 	private String remark;
-	
-	@JsonProperty("PARENT_ID")
 	private String parentID;
-	
-	@JsonProperty("STATUS")
 	private int status;
-	
 	public Category() {
 		
 	}
