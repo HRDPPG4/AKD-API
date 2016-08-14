@@ -20,7 +20,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Service
-public class UploadToGoogleService {
+public class UploadFileToGoogleService {
 	public Document upload(String path) throws GeneralSecurityException, IOException{
 		//	CODE CONNECT WITH GOOGLE API
 		String scope="https://www.googleapis.com/auth/drive";
