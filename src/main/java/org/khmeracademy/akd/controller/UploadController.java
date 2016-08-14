@@ -27,7 +27,7 @@ public class UploadController {
 	private DocumentRepository documentRepository;
 	
 	@RequestMapping(value="/api/uploadFile", method = RequestMethod.POST)
-	public String uploadFile(@RequestParam("files") MultipartFile file) throws GeneralSecurityException, IOException{
+	public String uploadFile(@RequestParam("files") MultipartFile file,@RequestParam("title") String title,@RequestParam("des") String des) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
 		String path = fileUpload.upload(file, null);
 		System.out.println("Path is: "+path);
@@ -37,8 +37,9 @@ public class UploadController {
 		{
 			UploadFileToGoogleService up=new UploadFileToGoogleService();
 			//up.upload(path);
+				
 			
-			uploadToDBService.uploadFile(up.upload(path));
+			uploadToDBService.uploadFile(up.upload(path,title,des));	
 			
 			/*Document doc = new Document(); 
 			
