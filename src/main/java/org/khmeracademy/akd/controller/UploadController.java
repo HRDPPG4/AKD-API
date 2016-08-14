@@ -55,19 +55,16 @@ public class UploadController {
 	}
 	
 	@RequestMapping(value="/api/uploadFolder", method = RequestMethod.POST)
-	public void uploadFolder(@RequestParam("folderID") String id,@RequestParam("folderName") String name ) throws GeneralSecurityException, IOException{
+	public void uploadFolder(@RequestParam("folderID") String id,@RequestParam("folderName") String name,@RequestParam("folderDes") String des ) throws GeneralSecurityException, IOException{
 		UploadFolderToGoogleService folder=new UploadFolderToGoogleService();		
-		boolean status=uploadToDBService.uploadFolder(folder.upload(id, name));	
+		boolean status=uploadToDBService.uploadFolder(folder.upload(id, name,des));	
 		if(status){
 			//SET CODE
 			//SET MESSAGE
-			
-			System.out.println("folder upload successful");
 		}
 		else{
 			//SET CODE
 			//SET MESSAGE
-			System.out.println("folder upload fail");
 		}
 	}	
 }
