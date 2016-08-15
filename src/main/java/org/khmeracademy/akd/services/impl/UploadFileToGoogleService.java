@@ -21,7 +21,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Service
 public class UploadFileToGoogleService {
-	public Document upload(String path,String title,String description) throws GeneralSecurityException, IOException{
+	public Document upload(String path,String title,String description,String parentID) throws GeneralSecurityException, IOException{
 		//	CODE CONNECT WITH GOOGLE API
 		String scope="https://www.googleapis.com/auth/drive";
 		String serviceAccountID="all-khmer-docs@akd-api.iam.gserviceaccount.com";
@@ -29,8 +29,12 @@ public class UploadFileToGoogleService {
 		
 		//  CODE TO SET DETAIL FOR FILE.
 		
-		String parentID="0B4RhbtI4DXY_QWVOWkFiSTlRY1E";
+	//	String parentID="0B4RhbtI4DXY_QWVOWkFiSTlRY1E";
+		if(parentID==null ||parentID=="" || parentID==" "){
+			parentID="0B4RhbtI4DXY_QWVOWkFiSTlRY1E";
+		}
 		
+		System.out.println("CatID: "+parentID);
 		
 		//String title="My File";
 		//String description="";
