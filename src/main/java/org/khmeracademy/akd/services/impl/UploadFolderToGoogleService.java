@@ -22,6 +22,10 @@ public class UploadFolderToGoogleService {
 		String serviceAccountID="all-khmer-docs@akd-api.iam.gserviceaccount.com";
 		String ServiceAccountPrivateKey="AKD-API-3512d7454018.p12";
 		
+		if(parentID==null ||parentID=="" || parentID==" "){
+			parentID="0B4RhbtI4DXY_QWVOWkFiSTlRY1E";
+		}
+		
 		
 		Set<String> scopes = new HashSet<>();
 		scopes.add(scope);		
