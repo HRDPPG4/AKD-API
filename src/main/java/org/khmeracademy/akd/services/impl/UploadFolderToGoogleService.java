@@ -16,15 +16,11 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Service
 public class UploadFolderToGoogleService {
-	public Category upload(String parentID,String folderName,String folderDes) throws GeneralSecurityException, IOException{
+	public Category upload(String parentID,String folderName,String folderDes,String status) throws GeneralSecurityException, IOException{
 		//	CODE CONNECT WITH GOOGLE API
 		String scope="https://www.googleapis.com/auth/drive";
 		String serviceAccountID="all-khmer-docs@akd-api.iam.gserviceaccount.com";
 		String ServiceAccountPrivateKey="AKD-API-3512d7454018.p12";
-		
-		// CODE TO DETAIL FOLDER		
-		int status=1;
-		
 		
 		
 		Set<String> scopes = new HashSet<>();
@@ -51,7 +47,7 @@ public class UploadFolderToGoogleService {
 			cat.setCreatedDate(folder.getCreatedDate().toString());
 			cat.setParentID(parentID);
 			cat.setRemark(folderDes);
-			cat.setStatus(status);
+			cat.setStatus(Integer.valueOf(status));
 		}
 		
 		return cat;		
