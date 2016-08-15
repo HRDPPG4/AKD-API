@@ -2,6 +2,7 @@ package org.khmeracademy.akd.services.impl;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 import org.khmeracademy.akd.services.UploadToServerService;
 import org.springframework.stereotype.Service;
@@ -18,17 +19,18 @@ public class UploadToServerServiceImpl implements UploadToServerService{
 			return null;
 		}
 		if(folder=="" || folder==null)
-			folder = "default";
+			folder = "D:/KSHRD/ALL KHMER DOCS/AKD File";
 		
-		String UPLOAD_PATH = "D:/KSHRD/Resturant/" + folder;
+	//	String UPLOAD_PATH = "file" + folder;
+		String UPLOAD_PATH =folder;
 		
 		java.io.File path = new java.io.File(UPLOAD_PATH);
 		if(!path.exists())
 			path.mkdirs();
 		
 		String fileName = file.getOriginalFilename();
-		//fileName = UUID.randomUUID().toString() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
-		fileName = fileName + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+		fileName = UUID.randomUUID().toString() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+		//fileName = fileName + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
 		try {
 			Files.copy(file.getInputStream(), Paths.get(UPLOAD_PATH, fileName));
 			filePath = UPLOAD_PATH + "/" + fileName;
