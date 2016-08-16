@@ -49,6 +49,9 @@ public class UploadController {
 	public Map<String, Object> uploadFile(@RequestParam("files") MultipartFile file,@RequestParam("title") String title,@RequestParam("des") String des,@RequestParam("catID") String catID) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
 		String path = fileUpload.upload(file, null);
+		if(title.endsWith(".pdf") || title.endsWith(".pptx") || title.endsWith(".ppt")){
+			title=title.substring(0, title.lastIndexOf('.'));
+		}
 		System.out.println("Path is: "+path);
 		
 		if(path!=null)
