@@ -42,7 +42,7 @@ public class UploadFileToGoogleService {
 		boolean restricted=false;
 		String embedLink=null;
 		int doctype=1;				//default
-		int userID=1;				//default
+		int userID=2;				//default
 		int status=1;				//default
 
 									
