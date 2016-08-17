@@ -55,7 +55,7 @@ public interface UserRepository {
 }
 
 interface USER_SQL{
-	String SELECT="SELECT * from akd_users";
+	String SELECT="SELECT * from akd_users ORDER BY user_id ASC";
 	
 	String FIND_ONE="SELECT * from akd_users WHERE user_id=#{userID}";
 	
@@ -73,11 +73,10 @@ interface USER_SQL{
 			+ "WHERE user_id=#{userID}";
 	
 	String INSERT="INSERT INTO "
-			+ "akd_users(user_id,"
+			+ "akd_users("
 			+ "name,"
 			+ "password,email,phone,created_date,remark,status,role)"
-			+ "VALUES"
-			+ "(#{userID},"
+			+ "VALUES("
 			+ "#{name},"
 			+ "#{password},"
 			+ "#{email},"
