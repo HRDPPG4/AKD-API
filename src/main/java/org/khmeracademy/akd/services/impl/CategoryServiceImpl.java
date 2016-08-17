@@ -44,6 +44,12 @@ public class CategoryServiceImpl implements CategoryService{
 	public ArrayList findAll() {
 		return categoryRepository.findAll();
 	}
+	
+	
+	@Override
+	public ArrayList getCategoryByParentID(String ParentID) {
+		return categoryRepository.getCategoryByParentID(ParentID);
+	}
 
 	@Override
 	public Category findOne(String id) {

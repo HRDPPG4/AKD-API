@@ -11,6 +11,7 @@ public interface CategoryService {
 	boolean update(Category cat);
 	
 	ArrayList<Object> findAll();
+	ArrayList<Object> getCategoryByParentID(String ParentID);
 	
 	Category findOne(String id);
 	

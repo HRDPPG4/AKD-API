@@ -51,4 +51,16 @@ public interface CategoryRepository {
 	})
 	Category findOne(String id);
 	
+	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} ")
+	@Results({
+		@Result(property="catID", column="cat_id"),
+		@Result(property="catName", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="parentID", column="parent_id"),
+		@Result(property="status", column="status")
+			
+	})
+	ArrayList<Category>getCategoryByParentID(String ParentID);
+	
 }
