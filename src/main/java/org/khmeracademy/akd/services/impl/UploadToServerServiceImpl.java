@@ -31,7 +31,6 @@ public class UploadToServerServiceImpl implements UploadToServerService{
 		
 		String fileName = file.getOriginalFilename();
 		fileName = UUID.randomUUID().toString() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
-	//	String ext = fileName.substring(fileName.lastIndexOf("/"),fileName.length());
 		System.out.println("File Tupe: "+fileName.substring(fileName.lastIndexOf('.')+1,fileName.length() ));
 		
 		//fileName = fileName + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
@@ -46,7 +45,6 @@ public class UploadToServerServiceImpl implements UploadToServerService{
 		}
 		
 		return filePath;
-		//return null;
 	}
 
 	

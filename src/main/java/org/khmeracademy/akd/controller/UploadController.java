@@ -29,43 +29,43 @@ public class UploadController {
 	@Autowired
 	private DocumentRepository documentRepository;
 	
-	/*@RequestMapping(value="/api/uploadFile", method = RequestMethod.POST)
-	public String uploadFile(@RequestParam("files") MultipartFile file,@RequestParam("title") String title,@RequestParam("des") String des,@RequestParam("catID") String catID) throws GeneralSecurityException, IOException{
-		//upload file to server -> get full path
-		String path = fileUpload.upload(file, null);
-		System.out.println("Path is: "+path);
-		
-
-		if(path!=null)
-		{
-			UploadFileToGoogleService up=new UploadFileToGoogleService();
-			uploadToDBService.uploadFile(up.upload(path,title,des,catID));	
-		}
-		
-		return path;
-	}*/
-	
 	@RequestMapping(value="/api/uploadFile", method = RequestMethod.POST)
 	public Map<String, Object> uploadFile(@RequestParam("files") MultipartFile file,@RequestParam("title") String title,@RequestParam("des") String des,@RequestParam("catID") String catID) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
 		String path = fileUpload.upload(file, null);
-		System.out.println("File Type in Controller: "+path.substring(path.lastIndexOf('.')+1,path.length()));
-		/*if(title.endsWith(".pdf") || title.endsWith(".pptx") || title.endsWith(".ppt")){
+		int typeNum=0;
+		String type=path.substring(path.lastIndexOf('.')+1,path.length());
+		System.out.println("Type: "+type);
+		
+		if(title.endsWith(".pdf") || title.endsWith(".pptx") || title.endsWith(".ppt")){
 			title=title.substring(0, title.lastIndexOf('.'));
 		}
-		System.out.println("Path is: "+path);
+		if(type.toLowerCase().equals("ppt") || type.toLowerCase().equals("pptx")){
+			typeNum=1;
+		}
+		else if(type.toLowerCase().equals("pdf")){
+			typeNum=2;
+		}
+		else if(type.toLowerCase().equals("doc") || type.toLowerCase().equals("docx")){
+			typeNum=3;
+		}
+		else{
+			typeNum=0;
+		}
+	//	System.out.println("Type: "+type.toLowerCase());
+	//	System.out.println("TypeNum: "+typeNum);
 		
 		if(path!=null)
 		{
 			UploadFileToGoogleService up=new UploadFileToGoogleService();
-			uploadToDBService.uploadFile(up.upload(path,title,des,catID));	
+			uploadToDBService.uploadFile(up.upload(path,title,des,catID,typeNum));	
 		}
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("CODE","0000");
 		map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
-		map.put("DATA",path);*/
-		//return map;
-		return null;
+		map.put("DATA",path);
+		return map;
 	}
 	
 	@RequestMapping(value="/api/uploadFolder", method = RequestMethod.POST)
