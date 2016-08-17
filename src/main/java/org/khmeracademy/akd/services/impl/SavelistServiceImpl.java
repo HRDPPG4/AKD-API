@@ -2,6 +2,7 @@ package org.khmeracademy.akd.services.impl;
 
 import java.util.ArrayList;
 
+import org.apache.felix.bundlerepository.impl.SystemRepositoryImpl;
 import org.khmeracademy.akd.entities.Savelist;
 import org.khmeracademy.akd.repositories.SavelistRepository;
 import org.khmeracademy.akd.services.SavelistService;
@@ -49,8 +50,9 @@ public class SavelistServiceImpl implements SavelistService{
 
 	@Override
 	public ArrayList<Object> findSavelistByUserID(int userID) {
+		return savelistRepository.findSavelistByUserID(userID);
 	
-		return null;
+	
 	}
 
 	

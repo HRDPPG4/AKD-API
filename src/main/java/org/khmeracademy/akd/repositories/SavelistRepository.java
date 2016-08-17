@@ -36,8 +36,21 @@ public interface SavelistRepository {
 		@Result(property="status", column="status")	
 	})
 	ArrayList<Savelist> findAll();
-	@Select("")
-	ArrayList <Savelist> findSavelistByUserID(int userID );
+	
+	@Select("SELECT * FROM akd_save_lists WHERE user_id = #{userID}")
+	
+	@Results({
+		@Result(property="savelistID", column="save_list_id"),
+		@Result(property="name", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="docID", column="doc_id"),
+		@Result(property="status", column="status")	
+	})
+	ArrayList<Object> findSavelistByUserID(int userID );
+	  
+
 	
 	@Select(SAVE_LIST_SQL.FIND_ONE)
 	@Results({
