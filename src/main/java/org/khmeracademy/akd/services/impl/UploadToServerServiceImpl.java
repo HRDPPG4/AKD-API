@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+import org.apache.commons.io.FilenameUtils;
 import org.khmeracademy.akd.services.UploadToServerService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +31,12 @@ public class UploadToServerServiceImpl implements UploadToServerService{
 		
 		String fileName = file.getOriginalFilename();
 		fileName = UUID.randomUUID().toString() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+	//	String ext = fileName.substring(fileName.lastIndexOf("/"),fileName.length());
+		System.out.println("File Tupe: "+fileName.substring(fileName.lastIndexOf('.')+1,fileName.length() ));
+		
 		//fileName = fileName + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+		
+		
 		try {
 			Files.copy(file.getInputStream(), Paths.get(UPLOAD_PATH, fileName));
 			filePath = UPLOAD_PATH + "/" + fileName;
@@ -40,6 +46,7 @@ public class UploadToServerServiceImpl implements UploadToServerService{
 		}
 		
 		return filePath;
+		//return null;
 	}
 
 	

@@ -20,7 +20,8 @@ public interface SavelistRepository {
 	@Update(SAVE_LIST_SQL.UPDATE)
 	boolean update(Savelist list);
 	
-	@Insert(SAVE_LIST_SQL.INSERT)
+	//@Insert(SAVE_LIST_SQL.INSERT)
+	@Insert("INSERT INTO akd_save_lists VALUES(nextval('akd_save_lists_save_list_id_seq'),#{name},#{createdDate},#{remark},#{userID},#{docID},#{status})")
 	boolean insert(Savelist list);
 	
 	

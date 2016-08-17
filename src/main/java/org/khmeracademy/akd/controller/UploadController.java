@@ -49,7 +49,8 @@ public class UploadController {
 	public Map<String, Object> uploadFile(@RequestParam("files") MultipartFile file,@RequestParam("title") String title,@RequestParam("des") String des,@RequestParam("catID") String catID) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
 		String path = fileUpload.upload(file, null);
-		if(title.endsWith(".pdf") || title.endsWith(".pptx") || title.endsWith(".ppt")){
+		System.out.println("File Type in Controller: "+path.substring(path.lastIndexOf('.')+1,path.length()));
+		/*if(title.endsWith(".pdf") || title.endsWith(".pptx") || title.endsWith(".ppt")){
 			title=title.substring(0, title.lastIndexOf('.'));
 		}
 		System.out.println("Path is: "+path);
@@ -62,8 +63,9 @@ public class UploadController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("CODE","0000");
 		map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
-		map.put("DATA",path);
-		return map;
+		map.put("DATA",path);*/
+		//return map;
+		return null;
 	}
 	
 	@RequestMapping(value="/api/uploadFolder", method = RequestMethod.POST)
