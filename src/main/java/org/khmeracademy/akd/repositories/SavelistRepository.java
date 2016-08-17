@@ -36,6 +36,8 @@ public interface SavelistRepository {
 		@Result(property="status", column="status")	
 	})
 	ArrayList<Savelist> findAll();
+	@Select("")
+	ArrayList <Savelist> findSavelistByUserID(int userID );
 	
 	@Select(SAVE_LIST_SQL.FIND_ONE)
 	@Results({
@@ -67,18 +69,6 @@ interface SAVE_LIST_SQL{
 			+ "status=#{status}"
 			+ "WHERE save_list_id=#{savelistID}";
 	
-	String INSERT="INSERT INTO "
-			+ "akd_save_lists(save_list_id,"
-			+ "name,"
-			+ "created_date,remark,user_id,doc_id,status)"
-			+ "VALUES"
-			+ "(#{savelistID},"
-			+ "#{name},"
-			+ "#{createdDate},"
-			+ "#{remark},"
-			+ "#{userID},"
-			+ "#{docID},"
-			+ "#{status})";
 }
 
 

@@ -11,6 +11,8 @@ public interface SavelistService {
 	
 	ArrayList<Object> findAll();
 	
+	ArrayList<Object> findSavelistByUserID(int userID);
+	
 	Savelist findOne(int id);
 	
 }
