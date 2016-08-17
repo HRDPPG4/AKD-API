@@ -37,6 +37,21 @@ public interface SavelistRepository {
 	})
 	ArrayList<Savelist> findAll();
 	
+	@Select("SELECT * FROM akd_save_lists WHERE user_id = #{userID}")
+	
+	@Results({
+		@Result(property="savelistID", column="save_list_id"),
+		@Result(property="name", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="docID", column="doc_id"),
+		@Result(property="status", column="status")	
+	})
+	ArrayList<Object> findSavelistByUserID(int userID );
+	  
+
+	
 	@Select(SAVE_LIST_SQL.FIND_ONE)
 	@Results({
 		@Result(property="savelistID", column="save_list_id"),
@@ -67,18 +82,6 @@ interface SAVE_LIST_SQL{
 			+ "status=#{status}"
 			+ "WHERE save_list_id=#{savelistID}";
 	
-	String INSERT="INSERT INTO "
-			+ "akd_save_lists(save_list_id,"
-			+ "name,"
-			+ "created_date,remark,user_id,doc_id,status)"
-			+ "VALUES"
-			+ "(#{savelistID},"
-			+ "#{name},"
-			+ "#{createdDate},"
-			+ "#{remark},"
-			+ "#{userID},"
-			+ "#{docID},"
-			+ "#{status})";
 }
 
 
