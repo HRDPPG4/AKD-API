@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Savelist;
 import org.springframework.stereotype.Repository;
@@ -21,8 +22,14 @@ public interface SavelistRepository {
 	boolean update(Savelist list);
 	
 	//@Insert(SAVE_LIST_SQL.INSERT)
-	@Insert("INSERT INTO akd_save_lists VALUES(nextval('akd_save_lists_save_list_id_seq'),#{name},#{createdDate},#{remark},#{userID},#{docID},#{status})")
+	@Insert("INSERT INTO akd_save_lists VALUES(nextval('akd_save_lists_save_list_id_seq'),#{name},#{createdDate},#{remark},#{userID},#{status})")
+	@SelectKey(before=false, keyProperty="savelistID", resultType=int.class,statement="SELECT last_value FROM akd_save_lists_save_list_id_seq")
 	boolean insert(Savelist list);
+	
+	@Insert("INSERT INTO akd_save_list_detail VALUES (#{savelistID},#{docID},#{createdDate})")
+	boolean insertDetails(Savelist list);
+	
+	
 	
 	
 	@Select(SAVE_LIST_SQL.SELECT)
@@ -32,7 +39,7 @@ public interface SavelistRepository {
 		@Result(property="createdDate", column="created_date"),
 		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
-		@Result(property="docID", column="doc_id"),
+	
 		@Result(property="status", column="status")	
 	})
 	ArrayList<Savelist> findAll();
@@ -59,7 +66,7 @@ public interface SavelistRepository {
 		@Result(property="createdDate", column="created_date"),
 		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
-		@Result(property="docID", column="doc_id"),
+	
 		@Result(property="status", column="status")	
 	})
 	Savelist findOne(int id);
