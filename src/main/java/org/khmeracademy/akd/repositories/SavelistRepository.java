@@ -48,7 +48,7 @@ public interface SavelistRepository {
 		@Result(property="docID", column="doc_id"),
 		@Result(property="status", column="status")	
 	})
-	ArrayList<Object> findSavelistByUserID(int userID );
+	ArrayList<Savelist> findSavelistByUserID(int userID );
 	  
 
 	

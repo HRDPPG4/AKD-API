@@ -1,6 +1,7 @@
 package org.khmeracademy.akd.controller.user;
 
 import java.util.ArrayList;
+
 import org.khmeracademy.akd.entities.Savelist;
 import org.khmeracademy.akd.response.*;
 import org.khmeracademy.akd.services.SavelistService;
@@ -43,6 +44,24 @@ public class SavelistController {
 		Savelist list=savelistService.findOne(id);
 		ResponseObject<Savelist> res=new ResponseObject<Savelist>();
 		if(savelistService.findOne(id)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(list);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	
+	@RequestMapping(value="/getuserSavelist/{userID}",method=RequestMethod.GET)
+	public ResponseObject<Savelist> findSavelistByUserID (@PathVariable("userID") int userID)
+	{
+		ArrayList<Savelist> list=savelistService.findSavelistByUserID(userID);
+		ResponseObject<Savelist> res=new ResponseObject<Savelist>();
+		if(savelistService.findSavelistByUserID(userID)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(list);

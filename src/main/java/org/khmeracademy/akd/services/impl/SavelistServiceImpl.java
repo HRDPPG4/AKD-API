@@ -49,7 +49,7 @@ public class SavelistServiceImpl implements SavelistService{
 	}
 
 	@Override
-	public ArrayList<Object> findSavelistByUserID(int userID) {
+	public ArrayList<Savelist> findSavelistByUserID(int userID) {
 		return savelistRepository.findSavelistByUserID(userID);
 	
 	
