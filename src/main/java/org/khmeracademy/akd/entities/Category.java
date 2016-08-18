@@ -20,6 +20,10 @@ public class Category {
 	
 	@JsonProperty("STATUS")
 	private int status;
+	
+	@JsonProperty("ICON")
+	private String icon;
+	
 	public Category() {
 		
 	}
@@ -60,6 +64,16 @@ public class Category {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+
+	public String getIcon() {
+		return icon;
+	}
+
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 	
 }

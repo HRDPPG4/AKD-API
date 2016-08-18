@@ -38,7 +38,7 @@ public class CategoryController {
 				
 		return res;
 	}
-
+	
 	
 	@RequestMapping(value="/category/{id}",method=RequestMethod.GET)
 	public ResponseObject<Category> fineOne(@PathVariable("id") String id)
@@ -112,6 +112,63 @@ public class CategoryController {
 			res.setMessage();
 		}
 	
+		return res;
+	}
+	
+	@RequestMapping(value="/getCategoryByParentID/{ParentID}",method=RequestMethod.GET)
+	public ResponseList<Category> getCategoryByParentID(@PathVariable("ParentID") String ParentID)
+	{
+		ArrayList<Object> cat=categoryService.getCategoryByParentID(ParentID);
+		ResponseList<Category> res=new ResponseList<Category>();
+		
+		if(categoryService.getCategoryByParentID(ParentID)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(cat);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
+	/*@RequestMapping(value="/category/{ParentID}?{Status}",method=RequestMethod.GET)
+	public ResponseList<Category> getCategoryByParentIDAndStatus(@PathVariable("ParentID") String ParentID,@PathVariable("Status") int Status)
+	{
+		ArrayList<Category> cat=categoryService.getCategoryByParentIDAndStatus(ParentID,Status);
+		ResponseList<Category> res=new ResponseList<Category>();
+		
+		if(categoryService.getCategoryByParentIDAndStatus(ParentID,Status)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(cat);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}*/
+	
+	@RequestMapping(value="/getCategoryByParentIDAndStatusEnable/{ParentID}",method=RequestMethod.GET)
+	public ResponseList<Category> getCategoryByParentIDAndStatusEnable(@PathVariable("ParentID") String ParentID)
+	{
+		ArrayList<Category> cat=categoryService.getCategoryByParentIDAndStatusEnable(ParentID);
+		ResponseList<Category> res=new ResponseList<Category>();
+		
+		if(categoryService.getCategoryByParentIDAndStatusEnable(ParentID)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(cat);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
 		return res;
 	}
 	

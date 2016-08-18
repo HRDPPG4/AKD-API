@@ -10,8 +10,14 @@ public interface CategoryService {
 	
 	boolean update(Category cat);
 	
+	Category findOne(String id);
+	
 	ArrayList<Object> findAll();
 	
-	Category findOne(String id);
+	ArrayList<Object> getCategoryByParentID(String ParentID);
+	
+	ArrayList<Category> getCategoryByParentIDAndStatus(String ParentID,int Status);
+	
+	ArrayList<Category> getCategoryByParentIDAndStatusEnable(String ParentID);
 	
 }

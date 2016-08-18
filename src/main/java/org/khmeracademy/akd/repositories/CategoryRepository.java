@@ -20,10 +20,10 @@ public interface CategoryRepository {
 	
 	@Delete("DELETE FROM akd_categories WHERE cat_id=#{catID}")
 	boolean delete(String id);
-	@Update("UPDATE akd_categories SET name=#{catName},created_date=#{createdDate},remark=#{remark},parent_id=#{parentID},status=#{status} WHERE cat_id=#{catID}")
+	@Update("UPDATE akd_categories SET name=#{catName},created_date=#{createdDate},remark=#{remark},parent_id=#{parentID},status=#{status},icon=#{icon} WHERE cat_id=#{catID}")
 	boolean update(Category cat);
 	
-	@Insert("INSERT INTO akd_categories (cat_id,name,created_date,remark ,parent_id,status) VALUES(#{catID},#{catName},#{createdDate},#{remark},#{parentID},#{status})")
+	@Insert("INSERT INTO akd_categories (cat_id,name,created_date,remark ,parent_id,status,icon) VALUES(#{catID},#{catName},#{createdDate},#{remark},#{parentID},#{status},#{icon})")
 	boolean insert(Category cat);
 	
 	
@@ -34,8 +34,8 @@ public interface CategoryRepository {
 		@Result(property="createdDate", column="created_date"),
 		@Result(property="remark", column="remark"),
 		@Result(property="parentID", column="parent_id"),
-		@Result(property="status", column="status")
-			
+		@Result(property="status", column="status"),
+		@Result(property="icon", column="icon")
 	})
 	ArrayList<Category>findAll();
 	
@@ -46,9 +46,49 @@ public interface CategoryRepository {
 		@Result(property="createdDate", column="created_date"),
 		@Result(property="remark", column="remark"),
 		@Result(property="parentID", column="parent_id"),
-		@Result(property="status", column="status")
+		@Result(property="status", column="status"),
+		@Result(property="icon", column="icon")
 			
 	})
 	Category findOne(String id);
+	
+	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} ")
+	@Results({
+		@Result(property="catID", column="cat_id"),
+		@Result(property="catName", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="parentID", column="parent_id"),
+		@Result(property="status", column="status"),
+		@Result(property="icon", column="icon")
+			
+	})
+	ArrayList<Category>getCategoryByParentID(String ParentID);
+	
+	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} AND status=#{status} ")
+	@Results({
+		@Result(property="catID", column="cat_id"),
+		@Result(property="catName", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="parentID", column="parent_id"),
+		@Result(property="status", column="status"),
+		@Result(property="icon", column="icon")
+			
+	})
+	ArrayList<Category>getCategoryByParentIDAndStatus(String ParentID,int Status);
+	
+	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} AND status=1")
+	@Results({
+		@Result(property="catID", column="cat_id"),
+		@Result(property="catName", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="parentID", column="parent_id"),
+		@Result(property="status", column="status"),
+		@Result(property="icon", column="icon")
+			
+	})
+	ArrayList<Category>getCategoryByParentIDAndStatusEnable(String ParentID);
 	
 }

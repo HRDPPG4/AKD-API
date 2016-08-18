@@ -44,6 +44,24 @@ public interface DocumentRepository {
 	})
 	ArrayList<Document> findAll();
 	
+	@Select("SELECT * from akd_documents WHERE cat_id=#{catID}")
+	@Results({
+		@Result(property="docID", column="doc_id"),
+		@Result(property="title", column="title"),
+		@Result(property="des", column="des"),
+		@Result(property="embedLink", column="embed_link"),
+		@Result(property="thumbnailURL", column="thumbnail_url"),
+		@Result(property="exportLink", column="export_link"),
+		@Result(property="view", column="view"),
+		@Result(property="share", column="share"),		
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="docTypeNum", column="doc_type_num"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="catID", column="cat_id"),
+		@Result(property="status", column="status")		
+	})
+	ArrayList<Document> getDocumentByCatID(String CatID);
+	
 	@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
 	@Results({
 		@Result(property="docID", column="doc_id"),

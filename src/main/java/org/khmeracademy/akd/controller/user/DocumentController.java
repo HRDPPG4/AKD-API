@@ -113,4 +113,23 @@ public class DocumentController {
 		return res;
 	}
 	
+	@RequestMapping(value="/getDocumentByCatID/{CatID}",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByCatID(@PathVariable("CatID") String CatID)
+	{
+		ArrayList<Document> doc=documentService.getDocumentByCatID(CatID);
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentByCatID(CatID)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
 }
