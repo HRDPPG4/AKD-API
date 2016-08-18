@@ -41,6 +41,13 @@ public class DocumentServiceImpl implements DocumentService{
 	public ArrayList findAll() {
 		return documentRepository.findAll();
 	}
+	
+	@Override
+	public ArrayList getDocumentByCatID(String CatID) {
+		return documentRepository.getDocumentByCatID(CatID);
+	}
+	
+	
 
 	@Override
 	public Document findOne(String id) {

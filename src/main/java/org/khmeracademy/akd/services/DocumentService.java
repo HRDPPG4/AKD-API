@@ -13,6 +13,8 @@ public interface DocumentService {
 	
 	ArrayList<Object> findAll();
 	
+	ArrayList<Document> getDocumentByCatID(String CatID);
+	
 	Document findOne(String id);
 	
 }

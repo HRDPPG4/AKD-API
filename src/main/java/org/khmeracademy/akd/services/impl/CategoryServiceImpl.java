@@ -50,6 +50,18 @@ public class CategoryServiceImpl implements CategoryService{
 	public ArrayList getCategoryByParentID(String ParentID) {
 		return categoryRepository.getCategoryByParentID(ParentID);
 	}
+	
+	@Override
+	public ArrayList getCategoryByParentIDAndStatus(String ParentID,int Status) {
+		return categoryRepository.getCategoryByParentIDAndStatus(ParentID,Status);
+	}
+	
+	@Override
+	public ArrayList getCategoryByParentIDAndStatusEnable(String ParentID) {
+		return categoryRepository.getCategoryByParentIDAndStatusEnable(ParentID);
+	}
+	
+	
 
 	@Override
 	public Category findOne(String id) {
