@@ -1,5 +1,7 @@
 package org.khmeracademy.akd.entities;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Comment {
@@ -20,6 +22,8 @@ public class Comment {
 	
 	@JsonProperty("STATUS")
 	private int status;
+	
+	private List<User> users;
 	
 	
 	public int getCommentID() {
@@ -57,6 +61,12 @@ public class Comment {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 	
 }

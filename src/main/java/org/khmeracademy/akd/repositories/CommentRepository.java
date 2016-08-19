@@ -45,4 +45,16 @@ public interface CommentRepository {
 	})
 	Comment findOne(int id);
 	
+	@Select("SELECT * from akd_comments WHERE doc_id=#{docID} ORDER BY comment_id DESC")
+	@Results({
+		@Result(property="commentID", column="comment_id"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="docID", column="doc_id"),
+		@Result(property="status", column="status")
+			
+	})
+	ArrayList<Comment> getAllCommentByDocID(String DocID);
+	
 }

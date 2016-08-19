@@ -13,4 +13,6 @@ public interface CommentService {
 	
 	Comment findOne(int id);
 	
+	ArrayList<Comment> getAllCommentByDocID(String DocID);
+	
 }

@@ -115,4 +115,23 @@ public class CommentController {
 		return res;
 	}
 	
+	@RequestMapping(value="/getAllCommentByDocID/{DocID}",method=RequestMethod.GET)
+	public ResponseList<Comment> getAllCommentByDocID(@PathVariable("DocID") String DocID)
+	{
+		ArrayList<Comment> com=commentService.getAllCommentByDocID(DocID);
+		ResponseList<Comment> res=new ResponseList<Comment>();
+		
+		if(commentService.getAllCommentByDocID(DocID)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(com);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
 }

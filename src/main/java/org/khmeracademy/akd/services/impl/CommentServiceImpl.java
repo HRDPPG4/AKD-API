@@ -45,6 +45,11 @@ public class CommentServiceImpl implements CommentService{
 	public Comment findOne(int id) {
 		return commentRepository.findOne(id);
 	}
-
+	
+	@Override
+	public ArrayList getAllCommentByDocID(String DocID) {
+		return commentRepository.getAllCommentByDocID(DocID);
+	}
+	
 	
 }
