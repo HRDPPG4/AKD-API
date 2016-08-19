@@ -8,10 +8,12 @@ public interface SavelistService {
 	boolean insert(Savelist list);
 	
 	boolean update(Savelist list);
+	boolean insertDetail(Savelist list);
+	boolean insertSavelistOnly(Savelist list);
 	
 	ArrayList<Object> findAll();
 	
-	ArrayList<Object> findSavelistByUserID(int userID);
+	ArrayList<Savelist> findSavelistByUserID(int userID);
 	
 	Savelist findOne(int id);
 	

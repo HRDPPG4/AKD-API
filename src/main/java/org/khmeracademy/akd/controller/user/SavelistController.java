@@ -1,6 +1,7 @@
 package org.khmeracademy.akd.controller.user;
 
 import java.util.ArrayList;
+
 import org.khmeracademy.akd.entities.Savelist;
 import org.khmeracademy.akd.response.*;
 import org.khmeracademy.akd.services.SavelistService;
@@ -55,6 +56,24 @@ public class SavelistController {
 		return res;
 	}
 	
+	@RequestMapping(value="/getuserSavelist/{userID}",method=RequestMethod.GET)
+	public ResponseObject<Savelist> findSavelistByUserID (@PathVariable("userID") int userID)
+	{
+		ArrayList<Savelist> list=savelistService.findSavelistByUserID(userID);
+		ResponseObject<Savelist> res=new ResponseObject<Savelist>();
+		if(savelistService.findSavelistByUserID(userID)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(list);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	
 	@RequestMapping(value="/savelist/{id}",method=RequestMethod.DELETE)
 	public Response delete(@PathVariable("id") int id)
 	{
@@ -87,7 +106,38 @@ public class SavelistController {
 			res.setMessage();
 		}		
 		return res;		
-	}	
+	}
+	
+	@RequestMapping(value="/savelistDetail",method=RequestMethod.POST)
+	public Response insertSavelistDetail(@RequestBody Savelist list)
+	{
+		Response res=new Response();
+		if(savelistService.insertDetail(list)){
+			res.setCode(ResponseCode.INSERT_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.INSERT_FAIL);
+			res.setMessage();
+		}		
+		return res;		
+	}
+	
+	@RequestMapping(value="/saveSavelistOnly",method=RequestMethod.POST)
+	public Response insertSavelistOnly(@RequestBody Savelist list)
+	{
+		Response res=new Response();
+		if(savelistService.insertSavelistOnly(list)){
+			res.setCode(ResponseCode.INSERT_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.INSERT_FAIL);
+			res.setMessage();
+		}		
+		return res;		
+	}
+	
 	
 	@RequestMapping(value="/savelist",method=RequestMethod.PUT)
 	public Response update(@RequestBody Savelist list)

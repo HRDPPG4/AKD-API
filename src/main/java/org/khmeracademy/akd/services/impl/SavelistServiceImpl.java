@@ -8,6 +8,7 @@ import org.khmeracademy.akd.repositories.SavelistRepository;
 import org.khmeracademy.akd.services.SavelistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SavelistServiceImpl implements SavelistService{
@@ -27,10 +28,12 @@ public class SavelistServiceImpl implements SavelistService{
 	}
 
 	@Override
+	
 	public boolean insert(Savelist list) {
 		
-		return savelistRepository.insert(list);
+		savelistRepository.insert(list);
 		
+		return savelistRepository.insertDetails(list);
 	}
 
 	@Override
@@ -49,10 +52,21 @@ public class SavelistServiceImpl implements SavelistService{
 	}
 
 	@Override
-	public ArrayList<Object> findSavelistByUserID(int userID) {
+	public ArrayList<Savelist> findSavelistByUserID(int userID) {
 		return savelistRepository.findSavelistByUserID(userID);
 	
 	
+	}
+
+	@Override
+	public boolean insertDetail(Savelist list) {
+		return savelistRepository.insertDetails(list);
+	}
+
+	@Override
+	public boolean insertSavelistOnly(Savelist list) {
+		
+		return savelistRepository.insertSavelistOnly( list );
 	}
 
 	
