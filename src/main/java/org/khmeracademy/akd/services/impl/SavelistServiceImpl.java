@@ -28,7 +28,7 @@ public class SavelistServiceImpl implements SavelistService{
 	}
 
 	@Override
-	@Transactional
+	
 	public boolean insert(Savelist list) {
 		
 		savelistRepository.insert(list);
@@ -56,6 +56,17 @@ public class SavelistServiceImpl implements SavelistService{
 		return savelistRepository.findSavelistByUserID(userID);
 	
 	
+	}
+
+	@Override
+	public boolean insertDetail(Savelist list) {
+		return savelistRepository.insertDetails(list);
+	}
+
+	@Override
+	public boolean insertSavelistOnly(Savelist list) {
+		
+		return savelistRepository.insertSavelistOnly( list );
 	}
 
 	

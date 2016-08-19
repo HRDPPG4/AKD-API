@@ -8,6 +8,8 @@ public interface SavelistService {
 	boolean insert(Savelist list);
 	
 	boolean update(Savelist list);
+	boolean insertDetail(Savelist list);
+	boolean insertSavelistOnly(Savelist list);
 	
 	ArrayList<Object> findAll();
 	

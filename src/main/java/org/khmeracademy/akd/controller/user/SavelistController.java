@@ -106,7 +106,38 @@ public class SavelistController {
 			res.setMessage();
 		}		
 		return res;		
-	}	
+	}
+	
+	@RequestMapping(value="/savelistDetail",method=RequestMethod.POST)
+	public Response insertSavelistDetail(@RequestBody Savelist list)
+	{
+		Response res=new Response();
+		if(savelistService.insertDetail(list)){
+			res.setCode(ResponseCode.INSERT_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.INSERT_FAIL);
+			res.setMessage();
+		}		
+		return res;		
+	}
+	
+	@RequestMapping(value="/saveSavelistOnly",method=RequestMethod.POST)
+	public Response insertSavelistOnly(@RequestBody Savelist list)
+	{
+		Response res=new Response();
+		if(savelistService.insertSavelistOnly(list)){
+			res.setCode(ResponseCode.INSERT_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.INSERT_FAIL);
+			res.setMessage();
+		}		
+		return res;		
+	}
+	
 	
 	@RequestMapping(value="/savelist",method=RequestMethod.PUT)
 	public Response update(@RequestBody Savelist list)

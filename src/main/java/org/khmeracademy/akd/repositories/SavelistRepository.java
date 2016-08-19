@@ -28,10 +28,8 @@ public interface SavelistRepository {
 	
 	@Insert("INSERT INTO akd_save_list_detail VALUES (#{savelistID},#{docID},#{createdDate})")
 	boolean insertDetails(Savelist list);
-	
-	
-	
-	
+	@Insert("INSERT INTO akd_save_lists VALUES(nextval('akd_save_lists_save_list_id_seq'),#{name},#{createdDate},#{remark},#{userID},#{status})")
+	boolean insertSavelistOnly(Savelist list);
 	@Select(SAVE_LIST_SQL.SELECT)
 	@Results({
 		@Result(property="savelistID", column="save_list_id"),
