@@ -6,8 +6,12 @@ import java.util.ArrayList;
 
 
 
+
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -60,12 +64,14 @@ public interface CategoryRepository {
 		@Result(property="remark", column="remark"),
 		@Result(property="parentID", column="parent_id"),
 		@Result(property="status", column="status"),
-		@Result(property="icon", column="icon")
-			
+		@Result(property="icon", column="icon"),
+		@Result(property="subCategories", column="cat_id"  
+			, many = @Many(select = "getCategoryByParentIDAndStatus")
+		)
 	})
 	ArrayList<Category>getCategoryByParentID(String ParentID);
 	
-	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} AND status=#{status} ")
+	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parent_id} AND status=1 ")
 	@Results({
 		@Result(property="catID", column="cat_id"),
 		@Result(property="catName", column="name"),
@@ -76,7 +82,7 @@ public interface CategoryRepository {
 		@Result(property="icon", column="icon")
 			
 	})
-	ArrayList<Category>getCategoryByParentIDAndStatus(String ParentID,int Status);
+	ArrayList<Category>getCategoryByParentIDAndStatus(@Param("parent_id")String ParentID, @Param("status")int Status);
 	
 	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} AND status=1")
 	@Results({

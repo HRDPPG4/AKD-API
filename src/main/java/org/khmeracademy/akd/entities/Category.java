@@ -1,5 +1,7 @@
 package org.khmeracademy.akd.entities;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Category {
@@ -23,6 +25,9 @@ public class Category {
 	
 	@JsonProperty("ICON")
 	private String icon;
+	
+	@JsonProperty("SUB_CATEGORIES")
+	private List<Category> subCategories;
 	
 	public Category() {
 		
