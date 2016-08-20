@@ -56,7 +56,7 @@ public interface CategoryRepository {
 	})
 	Category findOne(String id);
 	
-	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} ")
+	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} AND status=1")
 	@Results({
 		@Result(property="catID", column="cat_id"),
 		@Result(property="catName", column="name"),
@@ -66,12 +66,12 @@ public interface CategoryRepository {
 		@Result(property="status", column="status"),
 		@Result(property="icon", column="icon"),
 		@Result(property="subCategories", column="cat_id"  
-			, many = @Many(select = "getCategoryByParentIDAndStatus")
+			, many = @Many(select = "getCategoryByParentIDAndStatusEnable")
 		)
 	})
 	ArrayList<Category>getCategoryByParentID(String ParentID);
 	
-	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parent_id} AND status=1 ")
+	/*@Select("SELECT * FROM akd_categories WHERE parent_id=#{parent_id} AND status=1 ")
 	@Results({
 		@Result(property="catID", column="cat_id"),
 		@Result(property="catName", column="name"),
@@ -82,7 +82,7 @@ public interface CategoryRepository {
 		@Result(property="icon", column="icon")
 			
 	})
-	ArrayList<Category>getCategoryByParentIDAndStatus(@Param("parent_id")String ParentID, @Param("status")int Status);
+	ArrayList<Category>getCategoryByParentIDAndStatus(@Param("parent_id")String ParentID, @Param("status")int Status);*/
 	
 	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} AND status=1")
 	@Results({

@@ -51,10 +51,10 @@ public class CategoryServiceImpl implements CategoryService{
 		return categoryRepository.getCategoryByParentID(ParentID);
 	}
 	
-	@Override
+	/*@Override
 	public ArrayList getCategoryByParentIDAndStatus(String ParentID,int Status) {
 		return categoryRepository.getCategoryByParentIDAndStatus(ParentID,Status);
-	}
+	}*/
 	
 	@Override
 	public ArrayList getCategoryByParentIDAndStatusEnable(String ParentID) {

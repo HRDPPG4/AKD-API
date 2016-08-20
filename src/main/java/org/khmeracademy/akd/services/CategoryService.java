@@ -16,7 +16,7 @@ public interface CategoryService {
 	
 	ArrayList<Object> getCategoryByParentID(String ParentID);
 	
-	ArrayList<Category> getCategoryByParentIDAndStatus(String ParentID,int Status);
+	/*ArrayList<Category> getCategoryByParentIDAndStatus(String ParentID,int Status);*/
 	
 	ArrayList<Category> getCategoryByParentIDAndStatusEnable(String ParentID);
 	
