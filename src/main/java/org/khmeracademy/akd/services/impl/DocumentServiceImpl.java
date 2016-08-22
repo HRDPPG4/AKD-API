@@ -55,8 +55,8 @@ public class DocumentServiceImpl implements DocumentService{
 	}
 	
 	@Override
-	public ArrayList getDocumentAndUserAndCategoryAndComment() {
-		return documentRepository.getDocumentAndUserAndCategoryAndComment();
+	public ArrayList getDocumentAndUserAndCategoryAndCommentByDocID(String DocID) {
+		return documentRepository.getDocumentAndUserAndCategoryAndComment(DocID);
 	}
 	
 	

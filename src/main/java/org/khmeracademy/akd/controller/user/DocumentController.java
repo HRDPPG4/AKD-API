@@ -132,13 +132,13 @@ public class DocumentController {
 		return res;
 	}
 	
-	@RequestMapping(value="/getDocDetail",method=RequestMethod.GET)
-	public ResponseList<Document> getDocumentAndUserAndCategoryAndComment()
+	@RequestMapping(value="/getDocDetail/{DocID}",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentAndUserAndCategoryAndCommentByDocID(@PathVariable("DocID") String DocID)
 	{
-		ArrayList<Document> doc=documentService.getDocumentAndUserAndCategoryAndComment();
+		ArrayList<Document> doc=documentService.getDocumentAndUserAndCategoryAndCommentByDocID(DocID);
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.getDocumentAndUserAndCategoryAndComment()!=null){
+		if(documentService.getDocumentAndUserAndCategoryAndCommentByDocID(DocID)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);

@@ -102,7 +102,7 @@ public interface DocumentRepository {
 	})
 	ArrayList<Document> getDocumentAndUserAndCategory();
 	
-	@Select("SELECT * from akd_documents")
+	@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
 	@Results({
 		@Result(property="docID", column="doc_id"),
 		@Result(property="title", column="title"),
@@ -121,7 +121,7 @@ public interface DocumentRepository {
 		@Result(property="category", column="cat_id", one = @One(select = "getCategory")),
 		@Result(property="comment", column="doc_id", many = @Many(select = "getComments"))
 	})
-	ArrayList<Document> getDocumentAndUserAndCategoryAndComment();
+	ArrayList<Document> getDocumentAndUserAndCategoryAndComment(String DocID);
 	
 	@Select("SELECT * FROM akd_users WHERE user_id=#{userID}")
 	@Results({
