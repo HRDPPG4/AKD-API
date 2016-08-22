@@ -132,4 +132,25 @@ public class DocumentController {
 		return res;
 	}
 	
+	@RequestMapping(value="/getDocDetail",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentAndUserAndCategoryAndComment()
+	{
+		ArrayList<Document> doc=documentService.getDocumentAndUserAndCategoryAndComment();
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentAndUserAndCategoryAndComment()!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
+	
+	
 }

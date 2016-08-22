@@ -29,6 +29,9 @@ public class Category {
 	@JsonProperty("SUB_CATEGORIES")
 	private List<Category> subCategories;
 	
+	@JsonProperty("DOCUMENTS")
+	private List<Document> documents;
+	
 	public Category() {
 		
 	}
@@ -79,6 +82,16 @@ public class Category {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+
+	public List<Document> getDocuments() {
+		return documents;
+	}
+
+
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
 	}
 	
 }

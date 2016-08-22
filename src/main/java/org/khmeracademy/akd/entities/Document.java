@@ -1,5 +1,7 @@
 package org.khmeracademy.akd.entities;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Document {
@@ -41,6 +43,17 @@ public class Document {
 	
 	@JsonProperty("STATUS")
 	private int status;
+	
+	@JsonProperty("USERS")
+	private List<User> users;
+	
+	@JsonProperty("CATEGORY")
+	private List<Category> category;
+	
+	@JsonProperty("COMMENT")
+	private List<Comment> comment;
+	
+	
 	
 	
 	
@@ -122,6 +135,24 @@ public class Document {
 	}
 	public void setEmbedLink(String embedLink) {
 		this.embedLink = embedLink;
+	}
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	public List<Category> getCategory() {
+		return category;
+	}
+	public void setCategory(List<Category> category) {
+		this.category = category;
+	}
+	public List<Comment> getComment() {
+		return comment;
+	}
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
 	}
 	
 	

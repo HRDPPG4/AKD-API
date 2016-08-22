@@ -17,4 +17,8 @@ public interface DocumentService {
 	
 	Document findOne(String id);
 	
+	ArrayList<Document> getDocumentAndUserAndCategoryAndComment();
+	
+	
+	
 }

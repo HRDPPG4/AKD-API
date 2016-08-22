@@ -39,7 +39,7 @@ public class DocumentServiceImpl implements DocumentService{
 
 	@Override
 	public ArrayList findAll() {
-		return documentRepository.findAll();
+		return documentRepository.getDocumentAndUserAndCategory();
 	}
 	
 	@Override
@@ -53,6 +53,13 @@ public class DocumentServiceImpl implements DocumentService{
 	public Document findOne(String id) {
 		return documentRepository.findOne(id);
 	}
+	
+	@Override
+	public ArrayList getDocumentAndUserAndCategoryAndComment() {
+		return documentRepository.getDocumentAndUserAndCategoryAndComment();
+	}
+	
+	
 
 	
 }

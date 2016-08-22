@@ -23,7 +23,14 @@ public class Comment {
 	@JsonProperty("STATUS")
 	private int status;
 	
+	@JsonProperty("USERS")
 	private List<User> users;
+	
+	
+	@JsonProperty("DOCUMENTS")
+	private List<Document> documents;
+	
+	
 	
 	
 	public int getCommentID() {
@@ -68,5 +75,11 @@ public class Comment {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	
+	public List<Document> getDocuments() {
+		return documents;
+	}
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
+	}
+
 }
