@@ -19,6 +19,7 @@ public interface DocumentService {
 	
 	ArrayList<Document> getDocumentAndUserAndCategoryAndCommentByDocID(String DocID);
 	
+	ArrayList<Document> getDocumentByPopular();
 	
 	
 }

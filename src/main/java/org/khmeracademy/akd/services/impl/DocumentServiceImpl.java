@@ -59,6 +59,11 @@ public class DocumentServiceImpl implements DocumentService{
 		return documentRepository.getDocumentAndUserAndCategoryAndComment(DocID);
 	}
 	
+	@Override
+	public ArrayList getDocumentByPopular() {
+		return documentRepository.getDocumentByPopular();
+	}
+	
 	
 
 	

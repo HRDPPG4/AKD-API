@@ -151,6 +151,25 @@ public class DocumentController {
 		return res;
 	}
 	
+	@RequestMapping(value="/getDocumentByPopular/",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByPopular()
+	{
+		ArrayList<Document> doc=documentService.getDocumentByPopular();
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentByPopular()!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
 	
 	
 }
