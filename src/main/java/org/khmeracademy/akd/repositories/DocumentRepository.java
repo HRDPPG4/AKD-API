@@ -60,7 +60,8 @@ public interface DocumentRepository {
 		@Result(property="docTypeNum", column="doc_type_num"),
 		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
-		@Result(property="status", column="status")		
+		@Result(property="status", column="status"),
+		@Result(property="users", column="user_id", one = @One(select = "getUser"))
 	})
 	ArrayList<Document> getDocumentByCatID(String CatID);
 	
