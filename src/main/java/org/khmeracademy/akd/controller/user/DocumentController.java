@@ -151,6 +151,62 @@ public class DocumentController {
 		return res;
 	}
 	
+	@RequestMapping(value="/getDocumentByPopular/",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByPopular()
+	{
+		ArrayList<Document> doc=documentService.getDocumentByPopular();
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentByPopular()!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
+	@RequestMapping(value="/getDocumentByRecommended/",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByRecommended()
+	{
+		ArrayList<Document> doc=documentService.getDocumentByRecommended();
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentByRecommended()!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
+	@RequestMapping(value="/getDocumentByNewPost/",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByNewPost()
+	{
+		ArrayList<Document> doc=documentService.getDocumentByNewPost();
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentByNewPost()!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
 	
 	
 }

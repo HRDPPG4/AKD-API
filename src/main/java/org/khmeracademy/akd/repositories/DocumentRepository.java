@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Category;
 import org.khmeracademy.akd.entities.Comment;
 import org.khmeracademy.akd.entities.Document;
+import org.khmeracademy.akd.entities.Log;
 import org.khmeracademy.akd.entities.User;
 import org.springframework.stereotype.Repository;
 import org.apache.ibatis.annotations.Many;
@@ -60,7 +61,8 @@ public interface DocumentRepository {
 		@Result(property="docTypeNum", column="doc_type_num"),
 		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
-		@Result(property="status", column="status")		
+		@Result(property="status", column="status"),
+		@Result(property="users", column="user_id", one = @One(select = "getUser"))
 	})
 	ArrayList<Document> getDocumentByCatID(String CatID);
 	
@@ -160,6 +162,71 @@ public interface DocumentRepository {
 			
 	})
 	ArrayList<Comment>getComments();
+	
+	@Select("SELECT * FROM akd_documents ORDER BY view DESC")
+	@Results({
+		@Result(property="docID", column="doc_id"),
+		@Result(property="title", column="title"),
+		@Result(property="des", column="des"),
+		@Result(property="embedLink", column="embed_link"),
+		@Result(property="thumbnailURL", column="thumbnail_url"),
+		@Result(property="exportLink", column="export_link"),
+		@Result(property="view", column="view"),
+		@Result(property="share", column="share"),		
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="docTypeNum", column="doc_type_num"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="catID", column="cat_id"),
+		@Result(property="status", column="status"),
+		@Result(property="users", column="user_id", one = @One(select = "getUser"))
+	})
+	ArrayList<Document> getDocumentByPopular();
+	
+	@Select("SELECT * FROM akd_documents doc WHERE doc.cat_id IN(SELECT dd.cat_id FROM akd_documents dd INNER JOIN akd_logs ll ON dd.doc_id=ll.doc_id ) ORDER BY doc.view DESC")
+			
+	@Results({
+		@Result(property="docID", column="doc_id"),
+		@Result(property="title", column="title"),
+		@Result(property="des", column="des"),
+		@Result(property="embedLink", column="embed_link"),
+		@Result(property="thumbnailURL", column="thumbnail_url"),
+		@Result(property="exportLink", column="export_link"),
+		@Result(property="view", column="view"),
+		@Result(property="share", column="share"),		
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="docTypeNum", column="doc_type_num"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="catID", column="cat_id"),
+		@Result(property="status", column="status"),
+		@Result(property="users", column="user_id", one = @One(select = "getUser"))
+		
+	})
+	ArrayList<Document> getDocumentByRecommended();
+	
+	@Select("SELECT * FROM akd_documents ORDER BY created_date DESC")
+	
+	@Results({
+		@Result(property="docID", column="doc_id"),
+		@Result(property="title", column="title"),
+		@Result(property="des", column="des"),
+		@Result(property="embedLink", column="embed_link"),
+		@Result(property="thumbnailURL", column="thumbnail_url"),
+		@Result(property="exportLink", column="export_link"),
+		@Result(property="view", column="view"),
+		@Result(property="share", column="share"),		
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="docTypeNum", column="doc_type_num"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="catID", column="cat_id"),
+		@Result(property="status", column="status"),
+		@Result(property="users", column="user_id", one = @One(select = "getUser"))
+		
+	})
+	ArrayList<Document> getDocumentByNewPost();
+	
+	
+	
+	
 	
 }
 
