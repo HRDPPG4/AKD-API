@@ -3,6 +3,8 @@ package org.khmeracademy.akd.services.impl;
 import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -23,7 +25,21 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Service
 public class UploadFileToGoogleService {
-	private SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+	
+//	String dateStr = "Jul 27, 2011 8:35:29 AM";
+//	DateFormat readFormat = new SimpleDateFormat( "MMM dd, yyyy hh:mm:ss aa");
+//	DateFormat writeFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+//	Date date = null;
+//	try {
+//	    date = readFormat.parse(dateStr);
+//	} catch (ParseException e) {
+//	    e.printStackTrace();
+//	}
+//
+//	if (date != null) {
+//	    String formattedDate = writeFormat.format(date);
+//	}
+	private SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     private Date d=null;
     private String date=null;
 	public Document upload(String path,String title,String description,String parentID,int docTypeNum) throws GeneralSecurityException, IOException{
@@ -125,6 +141,8 @@ public class UploadFileToGoogleService {
 		Document doc = new Document();
 		d=new Date();
 		date=sdf.format(d);
+		
+		
 		
 		doc.setDocID(file1.getId());
 		doc.setTitle(file1.getTitle());

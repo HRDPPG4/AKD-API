@@ -20,7 +20,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Service
 public class UploadFolderToGoogleService {
-	private SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+	private SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     private Date d=null;
     private String date=null;
 	public Category upload(String parentID,String folderName,String folderDes,String status) throws GeneralSecurityException, IOException{

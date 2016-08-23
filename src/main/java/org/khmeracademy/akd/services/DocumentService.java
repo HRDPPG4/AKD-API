@@ -21,5 +21,11 @@ public interface DocumentService {
 	
 	ArrayList<Document> getDocumentByPopular();
 	
+	ArrayList<Document> getDocumentByRecommended();
+	
+	ArrayList<Document> getDocumentByNewPost();
+	
+	
+	
 	
 }

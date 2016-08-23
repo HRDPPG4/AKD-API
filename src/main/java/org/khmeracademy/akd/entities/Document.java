@@ -53,6 +53,8 @@ public class Document {
 	@JsonProperty("COMMENT")
 	private List<Comment> comment;
 	
+	@JsonProperty("LOGS")
+	private List<Log> logs;
 	
 	
 	
@@ -153,6 +155,12 @@ public class Document {
 	}
 	public void setComment(List<Comment> comment) {
 		this.comment = comment;
+	}
+	public List<Log> getLogs() {
+		return logs;
+	}
+	public void setLogs(List<Log> logs) {
+		this.logs = logs;
 	}
 	
 	
