@@ -2,9 +2,11 @@ package org.khmeracademy.akd.controller.user;
 
 import java.util.ArrayList;
 
+import org.khmeracademy.akd.entities.Log;
 import org.khmeracademy.akd.entities.Savelist;
 import org.khmeracademy.akd.entities.User;
 import org.khmeracademy.akd.response.*;
+import org.khmeracademy.akd.services.LogService;
 import org.khmeracademy.akd.services.SavelistService;
 import org.khmeracademy.akd.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private LogService logService;
+	
 	@RequestMapping(value="/user",method=RequestMethod.GET)
 	public ResponseList<User> findAll()
 	{
@@ -30,6 +35,25 @@ public class UserController {
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(user);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
+	@RequestMapping(value="/user/{userID}/logs",method=RequestMethod.GET)
+	public ResponseList<Log> findAllByUser(@PathVariable("userID") int userID)
+	{
+		ArrayList<Log> log=logService.findAllByUser(userID);
+		ResponseList<Log> res=new ResponseList<Log>();
+		
+		if(logService.findAllByUser(userID)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(log);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);
