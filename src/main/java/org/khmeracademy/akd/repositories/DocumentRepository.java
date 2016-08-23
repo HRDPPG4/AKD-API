@@ -225,6 +225,14 @@ public interface DocumentRepository {
 	ArrayList<Document> getDocumentByNewPost();
 	
 	
+	@Select("SELECT COUNT(*) FROM akd_documents")
+	
+	@Results({
+		@Result(property="docID", column="count"),
+	})
+	int getDocumentCount();
+	
+	
 	
 	
 	

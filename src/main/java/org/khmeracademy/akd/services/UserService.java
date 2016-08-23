@@ -13,4 +13,6 @@ public interface UserService {
 	
 	User findOne(int id);
 	
+	int getUserCount();
+	
 }

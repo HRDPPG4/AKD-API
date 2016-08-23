@@ -3,11 +3,8 @@ package org.khmeracademy.akd.services.impl;
 import java.util.ArrayList;
 
 import org.khmeracademy.akd.entities.Category;
-
 import org.khmeracademy.akd.repositories.CategoryRepository;
-
 import org.khmeracademy.akd.services.CategoryService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +63,11 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public Category findOne(String id) {
 		return categoryRepository.findOne(id);
+	}
+	
+	@Override
+	public int getCategoryCount() {
+		return categoryRepository.getCategoryCount();
 	}
 
 	

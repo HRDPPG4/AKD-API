@@ -208,5 +208,23 @@ public class DocumentController {
 		return res;
 	}
 	
+	@RequestMapping(value="/getDocumentCount",method=RequestMethod.GET)
+	public Response getDocumentCount()
+	{
+		int count =documentService.getDocumentCount();
+		Response res=new Response();
+		if(documentService.getDocumentCount()!=0){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setCount(count);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	
 	
 }

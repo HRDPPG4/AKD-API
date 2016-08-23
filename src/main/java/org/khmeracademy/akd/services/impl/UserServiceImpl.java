@@ -1,5 +1,6 @@
 package org.khmeracademy.akd.services.impl;
 import java.util.ArrayList;
+
 import org.khmeracademy.akd.entities.User;
 import org.khmeracademy.akd.repositories.UserRepository;
 import org.khmeracademy.akd.services.UserService;
@@ -43,6 +44,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User findOne(int id) {
 		return userRepository.findOne(id);
+	}
+	
+	@Override
+	public int getUserCount() {
+		return userRepository.getUserCount();
 	}
 
 	

@@ -20,4 +20,6 @@ public interface CategoryService {
 	
 	ArrayList<Category> getCategoryByParentIDAndStatusEnable(String ParentID);
 	
+	int getCategoryCount();
+	
 }

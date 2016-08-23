@@ -74,6 +74,10 @@ public class DocumentServiceImpl implements DocumentService{
 		return documentRepository.getDocumentByNewPost();
 	}
 	
+	@Override
+	public int getDocumentCount() {
+		return documentRepository.getDocumentCount();
+	}
 	
 	
 	

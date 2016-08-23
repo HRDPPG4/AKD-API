@@ -25,6 +25,8 @@ public interface DocumentService {
 	
 	ArrayList<Document> getDocumentByNewPost();
 	
+	int getDocumentCount();
+	
 	
 	
 	
