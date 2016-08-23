@@ -3,6 +3,8 @@ package org.khmeracademy.akd.services.impl;
 import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +23,9 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Service
 public class UploadFileToGoogleService {
+	private SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+    private Date d=null;
+    private String date=null;
 	public Document upload(String path,String title,String description,String parentID,int docTypeNum) throws GeneralSecurityException, IOException{
 		//	CODE CONNECT WITH GOOGLE API
 		String scope="https://www.googleapis.com/auth/drive";
@@ -118,6 +123,8 @@ public class UploadFileToGoogleService {
 		}
 
 		Document doc = new Document();
+		d=new Date();
+		date=sdf.format(d);
 		
 		doc.setDocID(file1.getId());
 		doc.setTitle(file1.getTitle());
@@ -127,7 +134,7 @@ public class UploadFileToGoogleService {
 		doc.setExportLink("");
 		doc.setView(0);
 		doc.setShare(0);
-		doc.setCreatedDate(file1.getCreatedDate().toString());
+		doc.setCreatedDate(date);
 		doc.setDocTypeNum(docTypeNum);
 		doc.setUserID(userID);
 		doc.setCatID(parentID);
