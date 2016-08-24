@@ -27,6 +27,10 @@ public interface DocumentService {
 	
 	int getDocumentCount();
 	
+	ArrayList<Document> getDocumentByLikeTitle(String title);
+	
+	
+	
 	
 	
 	

@@ -226,5 +226,24 @@ public class DocumentController {
 		return res;
 	}
 	
+	@RequestMapping(value="/getDocumentByLikeTitle/{Title}",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByLikeTitle(@PathVariable("Title") String title)
+	{
+		ArrayList<Document> doc=documentService.getDocumentByLikeTitle(title);
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentByLikeTitle(title)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
 	
 }

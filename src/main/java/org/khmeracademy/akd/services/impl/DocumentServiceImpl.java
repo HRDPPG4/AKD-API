@@ -79,7 +79,10 @@ public class DocumentServiceImpl implements DocumentService{
 		return documentRepository.getDocumentCount();
 	}
 	
-	
+	@Override
+	public ArrayList getDocumentByLikeTitle(String title) {
+		return documentRepository.getDocumentByLikeTitle(title);
+	}
 	
 
 	
