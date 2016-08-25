@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Feedback;
 import org.khmeracademy.akd.repositories.FeedbackRepository;
 import org.khmeracademy.akd.services.FeedbackService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +38,9 @@ public class FeedbackServiceImpl implements FeedbackService{
 	}
 
 	@Override
-	public ArrayList findAll() {
-		return feedbackRepository.findAll();
+	public ArrayList findAll(Paging pagination) {
+		pagination.setTotalPages(feedbackRepository.count());
+		return feedbackRepository.findAll(pagination);
 	}
 
 	@Override

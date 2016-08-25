@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Feedback;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -23,6 +25,9 @@ public interface FeedbackRepository {
 	@Insert(SQL.INSERT)
 	boolean insert(Feedback feed);
 	
+	@Select("SELECT COUNT(feed_id) from akd_feedbacks")
+	public Long count();
+	
 	@Select(SQL.SELECT)
 	@Results({
 		@Result(property="feedbackID", column="feed_id"),
@@ -30,7 +35,7 @@ public interface FeedbackRepository {
 		@Result(property="des", column="feed_des"),
 		@Result(property="status", column="status")
 	})
-	ArrayList<Feedback> findAll();
+	ArrayList<Feedback> findAll(@Param("pagination") Paging pagination);
 	
 	@Select(SQL.FIND_ONE)
 	@Results({
@@ -44,7 +49,7 @@ public interface FeedbackRepository {
 }
 
 interface SQL{
-	String SELECT="SELECT * from akd_feedbacks";
+	String SELECT="SELECT * from akd_feedbacks ORDER BY feed_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}";
 	String FIND_ONE="SELECT * from akd_feedbacks WHERE feed_id=#{feedbackID}";
 	String DELETE="DELETE FROM akd_feedbacks WHERE feed_id=#{feedbackID}";
 	String UPDATE="UPDATE akd_feedbacks SET "

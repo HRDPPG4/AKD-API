@@ -17,6 +17,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Category;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -30,8 +31,10 @@ public interface CategoryRepository {
 	@Insert("INSERT INTO akd_categories (cat_id,name,created_date,remark ,parent_id,status,icon) VALUES(#{catID},#{catName},#{createdDate},#{remark},#{parentID},#{status},#{icon})")
 	boolean insert(Category cat);
 	
+	@Select("SELECT COUNT(cat_id) from akd_categories")
+	public Long count();
 	
-	@Select("SELECT * FROM akd_categories")
+	@Select("SELECT * FROM akd_categories ORDER BY cat_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
 	@Results({
 		@Result(property="catID", column="cat_id"),
 		@Result(property="catName", column="name"),
@@ -41,7 +44,7 @@ public interface CategoryRepository {
 		@Result(property="status", column="status"),
 		@Result(property="icon", column="icon")
 	})
-	ArrayList<Category>findAll();
+	ArrayList<Category>findAll(@Param("pagination") Paging pagination);
 	
 	@Select("SELECT * from akd_categories WHERE cat_id=#{catID}")
 	@Results({

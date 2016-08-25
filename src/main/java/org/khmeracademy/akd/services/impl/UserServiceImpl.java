@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import org.khmeracademy.akd.entities.User;
 import org.khmeracademy.akd.repositories.UserRepository;
 import org.khmeracademy.akd.services.UserService;
+import org.khmeracademy.akd.utilities.Paging;
+import org.khmeracademy.akd.utilities.UserFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +39,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public ArrayList findAll() {
-		return userRepository.findAll();
+	public ArrayList findAll(Paging pagination) {
+		pagination.setTotalCount(userRepository.count());
+		return userRepository.findAll(pagination);
 	}
 
 	@Override

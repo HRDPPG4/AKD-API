@@ -5,6 +5,8 @@ package org.khmeracademy.akd.response;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.khmeracademy.akd.utilities.Paging;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ResponseList<T> extends Response {
@@ -28,6 +30,8 @@ public class ResponseList<T> extends Response {
 	{
 		return paging;
 	}
-	
+	public void setPaging(Paging paging) {
+		this.paging = paging;
+	}
 	
 }

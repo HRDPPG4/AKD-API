@@ -3,6 +3,7 @@ package org.khmeracademy.akd.services;
 import java.util.ArrayList;
 
 import org.khmeracademy.akd.entities.Document;
+import org.khmeracademy.akd.utilities.Paging;
 
 public interface DocumentService {	
 	boolean delete(String id);
@@ -11,7 +12,7 @@ public interface DocumentService {
 	
 	boolean update(Document doc);
 	
-	ArrayList<Object> findAll();
+	ArrayList<Object> findAll(Paging pagination);
 	
 	ArrayList<Document> getDocumentByCatID(String CatID);
 	

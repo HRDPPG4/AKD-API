@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.User;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -23,6 +25,8 @@ public interface UserRepository {
 	@Insert(USER_SQL.INSERT)
 	boolean insert(User user);
 	
+	@Select(USER_SQL.COUNT)
+	public Long count();
 	
 	@Select(USER_SQL.SELECT)
 	@Results({
@@ -36,7 +40,8 @@ public interface UserRepository {
 		@Result(property="status", column="status"),		
 		@Result(property="role", column="role")		
 	})
-	ArrayList<User> findAll();
+	ArrayList<User> findAll(@Param("pagination") Paging pagination);
+	
 	
 	@Select(USER_SQL.FIND_ONE)
 	@Results({
@@ -62,7 +67,9 @@ public interface UserRepository {
 }
 
 interface USER_SQL{
-	String SELECT="SELECT * from akd_users ORDER BY user_id ASC";
+//	String SELECT="SELECT * from akd_users ORDER BY user_id ASC";
+	
+	String SELECT="SELECT * from akd_users ORDER BY user_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}";
 	
 	String FIND_ONE="SELECT * from akd_users WHERE user_id=#{userID}";
 	
@@ -92,6 +99,8 @@ interface USER_SQL{
 			+ "#{remark},"
 			+ "#{status},"
 			+ "#{role})";	
+	
+	String COUNT="SELECT COUNT(user_id) FROM akd_users";
 }
 
 

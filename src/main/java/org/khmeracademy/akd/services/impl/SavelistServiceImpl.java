@@ -6,6 +6,7 @@ import org.apache.felix.bundlerepository.impl.SystemRepositoryImpl;
 import org.khmeracademy.akd.entities.Savelist;
 import org.khmeracademy.akd.repositories.SavelistRepository;
 import org.khmeracademy.akd.services.SavelistService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,8 +43,9 @@ public class SavelistServiceImpl implements SavelistService{
 	}
 
 	@Override
-	public ArrayList findAll() {
-		return savelistRepository.findAll();
+	public ArrayList findAll(Paging pagination) {
+		pagination.setTotalCount(savelistRepository.count());
+		return savelistRepository.findAll(pagination);
 	}
 
 	@Override

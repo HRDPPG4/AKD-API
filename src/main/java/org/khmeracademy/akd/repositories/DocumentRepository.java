@@ -13,6 +13,7 @@ import org.khmeracademy.akd.entities.Comment;
 import org.khmeracademy.akd.entities.Document;
 import org.khmeracademy.akd.entities.Log;
 import org.khmeracademy.akd.entities.User;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.stereotype.Repository;
 import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.One;
@@ -27,6 +28,9 @@ public interface DocumentRepository {
 	
 	@Insert("INSERT INTO akd_documents VALUES(#{docID},#{title},#{des},#{embedLink},#{thumbnailURL},#{exportLink},#{view},#{share},#{createdDate},#{docTypeNum},#{userID},#{catID},#{status})")
 	boolean insert(Document doc);
+	
+	@Select("SELECT COUNT(doc_id) from	akd_documents")
+	public Long count();
 	
 	
 	/*@Select("SELECT * from akd_documents")
@@ -84,7 +88,7 @@ public interface DocumentRepository {
 	})
 	Document findOne(String id);
 	
-	@Select("SELECT * from akd_documents")
+	@Select("SELECT * from akd_documents ORDER BY doc_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
 	@Results({
 		@Result(property="docID", column="doc_id"),
 		@Result(property="title", column="title"),
@@ -102,7 +106,7 @@ public interface DocumentRepository {
 		@Result(property="users", column="user_id", one = @One(select = "getUser")),
 		@Result(property="category", column="cat_id", one = @One(select = "getCategory"))		
 	})
-	ArrayList<Document> getDocumentAndUserAndCategory();
+	ArrayList<Document> getDocumentAndUserAndCategory(@Param("pagination") Paging pagination);
 	
 	@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
 	@Results({
@@ -234,7 +238,6 @@ public interface DocumentRepository {
 	
 	
 	
-	
-	
+		
 }
 

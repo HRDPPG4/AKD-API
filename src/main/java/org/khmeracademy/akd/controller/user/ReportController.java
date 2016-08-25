@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Report;
 import org.khmeracademy.akd.response.*;
 import org.khmeracademy.akd.services.ReportService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,15 +19,16 @@ public class ReportController {
 	private ReportService reportService;
 	
 	@RequestMapping(value="/report",method=RequestMethod.GET)
-	public ResponseList<Report> findAll()
+	public ResponseList<Report> findAll(Paging pagination)
 	{
-		ArrayList<Object> rep=reportService.findAll();
+		ArrayList<Object> rep=reportService.findAll(pagination);
 		ResponseList<Report> res=new ResponseList<Report>();
 		
-		if(reportService.findAll()!=null){
+		if(reportService.findAll(pagination)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(rep);
+			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);

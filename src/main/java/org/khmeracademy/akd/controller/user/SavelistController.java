@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Savelist;
 import org.khmeracademy.akd.response.*;
 import org.khmeracademy.akd.services.SavelistService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,15 +20,16 @@ public class SavelistController {
 	private SavelistService savelistService;
 	
 	@RequestMapping(value="/savelist",method=RequestMethod.GET)
-	public ResponseList<Savelist> findAll()
+	public ResponseList<Savelist> findAll(Paging pagination)
 	{
-		ArrayList<Object> list=savelistService.findAll();
+		ArrayList<Object> list=savelistService.findAll(pagination);
 		ResponseList<Savelist> res=new ResponseList<Savelist>();
 		
-		if(savelistService.findAll()!=null){
+		if(savelistService.findAll(pagination)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(list);
+			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);

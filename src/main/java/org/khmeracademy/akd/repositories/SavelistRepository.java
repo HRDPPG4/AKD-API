@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -14,6 +15,7 @@ import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Document;
 import org.khmeracademy.akd.entities.Savelist;
 import org.khmeracademy.akd.entities.User;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -32,8 +34,11 @@ public interface SavelistRepository {
 	
 	@Insert("INSERT INTO akd_save_list_detail VALUES (#{savelistID},#{docID},#{createdDate})")
 	boolean insertDetails(Savelist list);
+	
 	@Insert("INSERT INTO akd_save_lists VALUES(nextval('akd_save_lists_save_list_id_seq'),#{name},#{createdDate},#{remark},#{userID},#{status})")
 	boolean insertSavelistOnly(Savelist list);
+	
+	
 	@Select(SAVE_LIST_SQL.SELECT)
 	@Results({
 		@Result(property="savelistID", column="save_list_id"),
@@ -45,7 +50,7 @@ public interface SavelistRepository {
 		@Result(property="status", column="status")	
 		
 	})
-	ArrayList<Savelist> findAll();
+	ArrayList<Savelist> findAll(@Param("pagination") Paging pagination);
 	
 	@Select("SELECT * FROM akd_save_lists WHERE user_id = #{userID}")
 	
@@ -76,7 +81,8 @@ public interface SavelistRepository {
 	})
 	ArrayList<Savelist> getSavelistDetail();
 	
-	
+	@Select("SELECT COUNT(save_list_id) from akd_save_lists")
+	public Long count();
 	
 	  
 	@Select("SELECT * FROM akd_users WHERE user_id=#{userID}")
@@ -126,7 +132,7 @@ public interface SavelistRepository {
 }
 
 interface SAVE_LIST_SQL{
-	String SELECT="SELECT * from akd_save_lists";
+	String SELECT="SELECT * from akd_save_lists ORDER BY save_list_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}";
 	
 	String FIND_ONE="SELECT * from akd_save_lists WHERE save_list_id=#{savelistID}";
 	

@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Log;
 import org.khmeracademy.akd.entities.Report;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -19,6 +21,9 @@ public interface ReportRepository {
 	
 	@Update(REPORT_SQL.UPDATE)
 	boolean update(Report rep);
+	
+	@Select("SELECT COUNT(report_id) from akd_reports")
+	public Long count();
 	
 	@Insert(REPORT_SQL.INSERT)
 	boolean insert(Report rep);
@@ -33,7 +38,7 @@ public interface ReportRepository {
 		@Result(property="docID", column="doc_id"),
 		@Result(property="status", column="status")	
 	})
-	ArrayList<Report> findAll();
+	ArrayList<Report> findAll(@Param("pagination") Paging pagination);
 	
 	@Select(REPORT_SQL.FIND_ONE)
 	@Results({
@@ -49,7 +54,7 @@ public interface ReportRepository {
 }
 
 interface REPORT_SQL{
-	String SELECT="SELECT * from akd_reports";
+	String SELECT="SELECT * from akd_reports ORDER BY report_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}";
 	
 	String FIND_ONE="SELECT * from akd_reports WHERE report_id=#{reportID}";
 	

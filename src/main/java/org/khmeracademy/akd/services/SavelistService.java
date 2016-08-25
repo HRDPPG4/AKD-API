@@ -2,6 +2,7 @@ package org.khmeracademy.akd.services;
 
 import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Savelist;
+import org.khmeracademy.akd.utilities.Paging;
 public interface SavelistService {	
 	boolean delete(int id);
 	
@@ -11,7 +12,7 @@ public interface SavelistService {
 	boolean insertDetail(Savelist list);
 	boolean insertSavelistOnly(Savelist list);
 	
-	ArrayList<Object> findAll();
+	ArrayList<Object> findAll(Paging pagination);
 	
 	ArrayList<Savelist> findSavelistByUserID(int userID);
 	

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Category;
 import org.khmeracademy.akd.repositories.CategoryRepository;
 import org.khmeracademy.akd.services.CategoryService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +39,9 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public ArrayList findAll() {
-		return categoryRepository.findAll();
+	public ArrayList findAll(Paging pagination) {
+		pagination.setTotalCount(categoryRepository.count());
+		return categoryRepository.findAll(pagination);
 	}
 	
 	

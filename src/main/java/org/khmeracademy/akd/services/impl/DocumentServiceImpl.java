@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Document;
 import org.khmeracademy.akd.repositories.DocumentRepository;
 import org.khmeracademy.akd.services.DocumentService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,9 +39,12 @@ public class DocumentServiceImpl implements DocumentService{
 	}
 
 	@Override
-	public ArrayList findAll() {
-		return documentRepository.getDocumentAndUserAndCategory();
+	public ArrayList findAll(Paging pagination) {
+		pagination.setTotalCount(documentRepository.count());
+		return documentRepository.getDocumentAndUserAndCategory(pagination);
 	}
+	
+	
 	
 	@Override
 	public ArrayList getDocumentByCatID(String CatID) {
@@ -78,6 +82,8 @@ public class DocumentServiceImpl implements DocumentService{
 	public int getDocumentCount() {
 		return documentRepository.getDocumentCount();
 	}
+
+	
 	
 	
 	

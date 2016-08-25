@@ -7,6 +7,7 @@ import org.khmeracademy.akd.entities.Document;
 import org.khmeracademy.akd.response.*;
 import org.khmeracademy.akd.services.CategoryService;
 import org.khmeracademy.akd.services.DocumentService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,15 +22,16 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	@RequestMapping(value="/category",method=RequestMethod.GET)
-	public ResponseList<Category> findAll()
+	public ResponseList<Category> findAll(Paging pagination)
 	{
-		ArrayList<Object> cat=categoryService.findAll();
+		ArrayList<Object> cat=categoryService.findAll(pagination);
 		ResponseList<Category> res=new ResponseList<Category>();
 		
-		if(categoryService.findAll()!=null){
+		if(categoryService.findAll(pagination)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(cat);
+			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);
