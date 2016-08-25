@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Category;
 import org.khmeracademy.akd.entities.Comment;
@@ -24,7 +25,9 @@ public interface DocumentRepository {
 	boolean delete(String id);
 	@Update("UPDATE akd_documents SET title=#{title},des=#{des},embed_link=#{embedLink},thumbnail_url=#{thumbnailURL},export_link=#{exportLink},view=#{view},share=#{share},created_date=#{createdDate},doc_type_num=#{docTypeNum},user_id=#{userID},cat_id=#{catID},status=#{status} WHERE doc_id=#{docID}")
 	boolean update(Document doc);
-	
+	//@SelectKey(before= false, keyProperty="view",resultType= int.class,statement="SELECT view From akd_documents WHERE doc_id = #{docID}")
+	@Update("UPDATE akd_documents SET view =(SELECT view FROM akd_documents WHERE doc_id =#{docID})+1 WHERE doc_id= #{docID}")
+   	boolean countView(String docID);
 	@Insert("INSERT INTO akd_documents VALUES(#{docID},#{title},#{des},#{embedLink},#{thumbnailURL},#{exportLink},#{view},#{share},#{createdDate},#{docTypeNum},#{userID},#{catID},#{status})")
 	boolean insert(Document doc);
 	
@@ -65,6 +68,7 @@ public interface DocumentRepository {
 		@Result(property="users", column="user_id", one = @One(select = "getUser"))
 	})
 	ArrayList<Document> getDocumentByCatID(String CatID);
+	
 	
 	@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
 	@Results({

@@ -60,6 +60,7 @@ public class DocumentController {
 		return res;
 	
 	}
+	
 	@RequestMapping(value="/document/user/{userID}",method=RequestMethod.GET)
 	public ResponseObject<Document> getDocByUser(@PathVariable("userID") int userID, @RequestParam(value="docTypeNum", defaultValue="2") int docTypeNum)
 	{
@@ -132,6 +133,24 @@ public class DocumentController {
 			res.setMessage();
 		}
 	
+		return res;
+	}
+	
+	@RequestMapping(value="/document/counview/{docID}",method=RequestMethod.PUT)
+	public Response countView(@PathVariable("docID") String docID)
+	{
+		
+		System.out.println(docID);
+		Response res = new Response();
+		if(documentService.countView(docID)){
+			res.setCode(ResponseCode.UPDATE_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.UPDATE_FAIL);
+			res.setMessage();
+		}
+		
 		return res;
 	}
 	
@@ -266,6 +285,7 @@ public class DocumentController {
 				
 		return res;
 	}
+	
 	
 	
 }
