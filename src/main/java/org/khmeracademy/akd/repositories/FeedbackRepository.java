@@ -20,7 +20,7 @@ public interface FeedbackRepository {
 	@Update(SQL.UPDATE)
 	boolean update(Feedback feed);
 	
-	@Insert("INSERT INTO akd_feedbacks VALUES(nextval('akd_feedbacks_feed_id_seq'),#{date},#{des},#{status}) ")
+	@Insert(" INSERT INTO akd_feedbacks VALUES(nextval('akd_feedbacks_feed_id_seq'),#{date},#{des},#{status}) ")
 	boolean insert(Feedback feed);
 	
 	@Select(SQL.SELECT)
