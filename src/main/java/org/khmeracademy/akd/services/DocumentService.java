@@ -14,6 +14,8 @@ public interface DocumentService {
 	ArrayList<Object> findAll();
 	
 	ArrayList<Document> getDocumentByCatID(String CatID);
+	ArrayList<Document> getDocByUser(int userID, int docTypeNum);
+	
 	
 	Document findOne(String id);
 	

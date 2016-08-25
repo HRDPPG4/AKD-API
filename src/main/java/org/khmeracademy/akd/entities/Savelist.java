@@ -25,15 +25,37 @@ public class Savelist {
 	
 	@JsonProperty("STATUS")
 	private int status;
-	
+	@JsonProperty("SAVELISTDETAIL")
+	private List<Savelist>  savelistdetail;
+
+	public List<Savelist> getSavelistdetail() {
+		return savelistdetail;
+	}
+	public void setSavelistdetail(List<Savelist> savelistdetail) {
+		this.savelistdetail = savelistdetail;
+	}
 	@JsonProperty("USERS")
 	private List<User> users;
+	@JsonProperty("USER")
+	private User user;
 	
 	
-	@JsonProperty("DOCUMENTS")
-	private List<Document> documents;
+	@JsonProperty("DOCUMENT")
+	private List<Document> document;
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
+	public List<Document> getDocument() {
+		return document;
+	}
+	public void setDocument(List<Document> document) {
+		this.document = document;
+	}
 	public int getSavelistID() {
 		return savelistID;
 	}
@@ -82,12 +104,7 @@ public class Savelist {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	public List<Document> getDocuments() {
-		return documents;
-	}
-	public void setDocuments(List<Document> documents) {
-		this.documents = documents;
-	}
+
 	
 	
 }

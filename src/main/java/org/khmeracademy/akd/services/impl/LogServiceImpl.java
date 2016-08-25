@@ -46,5 +46,11 @@ public class LogServiceImpl implements LogService{
 		return logRepository.findOne(id);
 	}
 
+	@Override
+	public ArrayList<Log> findAllByUser(int userID) {
+		
+		return logRepository.findAllByUser(userID);
+	}
+
 	
 }

@@ -58,8 +58,17 @@ public class DocumentServiceImpl implements DocumentService{
 	public ArrayList getDocumentAndUserAndCategoryAndCommentByDocID(String DocID) {
 		return documentRepository.getDocumentAndUserAndCategoryAndComment(DocID);
 	}
+
+	
 	
 	
 
 	
+
+
+	@Override
+	public ArrayList<Document> getDocByUser(int userID, int docTypeNum) {
+		System.out.println("USER ID==> " + userID + " DOCTYPE NUM ==> "+ docTypeNum);
+		return documentRepository.getDocByUser(userID, docTypeNum);
+	}
 }
