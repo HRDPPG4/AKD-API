@@ -3,19 +3,26 @@ package org.khmeracademy.akd.services.impl;
 import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import org.khmeracademy.akd.entities.Category;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.drive.DriveFile;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.stereotype.Service;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Service
 public class UploadFolderToGoogleService {
+	private SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    private Date d=null;
+    private String date=null;
 	public Category upload(String parentID,String folderName,String folderDes,String status) throws GeneralSecurityException, IOException{
 		//	CODE CONNECT WITH GOOGLE API
 		String scope="https://www.googleapis.com/auth/drive";
@@ -45,10 +52,12 @@ public class UploadFolderToGoogleService {
 		Category cat=null;
 		
 		if(folder.getId()!=null && folder.getTitle()!=null){
+			d=new Date();
+			date=sdf.format(d);
 			cat=new Category();
 			cat.setCatID(folder.getId());
 			cat.setCatName(folder.getTitle());
-			cat.setCreatedDate(folder.getCreatedDate().toString());
+			cat.setCreatedDate(date);
 			cat.setParentID(parentID);
 			cat.setRemark(folderDes);
 			cat.setStatus(Integer.valueOf(status));

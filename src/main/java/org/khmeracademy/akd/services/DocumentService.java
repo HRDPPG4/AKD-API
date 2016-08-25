@@ -21,6 +21,19 @@ public interface DocumentService {
 	
 	ArrayList<Document> getDocumentAndUserAndCategoryAndCommentByDocID(String DocID);
 	
+	ArrayList<Document> getDocumentByPopular();
+	
+	ArrayList<Document> getDocumentByRecommended();
+	
+	ArrayList<Document> getDocumentByNewPost();
+	
+	int getDocumentCount();
+	
+	ArrayList<Document> getDocumentByLikeTitle(String title);
+	
+	
+	
+	
 	
 	
 }

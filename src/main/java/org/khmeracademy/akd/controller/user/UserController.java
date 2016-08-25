@@ -135,4 +135,22 @@ public class UserController {
 		return res;
 	}
 	
+	@RequestMapping(value="/getUserCount",method=RequestMethod.GET)
+	public Response getUserCount()
+	{
+		int count =userService.getUserCount();
+		Response res=new Response();
+		if(userService.getUserCount()!=0){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setCount(count);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	
 }

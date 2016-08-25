@@ -173,6 +173,99 @@ public class DocumentController {
 		return res;
 	}
 	
+	@RequestMapping(value="/getDocumentByPopular/",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByPopular()
+	{
+		ArrayList<Document> doc=documentService.getDocumentByPopular();
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentByPopular()!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
+	@RequestMapping(value="/getDocumentByRecommended/",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByRecommended()
+	{
+		ArrayList<Document> doc=documentService.getDocumentByRecommended();
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentByRecommended()!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
+	@RequestMapping(value="/getDocumentByNewPost/",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByNewPost()
+	{
+		ArrayList<Document> doc=documentService.getDocumentByNewPost();
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentByNewPost()!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
+	@RequestMapping(value="/getDocumentCount",method=RequestMethod.GET)
+	public Response getDocumentCount()
+	{
+		int count =documentService.getDocumentCount();
+		Response res=new Response();
+		if(documentService.getDocumentCount()!=0){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setCount(count);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	
+	@RequestMapping(value="/getDocumentByLikeTitle/{Title}",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByLikeTitle(@PathVariable("Title") String title)
+	{
+		ArrayList<Document> doc=documentService.getDocumentByLikeTitle(title);
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentByLikeTitle(title)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
 	
 	
 }

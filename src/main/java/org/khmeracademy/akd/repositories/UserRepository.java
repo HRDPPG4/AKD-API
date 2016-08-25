@@ -52,6 +52,13 @@ public interface UserRepository {
 	})
 	User findOne(int id);
 	
+	@Select("SELECT COUNT(*) FROM akd_users")
+	
+	@Results({
+		@Result(property="userID", column="count"),
+	})
+	int getUserCount();
+	
 }
 
 interface USER_SQL{

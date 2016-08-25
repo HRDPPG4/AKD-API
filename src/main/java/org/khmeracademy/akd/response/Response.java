@@ -6,6 +6,10 @@ public class Response {
 	@JsonProperty("CODE")
 	public String code=ResponseCode.FAIL;
 	
+	@JsonProperty("COUNT")
+	private int count=0;
+	
+	
 
 	public String getCode()
 	{
@@ -60,5 +64,13 @@ public class Response {
 		else if(code==ResponseCode.RECORD_FOUND){
 			this.message="RECORD FOUND!";
 		}
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}	
 }

@@ -61,6 +61,30 @@ public class DocumentServiceImpl implements DocumentService{
 
 	
 	
+	@Override
+	public ArrayList getDocumentByPopular() {
+		return documentRepository.getDocumentByPopular();
+	}
+	
+	@Override
+	public ArrayList getDocumentByRecommended() {
+		return documentRepository.getDocumentByRecommended();
+	}
+	
+	@Override
+	public ArrayList getDocumentByNewPost() {
+		return documentRepository.getDocumentByNewPost();
+	}
+	
+	@Override
+	public int getDocumentCount() {
+		return documentRepository.getDocumentCount();
+	}
+	
+	@Override
+	public ArrayList getDocumentByLikeTitle(String title) {
+		return documentRepository.getDocumentByLikeTitle(title);
+	}
 	
 
 	
