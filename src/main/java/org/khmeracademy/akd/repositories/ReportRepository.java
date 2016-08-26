@@ -64,14 +64,13 @@ interface REPORT_SQL{
 			+ "WHERE report_id=#{reportID}";
 	
 	String INSERT="INSERT INTO "
-			+ "akd_reports(report_id,"
+			+ "akd_reports("
 			+ "created_date,"
 			+ "remark,"
 			+ "user_id,"
 			+ "doc_id,status)"
 			+ "VALUES"
-			+ "(#{reportID},"
-			+ "#{date},"
+			+ "(#{date},"
 			+ "#{remark},"
 			+ "#{userID},"
 			+ "#{docID},"
