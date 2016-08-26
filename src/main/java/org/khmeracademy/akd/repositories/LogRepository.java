@@ -28,7 +28,7 @@ public interface LogRepository {
 	boolean insert(Log feed);
 	
 	
-	@Select("SELECT * from akd_logs")
+	@Select("SELECT * from akd_logs ")
 	@Results({
 		@Result(property="logID", column="log_id"),
 		@Result(property="date", column="date"),
@@ -41,6 +41,19 @@ public interface LogRepository {
 		
 	})
 	ArrayList<Log> findAll();
+	/*@Select("SELECT l.log_id ,d.title,d.des,d.thumbnail_url FROM akd_logs l INNER JOIN akd_documents d ON l.doc_id = d.doc_id WHERE l.user_id =#{userID}")
+	@Results({
+		@Result(property="logID", column="log_id"),
+		@Result(property="date", column="date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="docID", column="doc_id"),
+		@Result(property="status", column="status"),
+		@Result(property="user", column="user_id", one = @One(select = "getUser")),
+		@Result(property="document", column="doc_id", one = @One(select = "getDocument"))	
+		
+	})*/
+//      ArrayList<Log> findAllByUser(int userID);
 	
 	@Select("SELECT * from akd_logs WHERE log_id=#{logID}")
 	@Results({
@@ -65,7 +78,7 @@ public interface LogRepository {
 		@Result(property="status", column="status"),		
 		@Result(property="role", column="role")		
 	})
-	ArrayList<User> getUser();
+	  User getUser(int userID);
 	
 	
 	@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
@@ -84,6 +97,19 @@ public interface LogRepository {
 		@Result(property="catID", column="cat_id"),
 		@Result(property="status", column="status")		
 	})
-	ArrayList<Document> getDocument();
+	 Document getDocument(String docID);
 	
+	@Select("SELEct * FROM akd_logs WHERE user_id=#{userID}")
+	@Results({
+		@Result(property="logID", column="log_id"),
+		@Result(property="date", column="date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="docID", column="doc_id"),
+		@Result(property="status", column="status"),
+		@Result(property="user", column="user_id", one = @One(select = "getUser")),
+		@Result(property="document", column="doc_id", one = @One(select = "getDocument"))	
+		
+	})
+	ArrayList<Log> findAllByUser(int userID);
 }

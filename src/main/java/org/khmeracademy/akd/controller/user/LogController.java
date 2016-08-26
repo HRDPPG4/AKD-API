@@ -1,6 +1,9 @@
 package org.khmeracademy.akd.controller.user;
 
 import java.util.ArrayList;
+
+import org.apache.ibatis.annotations.Param;
+import org.khmeracademy.akd.entities.Document;
 import org.khmeracademy.akd.entities.Log;
 import org.khmeracademy.akd.response.*;
 import org.khmeracademy.akd.services.LogService;
@@ -37,12 +40,16 @@ public class LogController {
 	}
 
 	
-	@RequestMapping(value="/log/{id}",method=RequestMethod.GET)
-	public ResponseObject<Log> fineOne(@PathVariable("id") int id)
+
+	
+	
+	@RequestMapping(value="user/log/{userID}",method=RequestMethod.GET)
+	public ResponseList<Log> findAllByUser(@PathVariable("userID") int userID)
 	{
-		Log log=logService.findOne(id);
-		ResponseObject<Log> res=new ResponseObject<Log>();
-		if(logService.findOne(id)!=null){
+		ArrayList<Log> log=logService.findAllByUser(userID);
+		ResponseList<Log> res=new ResponseList<Log>();
+		
+		if(logService.findAllByUser(userID)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(log);
@@ -51,9 +58,10 @@ public class LogController {
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);
 			res.setMessage();
 		}
-		
+				
 		return res;
 	}
+
 	
 	@RequestMapping(value="/log/{id}",method=RequestMethod.DELETE)
 	public Response delete(@PathVariable("id") int id)

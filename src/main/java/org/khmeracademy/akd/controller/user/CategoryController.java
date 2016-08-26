@@ -172,4 +172,22 @@ public class CategoryController {
 		return res;
 	}
 	
+	@RequestMapping(value="/getCategoryCount",method=RequestMethod.GET)
+	public Response getCategoryCount()
+	{
+		int count =categoryService.getCategoryCount()-1;
+		Response res=new Response();
+		if(categoryService.getCategoryCount()!=0){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setCount(count);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	
 }

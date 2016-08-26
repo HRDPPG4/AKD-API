@@ -97,4 +97,11 @@ public interface CategoryRepository {
 	})
 	ArrayList<Category>getCategoryByParentIDAndStatusEnable(String ParentID);
 	
+	@Select("SELECT COUNT(*) FROM akd_categories")
+	
+	@Results({
+		@Result(property="catID", column="count"),
+	})
+	int getCategoryCount();
+	
 }

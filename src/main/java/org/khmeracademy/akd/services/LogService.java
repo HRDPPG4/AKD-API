@@ -10,6 +10,7 @@ public interface LogService {
 	boolean update(Log feed);
 	
 	ArrayList<Object> findAll();
+	ArrayList<Log> findAllByUser(int userID);
 	
 	Log findOne(int id);
 	
