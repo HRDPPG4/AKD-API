@@ -1,7 +1,10 @@
 package org.khmeracademy.akd.services;
 
 import java.util.ArrayList;
+
 import org.khmeracademy.akd.entities.User;
+import org.khmeracademy.akd.entities.forms.UserLogin;
+
 public interface UserService {	
 	boolean delete(int id);
 	
@@ -14,5 +17,7 @@ public interface UserService {
 	User findOne(int id);
 	
 	int getUserCount();
+	
+	User findUserByEmail(UserLogin userlogin);
 	
 }

@@ -2,10 +2,12 @@ package org.khmeracademy.akd.services.impl;
 import java.util.ArrayList;
 
 import org.khmeracademy.akd.entities.User;
+import org.khmeracademy.akd.entities.forms.UserLogin;
 import org.khmeracademy.akd.repositories.UserRepository;
 import org.khmeracademy.akd.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -49,6 +51,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int getUserCount() {
 		return userRepository.getUserCount();
+	}
+	
+	@Override
+	public User findUserByEmail(UserLogin userlogin) {		
+		return userRepository.findUserByEmail(userlogin);
 	}
 
 	

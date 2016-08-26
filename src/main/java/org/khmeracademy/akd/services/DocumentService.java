@@ -10,6 +10,7 @@ public interface DocumentService {
 	boolean insert(Document doc);
 	
 	boolean update(Document doc);
+	boolean countView(String docID);
 	
 	ArrayList<Object> findAll();
 	
@@ -30,6 +31,8 @@ public interface DocumentService {
 	int getDocumentCount();
 	
 	ArrayList<Document> getDocumentByLikeTitle(String title);
+
+	
 	
 	
 	

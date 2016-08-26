@@ -95,4 +95,15 @@ public class DocumentServiceImpl implements DocumentService{
 		System.out.println("USER ID==> " + userID + " DOCTYPE NUM ==> "+ docTypeNum);
 		return documentRepository.getDocByUser(userID, docTypeNum);
 	}
+
+	@Override
+	public boolean countView(String docID) {
+		// TODO Auto-generated method stub
+		return  documentRepository.countView(docID);
+	}
+
+
+	
+
+	
 }
