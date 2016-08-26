@@ -62,6 +62,8 @@ public class DocumentServiceImpl implements DocumentService{
 	public ArrayList getDocumentAndUserAndCategoryAndCommentByDocID(String DocID) {
 		return documentRepository.getDocumentAndUserAndCategoryAndComment(DocID);
 	}
+
+	
 	
 	@Override
 	public ArrayList getDocumentByPopular() {
@@ -85,7 +87,28 @@ public class DocumentServiceImpl implements DocumentService{
 
 	
 	
+	@Override
+	public ArrayList getDocumentByLikeTitle(String title) {
+		return documentRepository.getDocumentByLikeTitle(title);
+	}
 	
+
+	
+
+
+	@Override
+	public ArrayList<Document> getDocByUser(int userID, int docTypeNum) {
+		System.out.println("USER ID==> " + userID + " DOCTYPE NUM ==> "+ docTypeNum);
+		return documentRepository.getDocByUser(userID, docTypeNum);
+	}
+
+	@Override
+	public boolean countView(String docID) {
+		// TODO Auto-generated method stub
+		return  documentRepository.countView(docID);
+	}
+
+
 	
 
 	

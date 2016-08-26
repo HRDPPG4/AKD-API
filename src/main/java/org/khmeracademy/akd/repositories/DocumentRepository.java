@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Category;
 import org.khmeracademy.akd.entities.Comment;
@@ -25,7 +26,9 @@ public interface DocumentRepository {
 	boolean delete(String id);
 	@Update("UPDATE akd_documents SET title=#{title},des=#{des},embed_link=#{embedLink},thumbnail_url=#{thumbnailURL},export_link=#{exportLink},view=#{view},share=#{share},created_date=#{createdDate},doc_type_num=#{docTypeNum},user_id=#{userID},cat_id=#{catID},status=#{status} WHERE doc_id=#{docID}")
 	boolean update(Document doc);
-	
+	//@SelectKey(before= false, keyProperty="view",resultType= int.class,statement="SELECT view From akd_documents WHERE doc_id = #{docID}")
+	@Update("UPDATE akd_documents SET view =(SELECT view FROM akd_documents WHERE doc_id =#{docID})+1 WHERE doc_id= #{docID}")
+   	boolean countView(String docID);
 	@Insert("INSERT INTO akd_documents VALUES(#{docID},#{title},#{des},#{embedLink},#{thumbnailURL},#{exportLink},#{view},#{share},#{createdDate},#{docTypeNum},#{userID},#{catID},#{status})")
 	boolean insert(Document doc);
 	
@@ -69,6 +72,7 @@ public interface DocumentRepository {
 		@Result(property="users", column="user_id", one = @One(select = "getUser"))
 	})
 	ArrayList<Document> getDocumentByCatID(String CatID);
+	
 	
 	@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
 	@Results({
@@ -166,6 +170,25 @@ public interface DocumentRepository {
 			
 	})
 	ArrayList<Comment>getComments();
+	@Select("SELECT * FROM akd_documents WHERE user_id= #{userID} AND doc_type_num= #{docTypeNum}")
+	@Results({
+		@Result(property="docID", column="doc_id"),
+		@Result(property="title", column="title"),
+		@Result(property="des", column="des"),
+		@Result(property="embedLink", column="embed_link"),
+		@Result(property="thumbnailURL", column="thumbnail_url"),
+		@Result(property="exportLink", column="export_link"),
+		@Result(property="view", column="view"),
+		@Result(property="share", column="share"),		
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="docTypeNum", column="doc_type_num"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="catID", column="cat_id"),
+		@Result(property="status", column="status")		
+	})
+	ArrayList<Document>getDocByUser(@Param("userID")int userID, @Param("docTypeNum")int docTypeNum);
+	
+	
 	
 	@Select("SELECT * FROM akd_documents ORDER BY view DESC")
 	@Results({
@@ -235,6 +258,29 @@ public interface DocumentRepository {
 		@Result(property="docID", column="count"),
 	})
 	int getDocumentCount();
+	
+@Select("SELECT * FROM akd_documents WHERE title LIKE '%' || #{title} || '%'")
+	
+	@Results({
+		@Result(property="docID", column="doc_id"),
+		@Result(property="title", column="title"),
+		@Result(property="des", column="des"),
+		@Result(property="embedLink", column="embed_link"),
+		@Result(property="thumbnailURL", column="thumbnail_url"),
+		@Result(property="exportLink", column="export_link"),
+		@Result(property="view", column="view"),
+		@Result(property="share", column="share"),		
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="docTypeNum", column="doc_type_num"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="catID", column="cat_id"),
+		@Result(property="status", column="status"),
+		@Result(property="users", column="user_id", one = @One(select = "getUser"))
+		
+	})
+	ArrayList<Document> getDocumentByLikeTitle(String title);
+	
+	
 	
 	
 	

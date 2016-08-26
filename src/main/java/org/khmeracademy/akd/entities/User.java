@@ -1,10 +1,15 @@
 package org.khmeracademy.akd.entities;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class User {
+public class User{
 	@JsonProperty("USER_ID")
 	private int userID;
+	
+	/*@JsonProperty("ENC_USER_ID")
+	private String encUserId;*/
 	
 	@JsonProperty("USER_NAME")
 	private String name;
@@ -29,6 +34,9 @@ public class User {
 	
 	@JsonProperty("USER_ROLE")
 	private String role;
+	
+	@JsonProperty("ROLES")
+	private List<Role> roles;
 	
 	
 	public int getUserID() {
@@ -85,5 +93,6 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
 	
 }

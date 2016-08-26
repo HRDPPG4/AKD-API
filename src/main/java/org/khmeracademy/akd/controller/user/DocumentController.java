@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -51,6 +52,25 @@ public class DocumentController {
 		Document doc=documentService.findOne(id);
 		ResponseObject<Document> res=new ResponseObject<Document>();
 		if(documentService.findOne(id)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	
+	}
+	
+	@RequestMapping(value="/document/user/{userID}",method=RequestMethod.GET)
+	public ResponseObject<Document> getDocByUser(@PathVariable("userID") int userID, @RequestParam(value="docTypeNum", defaultValue="2") int docTypeNum)
+	{
+		ArrayList<Document> doc=documentService.getDocByUser(userID,docTypeNum);
+		ResponseObject<Document> res=new ResponseObject<Document>();
+		if(documentService.getDocByUser(userID,docTypeNum)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
@@ -117,6 +137,24 @@ public class DocumentController {
 			res.setMessage();
 		}
 	
+		return res;
+	}
+	
+	@RequestMapping(value="/document/counview/{docID}",method=RequestMethod.PUT)
+	public Response countView(@PathVariable("docID") String docID)
+	{
+		
+		System.out.println(docID);
+		Response res = new Response();
+		if(documentService.countView(docID)){
+			res.setCode(ResponseCode.UPDATE_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.UPDATE_FAIL);
+			res.setMessage();
+		}
+		
 		return res;
 	}
 	
@@ -232,6 +270,26 @@ public class DocumentController {
 		
 		return res;
 	}
+	
+	@RequestMapping(value="/getDocumentByLikeTitle/{Title}",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByLikeTitle(@PathVariable("Title") String title)
+	{
+		ArrayList<Document> doc=documentService.getDocumentByLikeTitle(title);
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(documentService.getDocumentByLikeTitle(title)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
 	
 	
 }

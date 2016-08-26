@@ -22,7 +22,7 @@ public interface FeedbackRepository {
 	@Update(SQL.UPDATE)
 	boolean update(Feedback feed);
 	
-	@Insert(SQL.INSERT)
+	@Insert(" INSERT INTO akd_feedbacks VALUES(nextval('akd_feedbacks_feed_id_seq'),#{date},#{des},#{status}) ")
 	boolean insert(Feedback feed);
 	
 	@Select("SELECT COUNT(feed_id) from akd_feedbacks")
@@ -58,11 +58,7 @@ interface SQL{
 			+ "status=#{status} "
 			+ "WHERE "
 			+ "feed_id=#{feedbackID}";
-	String INSERT="INSERT INTO akd_feedbacks"
-			+ "(feed_id,feed_date,feed_des,status)"
-			+ "VALUES(#{feedbackID},"
-			+ "#{date},#{des},"
-			+ "#{status})";	
+		
 }
 
 

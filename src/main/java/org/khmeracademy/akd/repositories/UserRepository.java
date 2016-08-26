@@ -1,9 +1,10 @@
 package org.khmeracademy.akd.repositories;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -12,6 +13,9 @@ import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.User;
 import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.stereotype.Repository;
+import org.khmeracademy.akd.entities.Role;
+import org.khmeracademy.akd.entities.forms.UserLogin;
+
 
 @Repository
 public interface UserRepository {
@@ -58,11 +62,34 @@ public interface UserRepository {
 	User findOne(int id);
 	
 	@Select("SELECT COUNT(*) FROM akd_users")
-	
 	@Results({
 		@Result(property="userID", column="count"),
 	})
 	int getUserCount();
+	
+	
+	@Results({
+		@Result(property="userID", column="user_id"),
+		@Result(property="name", column="name"),
+		@Result(property="password", column="password"),
+		@Result(property="email", column="email"),
+		@Result(property="phone", column="phone"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="status", column="status"),		
+		@Result(property="role", column="role"),
+		@Result(property="roles" , column="user_id" ,
+			many = @Many(select = "findRolesByUserId")
+		)
+	})
+	@Select(USER_SQL.U_ROLES_BY_EMAIL)
+	User findUserByEmail(@Param("u")UserLogin userlogin);
+	
+	@Select(USER_SQL.R_ROLES_BY_USER_ID)
+	@Results(value={
+			@Result(property="roleName" , column="role")
+	})
+	List<Role> findRolesByUserId(@Param("userID") int userID);
 	
 }
 
@@ -101,6 +128,19 @@ interface USER_SQL{
 			+ "#{role})";	
 	
 	String COUNT="SELECT COUNT(user_id) FROM akd_users";
+
+	String R_ROLES_BY_USER_ID = "SELECT "
+			+ "role "
+			+ "FROM "
+			+ "akd_users "
+			+ "WHERE "
+			+ "user_id=#{userID}";
+	String U_ROLES_BY_EMAIL = "SELECT "
+			+ " * "
+			+ " FROM "
+			+ " akd_users "
+			+ " WHERE "
+			+ " email=#{u.email}";
 }
 
 
