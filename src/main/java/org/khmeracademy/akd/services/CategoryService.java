@@ -13,7 +13,9 @@ public interface CategoryService {
 	
 	Category findOne(String id);
 	
-	ArrayList<Object> findAll(Paging pagination);
+	ArrayList<Object> findAll();
+	
+	ArrayList<Object> getAllCategoryByLimit(Paging pagination);
 	
 	ArrayList<Object> getCategoryByParentID(String ParentID);
 	

@@ -44,7 +44,20 @@ public interface CategoryRepository {
 		@Result(property="status", column="status"),
 		@Result(property="icon", column="icon")
 	})
-	ArrayList<Category>findAll(@Param("pagination") Paging pagination);
+	ArrayList<Category>getAllCategoryByLimit(@Param("pagination") Paging pagination);
+	
+	
+	@Select("SELECT * FROM akd_categories WHERE cat_id NOT IN ('0B4RhbtI4DXY_QWVOWkFiSTlRY1E') ORDER BY name ASC ")
+	@Results({
+		@Result(property="catID", column="cat_id"),
+		@Result(property="catName", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="parentID", column="parent_id"),
+		@Result(property="status", column="status"),
+		@Result(property="icon", column="icon")
+	})
+	ArrayList<Category>findAll();
 	
 	@Select("SELECT * from akd_categories WHERE cat_id=#{catID}")
 	@Results({

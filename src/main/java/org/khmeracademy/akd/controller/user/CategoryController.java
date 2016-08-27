@@ -22,12 +22,31 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	@RequestMapping(value="/category",method=RequestMethod.GET)
-	public ResponseList<Category> findAll(Paging pagination)
+	public ResponseList<Category> findAll()
 	{
-		ArrayList<Object> cat=categoryService.findAll(pagination);
+		ArrayList<Object> cat=categoryService.findAll();
 		ResponseList<Category> res=new ResponseList<Category>();
 		
-		if(categoryService.findAll(pagination)!=null){
+		if(categoryService.findAll()!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(cat);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+				
+		return res;
+	}
+	
+	@RequestMapping(value="/getAllCategoryByLimit",method=RequestMethod.GET)
+	public ResponseList<Category> getAllCategoryByLimit(Paging pagination)
+	{
+		ArrayList<Object> cat=categoryService.getAllCategoryByLimit(pagination);
+		ResponseList<Category> res=new ResponseList<Category>();
+		
+		if(categoryService.getAllCategoryByLimit(pagination)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(cat);
