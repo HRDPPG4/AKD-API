@@ -62,7 +62,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter{
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		
-		registry.addViewController("/").setViewName("login");
+		/*registry.addViewController("/").setViewName("login");
 		registry.addViewController("/login").setViewName("login");
 		
 		registry.addViewController("/register").setViewName("register");
@@ -74,7 +74,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter{
 		registry.addViewController("/401").setViewName("/errors/401");
 		registry.addViewController("/404").setViewName("/errors/404");
 		
-		registry.addViewController("/swagger").setViewName("swagger-ui");
+		registry.addViewController("/swagger").setViewName("swagger-ui");*/
 		
 	}
 
