@@ -1,14 +1,17 @@
 package org.khmeracademy.akd.repositories;
 
 import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Comment;
+import org.khmeracademy.akd.entities.User;
 import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.stereotype.Repository;
 
@@ -56,9 +59,17 @@ public interface CommentRepository {
 		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
 		@Result(property="docID", column="doc_id"),
-		@Result(property="status", column="status")
+		@Result(property="status", column="status"),
+		@Result(property="users", column="user_id", one = @One(select = "getUser"))
 			
 	})
 	ArrayList<Comment> getAllCommentByDocID(String DocID);
+	
+	@Select("SELECT * FROM akd_users WHERE user_id=#{userID}")
+	@Results({
+		@Result(property="userID", column="user_id"),
+		@Result(property="name", column="name")	
+	})
+	ArrayList<User> getUser();
 	
 }
