@@ -37,7 +37,8 @@ public interface SavelistRepository {
 	
 	@Insert("INSERT INTO akd_save_lists VALUES(nextval('akd_save_lists_save_list_id_seq'),#{name},#{createdDate},#{remark},#{userID},#{status})")
 	boolean insertSavelistOnly(Savelist list);
-	
+	@Delete("DELETE FROM akd_save_list_detail WHERE doc_id = #{docID}")
+	boolean deleteSaveDetail(String docID);
 	
 	@Select(SAVE_LIST_SQL.SELECT)
 	@Results({
@@ -51,7 +52,7 @@ public interface SavelistRepository {
 		
 	})
 	ArrayList<Savelist> findAll(@Param("pagination") Paging pagination);
-	
+
 	@Select("SELECT * FROM akd_save_lists WHERE user_id = #{userID}")
 	
 	@Results({
@@ -66,6 +67,40 @@ public interface SavelistRepository {
 		@Result(property="savelistdetail", column="save_list_id", many= @Many(select = "getSavelistDetail")),		
 	})
 	ArrayList<Savelist> findSavelistByUserID(int userID );
+	
+	@Select("SELECT * FROM akd_save_lists WHERE user_id = #{userID} AND save_list_id = #{savelistID}")
+	
+	@Results({
+		@Result(property="savelistID", column="save_list_id"),
+		@Result(property="name", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="userID", column="user_id"),
+		
+		@Result(property="status", column="status"),
+		@Result(property="user", column="user_id", one = @One(select = "getUser")),
+		@Result(property="savelistdetail", column="save_list_id", many= @Many(select = "getSavelistDetail")),		
+	})
+	ArrayList<Savelist> findEachSavelistByUserID(@Param("userID")int userID, @Param("savelistID")int savelistID );
+	
+	 
+	
+	@Select("SELECT * FROM akd_save_lists WHERE user_id = #{userID}")
+	
+	@Results({
+		@Result(property="savelistID", column="save_list_id"),
+		@Result(property="name", column="name"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		
+		
+		@Result(property="status", column="status"),
+		@Result(property="user", column="user_id", one = @One(select = "getUser"))
+				
+	})
+	ArrayList<Savelist> findSavelistMenuByUserID(int userID );
+	
+	
     
 	@Select("SELECT * FROM akd_save_list_detail where save_list_id = #{savelistID}")
 	

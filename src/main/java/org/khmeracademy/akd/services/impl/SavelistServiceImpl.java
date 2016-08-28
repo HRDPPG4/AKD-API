@@ -71,5 +71,27 @@ public class SavelistServiceImpl implements SavelistService{
 		return savelistRepository.insertSavelistOnly( list );
 	}
 
+	@Override
+	public ArrayList<Savelist> findSavelistMenuByUserID(int userID) {
+		// TODO Auto-generated method stub
+		return savelistRepository.findSavelistMenuByUserID(userID);
+	}
+
+	@Override
+	public ArrayList<Savelist> findEachSavelistByUserID(int userID,
+			int savelistID) {
+		
+		return savelistRepository.findEachSavelistByUserID(userID,savelistID);
+	}
+
+	@Override
+	public boolean deleteSavelistDetail(String docID) {
+		// TODO Auto-generated method stub
+		return savelistRepository.deleteSaveDetail(docID);
+	}
+
+	
+
+
 	
 }
