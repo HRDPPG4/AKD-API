@@ -39,9 +39,15 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public ArrayList findAll(Paging pagination) {
+	public ArrayList findAll() {
+		return categoryRepository.findAll();
+	}
+	
+	
+	@Override
+	public ArrayList getAllCategoryByLimit(Paging pagination) {
 		pagination.setTotalCount(categoryRepository.count());
-		return categoryRepository.findAll(pagination);
+		return categoryRepository.getAllCategoryByLimit(pagination);
 	}
 	
 	

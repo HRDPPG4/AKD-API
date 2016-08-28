@@ -17,8 +17,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth)
 			throws Exception {
 		//Authentication: Basic QURNSU5fQVBJOkFETUlOX1BAU1NXT1JE
-		auth.inMemoryAuthentication()
-				.withUser("ADMIN_API").password("ADMIN_P@SSWORD").roles("ADMIN_API");
+		/*auth.inMemoryAuthentication()
+				.withUser("ADMIN_API").password("ADMIN_P@SSWORD").roles("ADMIN_API");*/
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
