@@ -7,6 +7,7 @@ import org.khmeracademy.akd.entities.Comment;
 import org.khmeracademy.akd.response.*;
 import org.khmeracademy.akd.services.CategoryService;
 import org.khmeracademy.akd.services.CommentService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,15 +22,16 @@ public class CommentController {
 	private CommentService commentService;
 	
 	@RequestMapping(value="/comment",method=RequestMethod.GET)
-	public ResponseList<Comment> findAll()
+	public ResponseList<Comment> findAll(Paging pagination)
 	{
-		ArrayList<Object> com=commentService.findAll();
+		ArrayList<Object> com=commentService.findAll(pagination);
 		ResponseList<Comment> res=new ResponseList<Comment>();
 		
-		if(commentService.findAll()!=null){
+		if(commentService.findAll(pagination)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(com);
+			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);

@@ -8,6 +8,7 @@ import org.khmeracademy.akd.response.ResponseCode;
 import org.khmeracademy.akd.response.ResponseList;
 import org.khmeracademy.akd.response.ResponseObject;
 import org.khmeracademy.akd.services.DocumentService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,15 +24,16 @@ public class DocumentController {
 	private DocumentService documentService;
 	
 	@RequestMapping(value="/document",method=RequestMethod.GET)
-	public ResponseList<Document> findAll()
+	public ResponseList<Document> findAll(Paging pagination)
 	{
-		ArrayList<Object> doc=documentService.findAll();
+		ArrayList<Object> doc=documentService.findAll(pagination);
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.findAll()!=null){
+		if(documentService.findAll(pagination)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
+			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);
@@ -41,6 +43,8 @@ public class DocumentController {
 		return res;
 	}
 
+	
+	
 	
 	@RequestMapping(value="/document/{id}",method=RequestMethod.GET)
 	public ResponseObject<Document> fineOne(@PathVariable("id") String id)

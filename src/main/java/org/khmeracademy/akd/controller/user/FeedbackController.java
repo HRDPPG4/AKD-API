@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Feedback;
 import org.khmeracademy.akd.response.*;
 import org.khmeracademy.akd.services.FeedbackService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,15 +19,16 @@ public class FeedbackController {
 	private FeedbackService feedbackService;
 	
 	@RequestMapping(value="/feedback",method=RequestMethod.GET)
-	public ResponseList<Feedback> findAll()
+	public ResponseList<Feedback> findAll(Paging pagination)
 	{
-		ArrayList<Object> feed=feedbackService.findAll();
+		ArrayList<Object> feed=feedbackService.findAll(pagination);
 		ResponseList<Feedback> res=new ResponseList<Feedback>();
 		
-		if(feedbackService.findAll()!=null){
+		if(feedbackService.findAll(pagination)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(feed);
+			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);

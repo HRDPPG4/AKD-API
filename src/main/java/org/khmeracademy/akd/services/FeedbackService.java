@@ -2,6 +2,7 @@ package org.khmeracademy.akd.services;
 
 import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Feedback;
+import org.khmeracademy.akd.utilities.Paging;
 public interface FeedbackService {	
 	boolean delete(int id);
 	
@@ -9,7 +10,7 @@ public interface FeedbackService {
 	
 	boolean update(Feedback feed);
 	
-	ArrayList<Object> findAll();
+	ArrayList<Object> findAll(Paging pagination);
 	
 	Feedback findOne(int id);
 	

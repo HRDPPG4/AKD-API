@@ -3,6 +3,7 @@ package org.khmeracademy.akd.services;
 import java.util.ArrayList;
 
 import org.khmeracademy.akd.entities.Category;
+import org.khmeracademy.akd.utilities.Paging;
 public interface CategoryService {	
 	boolean delete(String id);
 	
@@ -13,6 +14,8 @@ public interface CategoryService {
 	Category findOne(String id);
 	
 	ArrayList<Object> findAll();
+	
+	ArrayList<Object> getAllCategoryByLimit(Paging pagination);
 	
 	ArrayList<Object> getCategoryByParentID(String ParentID);
 	

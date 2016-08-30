@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Report;
 import org.khmeracademy.akd.repositories.ReportRepository;
 import org.khmeracademy.akd.services.ReportService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +38,9 @@ public class ReportServiceImpl implements ReportService{
 	}
 
 	@Override
-	public ArrayList findAll() {
-		return reportRepository.findAll();
+	public ArrayList findAll(Paging pagination) {
+		pagination.setTotalCount(reportRepository.count());
+		return reportRepository.findAll(pagination);
 	}
 
 	@Override

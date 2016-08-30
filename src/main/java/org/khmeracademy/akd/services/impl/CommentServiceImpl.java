@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Comment;
 import org.khmeracademy.akd.repositories.CommentRepository;
 import org.khmeracademy.akd.services.CommentService;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +38,9 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public ArrayList findAll() {
-		return commentRepository.findAll();
+	public ArrayList findAll(Paging pagination) {
+		pagination.setTotalCount(commentRepository.count());
+		return commentRepository.findAll(pagination);
 	}
 
 	@Override

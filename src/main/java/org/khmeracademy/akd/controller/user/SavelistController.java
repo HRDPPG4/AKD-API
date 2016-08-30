@@ -2,14 +2,18 @@ package org.khmeracademy.akd.controller.user;
 
 import java.util.ArrayList;
 
+import org.khmeracademy.akd.entities.Document;
 import org.khmeracademy.akd.entities.Savelist;
 import org.khmeracademy.akd.response.*;
 import org.khmeracademy.akd.services.SavelistService;
+import org.khmeracademy.akd.services.impl.SavelistServiceImpl;
+import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,15 +23,16 @@ public class SavelistController {
 	private SavelistService savelistService;
 	
 	@RequestMapping(value="/savelist",method=RequestMethod.GET)
-	public ResponseList<Savelist> findAll()
+	public ResponseList<Savelist> findAll(Paging pagination)
 	{
-		ArrayList<Object> list=savelistService.findAll();
+		ArrayList<Object> list=savelistService.findAll(pagination);
 		ResponseList<Savelist> res=new ResponseList<Savelist>();
 		
-		if(savelistService.findAll()!=null){
+		if(savelistService.findAll(pagination)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(list);
+			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);
@@ -56,6 +61,23 @@ public class SavelistController {
 		return res;
 	}
 	
+	
+	@RequestMapping(value="/savelist/deleteSavelistDetail/{docID}",method=RequestMethod.DELETE)
+	public Response deleteSavelistDetail(@PathVariable("docID") String docID)
+	{
+	
+		boolean status=savelistService.deleteSavelistDetail(docID);
+		Response res=new Response();
+		if(status){
+			res.setCode(ResponseCode.DELETE_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.DELETE_FAIL);
+			res.setMessage();
+		}
+		return res;
+	}
 	@RequestMapping(value="/getuserSavelist/{userID}",method=RequestMethod.GET)
 	public ResponseObject<Savelist> findSavelistByUserID (@PathVariable("userID") int userID)
 	{
@@ -65,6 +87,43 @@ public class SavelistController {
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(list);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	@RequestMapping(value="/getuserSavelistMenu/{userID}",method=RequestMethod.GET)
+	public ResponseObject<Savelist> findSavelistMenuByUserID (@PathVariable("userID") int userID)
+	{
+		ArrayList<Savelist> list=savelistService.findSavelistMenuByUserID(userID);
+		ResponseObject<Savelist> res=new ResponseObject<Savelist>();
+		if(savelistService.findSavelistMenuByUserID(userID)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(list);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	
+	
+	@RequestMapping(value="/getEachSavelist/{userID}",method=RequestMethod.GET)
+	public ResponseObject<Savelist> findEachSavelistByUserID(@PathVariable("userID") int userID, @RequestParam(value="savelistID") int savelistID)
+	{
+		
+		ArrayList<Savelist> savelist= savelistService.findEachSavelistByUserID(userID, savelistID);
+		ResponseObject<Savelist> res=new ResponseObject<Savelist>();
+		if(savelistService.findEachSavelistByUserID(userID, savelistID)!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(savelist);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);

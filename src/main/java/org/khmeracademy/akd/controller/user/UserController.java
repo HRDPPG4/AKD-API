@@ -10,6 +10,8 @@ import org.khmeracademy.akd.response.*;
 import org.khmeracademy.akd.services.LogService;
 import org.khmeracademy.akd.services.SavelistService;
 import org.khmeracademy.akd.services.UserService;
+import org.khmeracademy.akd.utilities.Paging;
+import org.khmeracademy.akd.utilities.UserFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -30,15 +34,16 @@ public class UserController {
 	private LogService logService;
 	
 	@RequestMapping(value="/user",method=RequestMethod.GET)
-	public ResponseList<User> findAll()
+	public ResponseList<User> findAll(Paging pagination)
 	{
-		ArrayList<Object> user=userService.findAll();
+		ArrayList<Object> user=userService.findAll(pagination);
 		ResponseList<User> res=new ResponseList<User>();
 		
-		if(userService.findAll()!=null){
+		if(userService.findAll(pagination)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(user);
+			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);
