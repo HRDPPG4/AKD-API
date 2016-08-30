@@ -8,6 +8,7 @@ import org.khmeracademy.akd.utilities.UserFilter;
 import org.khmeracademy.akd.entities.forms.UserLogin;
 
 public interface UserService {	
+	
 	boolean delete(int id);
 	
 	boolean insert(User user);

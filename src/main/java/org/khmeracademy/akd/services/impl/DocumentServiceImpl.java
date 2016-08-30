@@ -39,9 +39,8 @@ public class DocumentServiceImpl implements DocumentService{
 	}
 
 	@Override
-	public ArrayList findAll(Paging pagination) {
-		pagination.setTotalCount(documentRepository.count());
-		return documentRepository.getDocumentAndUserAndCategory(pagination);
+	public ArrayList findAll() {
+		return documentRepository.getDocumentAndUserAndCategory();
 	}
 	
 	
@@ -75,10 +74,6 @@ public class DocumentServiceImpl implements DocumentService{
 		return documentRepository.getDocumentByRecommended();
 	}
 	
-	@Override
-	public ArrayList getDocumentByNewPost() {
-		return documentRepository.getDocumentByNewPost();
-	}
 	
 	@Override
 	public int getDocumentCount() {
@@ -107,6 +102,14 @@ public class DocumentServiceImpl implements DocumentService{
 		// TODO Auto-generated method stub
 		return  documentRepository.countView(docID);
 	}
+
+	@Override
+	public ArrayList<Document> getDocumentByNewPost() {
+		// TODO Auto-generated method stub
+		return documentRepository.getDocumentByNewPost();
+	}
+
+	
 
 
 	

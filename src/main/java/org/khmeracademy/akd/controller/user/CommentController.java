@@ -60,7 +60,7 @@ public class CommentController {
 		return res;
 	}
 	
-	@RequestMapping(value="/comment/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/comment/{id}",method=RequestMethod.PUT)
 	public Response delete(@PathVariable("id") int id)
 	{
 	
