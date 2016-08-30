@@ -73,7 +73,7 @@ public interface CategoryRepository {
 	})
 	Category findOne(String id);
 	
-	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} AND status=1")
+	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} AND status=1 ORDER BY rang_order ASC")
 	@Results({
 		@Result(property="catID", column="cat_id"),
 		@Result(property="catName", column="name"),
