@@ -25,7 +25,7 @@ public interface DocumentService {
 	
 	ArrayList<Document> getDocumentAndUserAndCategoryAndCommentByDocID(String DocID);
 	
-	ArrayList<Document> getDocumentByPopular();
+	ArrayList<Document> getDocumentByPopular(Paging pagination);
 	
 	ArrayList<Document> getDocumentByRecommended();
 	

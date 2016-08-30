@@ -192,15 +192,16 @@ public class DocumentController {
 	}
 	
 	@RequestMapping(value="/getDocumentByPopular/",method=RequestMethod.GET)
-	public ResponseList<Document> getDocumentByPopular()
+	public ResponseList<Document> getDocumentByPopular(Paging pagination)
 	{
-		ArrayList<Document> doc=documentService.getDocumentByPopular();
+		ArrayList<Document> doc=documentService.getDocumentByPopular(pagination);
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.getDocumentByPopular()!=null){
+		if(documentService.getDocumentByPopular(pagination)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
+			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);

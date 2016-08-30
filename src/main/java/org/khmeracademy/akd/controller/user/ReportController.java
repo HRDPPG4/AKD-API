@@ -57,7 +57,7 @@ public class ReportController {
 		return res;
 	}
 	
-	@RequestMapping(value="/report/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/report/{id}",method=RequestMethod.PUT)
 	public Response delete(@PathVariable("id") int id)
 	{
 	
