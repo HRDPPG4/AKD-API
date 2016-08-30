@@ -65,8 +65,9 @@ public class DocumentServiceImpl implements DocumentService{
 	
 	
 	@Override
-	public ArrayList getDocumentByPopular() {
-		return documentRepository.getDocumentByPopular();
+	public ArrayList getDocumentByPopular(Paging pagination) {
+		pagination.setTotalCount(documentRepository.count());
+		return documentRepository.getDocumentByPopular(pagination);
 	}
 	
 	@Override

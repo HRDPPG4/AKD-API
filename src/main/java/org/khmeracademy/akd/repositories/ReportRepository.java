@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReportRepository {
-	@Delete(REPORT_SQL.DELETE)
+	@Delete("UPDATE akd_reports SET status = 0 WHERE report_id =#{id}")
 	boolean delete(int id);
 	
 	@Update(REPORT_SQL.UPDATE)
@@ -54,7 +54,7 @@ public interface ReportRepository {
 }
 
 interface REPORT_SQL{
-	String SELECT="SELECT * from akd_reports ORDER BY report_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}";
+	String SELECT="SELECT * from akd_reports WHERE status = 1 ORDER BY report_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}";
 	
 	String FIND_ONE="SELECT * from akd_reports WHERE report_id=#{reportID}";
 	
