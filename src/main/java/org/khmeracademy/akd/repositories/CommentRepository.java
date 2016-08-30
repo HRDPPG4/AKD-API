@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommentRepository {
 	
-	@Delete("DELETE FROM akd_comments WHERE comment_id=#{commentID}")
+	@Delete("UPDATE akd_comments SET status= 0 WHERE comment_id =#{commentID}")
 	boolean delete(int id);
 	@Update("UPDATE akd_comments SET created_date=#{createdDate},remark=#{remark},user_id=#{userID},doc_id=#{docID},status=#{status} WHERE comment_id =#{commentID}")
 	boolean update(Comment com);
@@ -29,7 +29,7 @@ public interface CommentRepository {
 	@Select("SELECT COUNT(comment_id) from akd_comments")
 	public Long count();
 	
-	@Select("SELECT * from akd_comments ORDER BY comment_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
+	@Select("SELECT * from akd_comments WHERE status = 1 ORDER BY comment_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
 	@Results({
 		@Result(property="commentID", column="comment_id"),
 		@Result(property="createdDate", column="created_date"),

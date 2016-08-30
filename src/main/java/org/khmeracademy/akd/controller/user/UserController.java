@@ -91,7 +91,7 @@ public class UserController {
 		return res;
 	}
 	
-	@RequestMapping(value="/user/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/user/{id}",method=RequestMethod.PUT)
 	public Response delete(@PathVariable("id") int id)
 	{
 	
@@ -143,6 +143,7 @@ public class UserController {
 	
 		return res;
 	}
+	
 	
 	@RequestMapping(value="/getUserCount",method=RequestMethod.GET)
 	public Response getUserCount()

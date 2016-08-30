@@ -20,11 +20,12 @@ import org.khmeracademy.akd.entities.forms.UserLogin;
 @Repository
 public interface UserRepository {
 	
-	@Delete(USER_SQL.DELETE)
+	@Delete("UPDATE akd_users SET status= 0 WHERE user_id = #{id}")
 	boolean delete(int id);
 	
 	@Update(USER_SQL.UPDATE)
 	boolean update(User user);
+	
 	
 	@Insert(USER_SQL.INSERT)
 	boolean insert(User user);
@@ -96,11 +97,11 @@ public interface UserRepository {
 interface USER_SQL{
 //	String SELECT="SELECT * from akd_users ORDER BY user_id ASC";
 	
-	String SELECT="SELECT * from akd_users ORDER BY user_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}";
+	String SELECT="SELECT * from akd_users WHERE status=1 ORDER BY user_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}";
 	
 	String FIND_ONE="SELECT * from akd_users WHERE user_id=#{userID}";
 	
-	String DELETE="DELETE FROM akd_users WHERE user_id=#{userID}";
+	String DELETE="UPDATE akd_users SET status=0 WHERE user_id=#{id}";
 	
 	String UPDATE="UPDATE akd_users SET "
 			+ "name=#{name},"
@@ -111,6 +112,10 @@ interface USER_SQL{
 			+ "remark=#{remark},"
 			+ "status=#{status},"
 			+ "role=#{role}"
+			+ "WHERE user_id=#{userID}";
+	
+	String UPDATE_STATUS="UPDATE akd_users SET "
+			+ "status=0,"
 			+ "WHERE user_id=#{userID}";
 	
 	String INSERT="INSERT INTO "

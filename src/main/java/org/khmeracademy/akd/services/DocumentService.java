@@ -11,11 +11,13 @@ public interface DocumentService {
 	boolean insert(Document doc);
 	
 	boolean update(Document doc);
+	
 	boolean countView(String docID);
 	
-	ArrayList<Object> findAll(Paging pagination);
+	ArrayList<Object> findAll();
 	
 	ArrayList<Document> getDocumentByCatID(String CatID);
+	
 	ArrayList<Document> getDocByUser(int userID, int docTypeNum);
 	
 	
@@ -32,6 +34,7 @@ public interface DocumentService {
 	int getDocumentCount();
 	
 	ArrayList<Document> getDocumentByLikeTitle(String title);
+
 
 	
 	
