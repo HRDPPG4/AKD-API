@@ -24,27 +24,22 @@ public class DocumentController {
 	private DocumentService documentService;
 	
 	@RequestMapping(value="/document",method=RequestMethod.GET)
-	public ResponseList<Document> findAll(Paging pagination)
+	public ResponseList<Document> findAll()
 	{
-		ArrayList<Object> doc=documentService.findAll(pagination);
+		ArrayList<Object> doc=documentService.findAll();
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.findAll(pagination)!=null){
+		if(documentService.findAll()!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
-			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);
 			res.setMessage();
 		}
-				
 		return res;
 	}
-
-	
-	
 	
 	@RequestMapping(value="/document/{id}",method=RequestMethod.GET)
 	public ResponseObject<Document> fineOne(@PathVariable("id") String id)
@@ -249,8 +244,8 @@ public class DocumentController {
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);
 			res.setMessage();
 		}
-				
 		return res;
+		
 	}
 	
 	@RequestMapping(value="/getDocumentCount",method=RequestMethod.GET)

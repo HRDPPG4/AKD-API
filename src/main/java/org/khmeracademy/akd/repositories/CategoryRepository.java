@@ -23,8 +23,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CategoryRepository {
 	
-	@Delete("DELETE FROM akd_categories WHERE cat_id=#{catID}")
+	@Delete("UPDATE akd_categories SET status = 0 WHERE cat_id=#{id}")
 	boolean delete(String id);
+	
 	@Update("UPDATE akd_categories SET name=#{catName},created_date=#{createdDate},remark=#{remark},parent_id=#{parentID},status=#{status},icon=#{icon} WHERE cat_id=#{catID}")
 	boolean update(Category cat);
 	
@@ -34,7 +35,7 @@ public interface CategoryRepository {
 	@Select("SELECT COUNT(cat_id) from akd_categories")
 	public Long count();
 	
-	@Select("SELECT * FROM akd_categories ORDER BY cat_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
+	@Select("SELECT * FROM akd_categories ORDER BY cat_id ASC")
 	@Results({
 		@Result(property="catID", column="cat_id"),
 		@Result(property="catName", column="name"),
@@ -72,7 +73,7 @@ public interface CategoryRepository {
 	})
 	Category findOne(String id);
 	
-	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} AND status=1")
+	@Select("SELECT * FROM akd_categories WHERE parent_id=#{parentID} AND status=1 ORDER BY rang_order ASC")
 	@Results({
 		@Result(property="catID", column="cat_id"),
 		@Result(property="catName", column="name"),
