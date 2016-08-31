@@ -106,8 +106,26 @@ public class UploadController {
 		return map;
 	}
 	
-	
-	
-	
+	@RequestMapping(value="/api/uploadDocThumbnail", method = RequestMethod.POST)
+	public Map<String, Object> uploadDocThumbnail(@RequestParam("files") MultipartFile file,@RequestParam("docID") String docID) throws GeneralSecurityException, IOException{
+		//upload file to server -> get full path
+		String path = fileUpload.uploadDocThumbnail(file, null);
+		System.out.println(docID);
+		
+		String fileName=path.substring(path.lastIndexOf('/')+1,path.length());
+		System.out.println(fileName);
+		
+		
+		if(path!=null)
+		{
+			//uploadToDBService.uploadDocThumbnail(fileName,docID);	
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("CODE","0000");
+		map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
+		map.put("DATA",path);
+		return map;
+	}
 	
 }

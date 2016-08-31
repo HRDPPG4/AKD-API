@@ -33,6 +33,11 @@ public class UploadToDBServiceImpl implements UploadToDBService{
 	public boolean uploadUserProfile(String profile, int userID) {
 		return userRepository.uploadUserProfile(profile,userID);
 	}
+	
+	@Override
+	public boolean uploadDocThumbnail(String thumbnail,String docID) {
+		return documentRepository.uploadDocThumbnail(thumbnail,docID);
+	}
 }
 
 

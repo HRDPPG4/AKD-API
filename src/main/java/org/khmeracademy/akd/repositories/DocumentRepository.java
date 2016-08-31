@@ -284,7 +284,8 @@ public interface DocumentRepository {
 	ArrayList<Document> getDocumentByLikeTitle(String title);
 	
 	
-	
+//	@Update("UPDATE akd_users SET profile=#{thumbnail} WHERE user_id=#{userID}")
+	boolean uploadDocThumbnail(@Param("profile") String thumbnail,@Param("docID") String docID);
 	
 	
 		

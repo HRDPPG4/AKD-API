@@ -8,5 +8,6 @@ public interface UploadToServerService {
 	 */
 	public String uploadFile(MultipartFile files, String folder);
 	public String uploadUserProfile(MultipartFile files, String folder);
+	public String uploadDocThumbnail(MultipartFile files, String folder);
 	
 }

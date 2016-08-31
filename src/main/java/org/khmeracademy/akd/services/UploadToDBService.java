@@ -5,4 +5,5 @@ public interface UploadToDBService {
 	boolean uploadFile(Document doc);
 	boolean uploadFolder(Category cat);		
 	boolean uploadUserProfile(String filePath,int userID);	
+	boolean uploadDocThumbnail(String filePath,String docID);	
 }
