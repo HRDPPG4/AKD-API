@@ -110,7 +110,7 @@ public interface DocumentRepository {
 		@Result(property="users", column="user_id", one = @One(select = "getUser")),
 		@Result(property="category", column="cat_id", one = @One(select = "getCategory"))		
 	})
-	ArrayList<Document> getDocumentAndUserAndCategory(@Param("pagination") Paging pagination);
+	ArrayList<Document> getDocumentAndUserAndCategory();
 	
 	@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
 	@Results({
@@ -170,6 +170,8 @@ public interface DocumentRepository {
 			
 	})
 	ArrayList<Comment>getComments();
+	
+	
 	@Select("SELECT * FROM akd_documents WHERE user_id= #{userID} AND doc_type_num= #{docTypeNum}")
 	@Results({
 		@Result(property="docID", column="doc_id"),
@@ -190,7 +192,7 @@ public interface DocumentRepository {
 	
 	
 	
-	@Select("SELECT * FROM akd_documents ORDER BY view DESC")
+	@Select("SELECT * FROM akd_documents ORDER BY view DESC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
 	@Results({
 		@Result(property="docID", column="doc_id"),
 		@Result(property="title", column="title"),
@@ -207,10 +209,11 @@ public interface DocumentRepository {
 		@Result(property="status", column="status"),
 		@Result(property="users", column="user_id", one = @One(select = "getUser"))
 	})
-	ArrayList<Document> getDocumentByPopular();
+	ArrayList<Document> getDocumentByPopular(@Param("pagination") Paging pagination);
+	
+	
 	
 	@Select("SELECT * FROM akd_documents doc WHERE doc.cat_id IN(SELECT dd.cat_id FROM akd_documents dd INNER JOIN akd_logs ll ON dd.doc_id=ll.doc_id ) ORDER BY doc.view DESC")
-			
 	@Results({
 		@Result(property="docID", column="doc_id"),
 		@Result(property="title", column="title"),
@@ -230,7 +233,7 @@ public interface DocumentRepository {
 	})
 	ArrayList<Document> getDocumentByRecommended();
 	
-	@Select("SELECT * FROM akd_documents ORDER BY created_date DESC")
+	@Select("SELECT * FROM akd_documents ORDER BY created_date DESC ")
 	
 	@Results({
 		@Result(property="docID", column="doc_id"),

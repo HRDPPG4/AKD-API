@@ -79,10 +79,9 @@ public class CategoryController {
 		return res;
 	}
 	
-	@RequestMapping(value="/category/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/category/{id}",method=RequestMethod.PUT)
 	public Response delete(@PathVariable("id") String id)
 	{
-	
 		boolean status=categoryService.delete(id);
 		Response res=new Response();
 		if(status){

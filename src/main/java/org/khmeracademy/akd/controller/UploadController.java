@@ -30,7 +30,7 @@ public class UploadController {
 	private DocumentRepository documentRepository;
 	
 	@RequestMapping(value="/api/uploadFile", method = RequestMethod.POST)
-	public Map<String, Object> uploadFile(@RequestParam("files") MultipartFile file,@RequestParam("title") String title,@RequestParam("des") String des,@RequestParam("catID") String catID) throws GeneralSecurityException, IOException{
+	public Map<String, Object> uploadFile(@RequestParam("files") MultipartFile file,@RequestParam("title") String title,@RequestParam("des") String des,@RequestParam("catID") String catID,@RequestParam("usreID") int userID) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
 		String path = fileUpload.upload(file, null);
 		int typeNum=0;
@@ -58,7 +58,7 @@ public class UploadController {
 		if(path!=null)
 		{
 			UploadFileToGoogleService up=new UploadFileToGoogleService();
-			uploadToDBService.uploadFile(up.upload(path,title,des,catID,typeNum));	
+			uploadToDBService.uploadFile(up.upload(path,title,des,catID,typeNum,userID));	
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
