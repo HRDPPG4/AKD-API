@@ -29,6 +29,7 @@ public interface CategoryRepository {
 	@Update("UPDATE akd_categories SET name=#{catName},created_date=#{createdDate},remark=#{remark},parent_id=#{parentID},status=#{status},icon=#{icon} WHERE cat_id=#{catID}")
 	boolean update(Category cat);
 	
+	
 	@Insert("INSERT INTO akd_categories (cat_id,name,created_date,remark ,parent_id,status,icon) VALUES(#{catID},#{catName},#{createdDate},#{remark},#{parentID},#{status},#{icon})")
 	boolean insert(Category cat);
 	
@@ -120,5 +121,9 @@ public interface CategoryRepository {
 		@Result(property="catID", column="count"),
 	})
 	int getCategoryCount();
+	
+	
+	
+	
 	
 }

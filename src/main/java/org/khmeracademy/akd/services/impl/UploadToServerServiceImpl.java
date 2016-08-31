@@ -65,7 +65,7 @@ public class UploadToServerServiceImpl implements UploadToServerService{
 			path.mkdirs();
 		
 		String fileName = file.getOriginalFilename();
-		//fileName = UUID.randomUUID().toString() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+		fileName = UUID.randomUUID().toString() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
 		System.out.println("Original Name: "+fileName);
 		System.out.println("File Tupe: "+fileName.substring(fileName.lastIndexOf('.')+1,fileName.length() ));
 		

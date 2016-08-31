@@ -28,7 +28,7 @@ public class UploadFileToGoogleService {
 	private SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     private Date d=null;
     private String date=null;
-	public Document upload(String path,String title,String description,String parentID,int docTypeNum,int userID) throws GeneralSecurityException, IOException{
+	public Document uploadDocument(String path,String title,String description,String parentID,int docTypeNum,int userID) throws GeneralSecurityException, IOException{
 		//	CODE CONNECT WITH GOOGLE API
 		String scope="https://www.googleapis.com/auth/drive";
 		String serviceAccountID="all-khmer-docs@akd-api.iam.gserviceaccount.com";

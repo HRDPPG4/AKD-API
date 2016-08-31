@@ -3,6 +3,7 @@ import org.khmeracademy.akd.entities.Category;
 import org.khmeracademy.akd.entities.Document;
 import org.khmeracademy.akd.repositories.CategoryRepository;
 import org.khmeracademy.akd.repositories.DocumentRepository;
+import org.khmeracademy.akd.repositories.UserRepository;
 import org.khmeracademy.akd.services.UploadToDBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class UploadToDBServiceImpl implements UploadToDBService{
 	private DocumentRepository documentRepository;	
 	@Autowired
 	private CategoryRepository categoryRepository;
+	@Autowired
+	private UserRepository userRepository;
+	
 	
 	
 	@Override
@@ -24,4 +28,12 @@ public class UploadToDBServiceImpl implements UploadToDBService{
 	public boolean uploadFolder(Category cat) {
 		return categoryRepository.insert(cat);
 	}
+
+	@Override
+	public boolean uploadUserProfile(String profile, int userID) {
+		return userRepository.uploadUserProfile(profile,userID);
+	}
 }
+
+
+

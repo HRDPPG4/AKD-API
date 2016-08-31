@@ -2,6 +2,7 @@ package org.khmeracademy.akd.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
@@ -91,6 +92,11 @@ public interface UserRepository {
 			@Result(property="roleName" , column="role")
 	})
 	List<Role> findRolesByUserId(@Param("userID") int userID);
+	
+	
+	@Update("UPDATE akd_users SET profile=#{profile} WHERE user_id=#{userID}")
+	boolean uploadUserProfile(@Param("profile") String profile,@Param("userID")int userID);
+	
 	
 }
 

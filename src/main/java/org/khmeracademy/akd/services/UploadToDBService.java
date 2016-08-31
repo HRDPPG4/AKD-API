@@ -4,4 +4,5 @@ import org.khmeracademy.akd.entities.Document;
 public interface UploadToDBService {			
 	boolean uploadFile(Document doc);
 	boolean uploadFolder(Category cat);		
+	boolean uploadUserProfile(String filePath,int userID);	
 }

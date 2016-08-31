@@ -58,7 +58,7 @@ public class UploadController {
 		if(path!=null)
 		{
 			UploadFileToGoogleService up=new UploadFileToGoogleService();
-			uploadToDBService.uploadFile(up.upload(path,title,des,catID,typeNum,userID));	
+			uploadToDBService.uploadFile(up.uploadDocument(path,title,des,catID,typeNum,userID));	
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -89,6 +89,15 @@ public class UploadController {
 		//upload file to server -> get full path
 		String path = fileUpload.uploadUserProfile(file, null);
 		System.out.println(userID);
+		
+		String fileName=path.substring(path.lastIndexOf('/')+1,path.length());
+		System.out.println(fileName);
+		
+		
+		if(path!=null)
+		{
+			uploadToDBService.uploadUserProfile(fileName,userID);	
+		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("CODE","0000");

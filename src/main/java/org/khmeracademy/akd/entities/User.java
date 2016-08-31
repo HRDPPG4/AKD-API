@@ -35,6 +35,11 @@ public class User{
 	@JsonProperty("USER_ROLE")
 	private String role;
 	
+	@JsonProperty("PROFILE")
+	private String profile;
+	
+	
+	
 	@JsonProperty("ROLES")
 	private List<Role> roles;
 	
@@ -92,6 +97,12 @@ public class User{
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 	
 	
