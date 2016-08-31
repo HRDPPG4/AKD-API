@@ -32,7 +32,7 @@ public class UploadController {
 	@RequestMapping(value="/api/uploadFile", method = RequestMethod.POST)
 	public Map<String, Object> uploadFile(@RequestParam("files") MultipartFile file,@RequestParam("title") String title,@RequestParam("des") String des,@RequestParam("catID") String catID,@RequestParam("usreID") int userID) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
-		String path = fileUpload.upload(file, null);
+		String path = fileUpload.uploadFile(file, null);
 		int typeNum=0;
 		String type=path.substring(path.lastIndexOf('.')+1,path.length());
 		System.out.println("Type: "+type);
@@ -81,5 +81,24 @@ public class UploadController {
 			//SET CODE
 			//SET MESSAGE
 		}
-	}	
+	}
+	
+	
+	@RequestMapping(value="/api/uploadUserProfile", method = RequestMethod.POST)
+	public Map<String, Object> uploadUserProfile(@RequestParam("files") MultipartFile file,@RequestParam("userID") int userID) throws GeneralSecurityException, IOException{
+		//upload file to server -> get full path
+		String path = fileUpload.uploadUserProfile(file, null);
+		System.out.println(userID);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("CODE","0000");
+		map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
+		map.put("DATA",path);
+		return map;
+	}
+	
+	
+	
+	
+	
 }

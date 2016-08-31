@@ -6,7 +6,7 @@ public interface UploadToServerService {
 	/***
 	 * Upload to default location
 	 */
-	public String upload(MultipartFile files, String folder);
-	
+	public String uploadFile(MultipartFile files, String folder);
+	public String uploadUserProfile(MultipartFile files, String folder);
 	
 }
