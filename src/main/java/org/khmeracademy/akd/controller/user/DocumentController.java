@@ -211,13 +211,13 @@ public class DocumentController {
 		return res;
 	}
 	
-	@RequestMapping(value="/getDocumentByRecommended/",method=RequestMethod.GET)
-	public ResponseList<Document> getDocumentByRecommended()
+	@RequestMapping(value="/getDocumentByRecommended/{userID}",method=RequestMethod.GET)
+	public ResponseList<Document> getDocumentByRecommended(@PathVariable("userID") int userID)
 	{
-		ArrayList<Document> doc=documentService.getDocumentByRecommended();
+		ArrayList<Document> doc=documentService.getDocumentByRecommended(userID);
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.getDocumentByRecommended()!=null){
+		if(documentService.getDocumentByRecommended(userID)!=null){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);

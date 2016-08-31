@@ -127,7 +127,7 @@ interface USER_SQL{
 	String INSERT="INSERT INTO "
 			+ "akd_users("
 			+ "name,"
-			+ "password,email,phone,created_date,remark,status,role)"
+			+ "password,email,phone,created_date,remark,status,role,profile)"
 			+ "VALUES("
 			+ "#{name},"
 			+ "#{password},"
@@ -136,7 +136,8 @@ interface USER_SQL{
 			+ "#{createdDate},"
 			+ "#{remark},"
 			+ "#{status},"
-			+ "#{role})";	
+			+ "#{role},"
+			+ "'default.png')";	
 	
 	String COUNT="SELECT COUNT(user_id) FROM akd_users";
 

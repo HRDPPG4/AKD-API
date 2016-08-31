@@ -213,7 +213,7 @@ public interface DocumentRepository {
 	
 	
 	
-	@Select("SELECT * FROM akd_documents doc WHERE doc.cat_id IN(SELECT dd.cat_id FROM akd_documents dd INNER JOIN akd_logs ll ON dd.doc_id=ll.doc_id ) ORDER BY doc.view DESC")
+	@Select("SELECT DISTINCT doc.doc_id,doc.title,doc.des,doc.embed_link,doc.thumbnail_url,doc.view,doc.share,doc.user_id FROM akd_documents doc INNER JOIN akd_logs lg ON doc.doc_id=lg.doc_id WHERE doc.cat_id IN(SELECT dd.cat_id FROM akd_documents dd INNER JOIN akd_logs ll ON dd.doc_id=ll.doc_id WHERE ll.user_id=#{userID} ORDER BY ll.date DESC)")
 	@Results({
 		@Result(property="docID", column="doc_id"),
 		@Result(property="title", column="title"),
@@ -231,7 +231,7 @@ public interface DocumentRepository {
 		@Result(property="users", column="user_id", one = @One(select = "getUser"))
 		
 	})
-	ArrayList<Document> getDocumentByRecommended();
+	ArrayList<Document> getDocumentByRecommended(int userID);
 	
 	@Select("SELECT * FROM akd_documents ORDER BY created_date DESC ")
 	
@@ -284,8 +284,8 @@ public interface DocumentRepository {
 	ArrayList<Document> getDocumentByLikeTitle(String title);
 	
 	
-//	@Update("UPDATE akd_users SET profile=#{thumbnail} WHERE user_id=#{userID}")
-	boolean uploadDocThumbnail(@Param("profile") String thumbnail,@Param("docID") String docID);
+	@Update("UPDATE akd_documents SET thumbnail_url=#{thumbnailURL} WHERE doc_id=#{docID}")
+	boolean uploadDocThumbnail(@Param("thumbnailURL") String thumbnailURL,@Param("docID") String docID);
 	
 	
 		

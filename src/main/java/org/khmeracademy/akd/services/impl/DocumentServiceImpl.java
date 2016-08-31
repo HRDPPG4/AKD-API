@@ -71,8 +71,8 @@ public class DocumentServiceImpl implements DocumentService{
 	}
 	
 	@Override
-	public ArrayList getDocumentByRecommended() {
-		return documentRepository.getDocumentByRecommended();
+	public ArrayList getDocumentByRecommended(int userID) {
+		return documentRepository.getDocumentByRecommended(userID);
 	}
 	
 	
@@ -100,13 +100,11 @@ public class DocumentServiceImpl implements DocumentService{
 
 	@Override
 	public boolean countView(String docID) {
-		// TODO Auto-generated method stub
 		return  documentRepository.countView(docID);
 	}
 
 	@Override
 	public ArrayList<Document> getDocumentByNewPost() {
-		// TODO Auto-generated method stub
 		return documentRepository.getDocumentByNewPost();
 	}
 

@@ -110,15 +110,19 @@ public class UploadController {
 	public Map<String, Object> uploadDocThumbnail(@RequestParam("files") MultipartFile file,@RequestParam("docID") String docID) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
 		String path = fileUpload.uploadDocThumbnail(file, null);
-		System.out.println(docID);
+		System.out.println("DocID"+docID);
 		
 		String fileName=path.substring(path.lastIndexOf('/')+1,path.length());
-		System.out.println(fileName);
+		System.out.println("FileName"+fileName);
+		String finalFilePath="http://localhost:1111/resources/img/doc-thumbnail/"+fileName;
 		
+		
+			
 		
 		if(path!=null)
 		{
-			//uploadToDBService.uploadDocThumbnail(fileName,docID);	
+//			uploadToDBService.uploadDocThumbnail(fileName,docID);	
+			uploadToDBService.uploadDocThumbnail(finalFilePath,docID);	
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
