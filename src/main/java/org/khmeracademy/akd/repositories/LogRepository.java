@@ -99,7 +99,7 @@ public interface LogRepository {
 	})
 	 Document getDocument(String docID);
 	
-	@Select("SELEct * FROM akd_logs WHERE user_id=#{userID}")
+	@Select("SELEct * FROM akd_logs WHERE user_id=#{userID} AND status =1")
 	@Results({
 		@Result(property="logID", column="log_id"),
 		@Result(property="date", column="date"),
