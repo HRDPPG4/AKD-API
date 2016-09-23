@@ -287,6 +287,15 @@ public interface DocumentRepository {
 	@Update("UPDATE akd_documents SET thumbnail_url=#{thumbnailURL} WHERE doc_id=#{docID}")
 	boolean uploadDocThumbnail(@Param("thumbnailURL") String thumbnailURL,@Param("docID") String docID);
 	
+	/*@Select("SELECT COUNT(*) FROM akd_documents WHERE cat_id=#{catID}")
+	
+	@Results({
+		@Result(property="catID", column="count"),
+	})
+	int getDocumentCountByCatID(String catID);*/
+	
+	@Update("UPDATE akd_categories SET total_doc=(SELECT count(*) FROM akd_documents WHERE cat_id=#{catID}) WHERE cat_id=#{catID}")
+	boolean updateTotalDocByCatID(String catID);
 	
 		
 }

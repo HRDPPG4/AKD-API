@@ -35,6 +35,10 @@ public interface DocumentService {
 	
 	ArrayList<Document> getDocumentByLikeTitle(String title);
 
+	/*int getDocumentCountByCatID(String catID);*/
+
+	boolean updateTotalDocByCatID(String catID);
+
 
 	
 	

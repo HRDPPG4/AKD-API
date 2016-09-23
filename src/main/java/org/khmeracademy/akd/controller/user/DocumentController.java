@@ -287,6 +287,44 @@ public class DocumentController {
 		return res;
 	}
 	
+	/*@RequestMapping(value="/getDocumentCountByCatID/{CatID}",method=RequestMethod.GET)
+	public Response getDocumentCountByCatID(@PathVariable("CatID") String CatID)
+	{
+		int count =documentService.getDocumentCountByCatID(CatID);
+		Response res=new Response();
+		if(count!=0){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setCount(count);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}*/
+		
+	
+	@RequestMapping(value="/document/updateTotalDocByCatID/{catID}",method=RequestMethod.PUT)
+	public Response updateTotalDocByCatID(@PathVariable("catID") String catID)
+	{
+		Response res=new Response();
+		
+		if(documentService.updateTotalDocByCatID(catID))
+		{
+			res.setCode(ResponseCode.UPDATE_SUCCESS);
+			res.setMessage();
+		}
+		else
+		{
+			res.setCode(ResponseCode.UPDATE_FAIL);
+			res.setMessage();
+		}
+	
+		return res;
+	}
+	
 	
 	
 }

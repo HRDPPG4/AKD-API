@@ -44,7 +44,9 @@ public interface CategoryRepository {
 		@Result(property="remark", column="remark"),
 		@Result(property="parentID", column="parent_id"),
 		@Result(property="status", column="status"),
-		@Result(property="icon", column="icon")
+		@Result(property="icon", column="icon"),
+		@Result(property="order", column="rang_order"),
+		@Result(property="totalDoc", column="total_doc")		
 	})
 	ArrayList<Category>getAllCategoryByLimit(@Param("pagination") Paging pagination);
 	
@@ -57,7 +59,9 @@ public interface CategoryRepository {
 		@Result(property="remark", column="remark"),
 		@Result(property="parentID", column="parent_id"),
 		@Result(property="status", column="status"),
-		@Result(property="icon", column="icon")
+		@Result(property="icon", column="icon"),
+		@Result(property="order", column="rang_order"),
+		@Result(property="totalDoc", column="total_doc")
 	})
 	ArrayList<Category>findAll();
 	
@@ -69,7 +73,9 @@ public interface CategoryRepository {
 		@Result(property="remark", column="remark"),
 		@Result(property="parentID", column="parent_id"),
 		@Result(property="status", column="status"),
-		@Result(property="icon", column="icon")
+		@Result(property="icon", column="icon"),
+		@Result(property="order", column="rang_order"),
+		@Result(property="totalDoc", column="total_doc")
 			
 	})
 	Category findOne(String id);
@@ -83,6 +89,8 @@ public interface CategoryRepository {
 		@Result(property="parentID", column="parent_id"),
 		@Result(property="status", column="status"),
 		@Result(property="icon", column="icon"),
+		@Result(property="order", column="rang_order"),
+		@Result(property="totalDoc", column="total_doc"),
 		@Result(property="subCategories", column="cat_id"  
 			, many = @Many(select = "getCategoryByParentIDAndStatusEnable")
 		)
@@ -97,7 +105,9 @@ public interface CategoryRepository {
 		@Result(property="remark", column="remark"),
 		@Result(property="parentID", column="parent_id"),
 		@Result(property="status", column="status"),
-		@Result(property="icon", column="icon")
+		@Result(property="icon", column="icon"),
+		@Result(property="order", column="rang_order"),
+		@Result(property="totalDoc", column="total_doc")
 			
 	})
 	ArrayList<Category>getCategoryByParentIDAndStatus(@Param("parent_id")String ParentID, @Param("status")int Status);*/
@@ -110,7 +120,9 @@ public interface CategoryRepository {
 		@Result(property="remark", column="remark"),
 		@Result(property="parentID", column="parent_id"),
 		@Result(property="status", column="status"),
-		@Result(property="icon", column="icon")
+		@Result(property="icon", column="icon"),
+		@Result(property="order", column="rang_order"),
+		@Result(property="totalDoc", column="total_doc")
 			
 	})
 	ArrayList<Category>getCategoryByParentIDAndStatusEnable(String ParentID);

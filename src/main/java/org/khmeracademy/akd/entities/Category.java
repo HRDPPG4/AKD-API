@@ -26,6 +26,12 @@ public class Category {
 	@JsonProperty("ICON")
 	private String icon;
 	
+	@JsonProperty("ORDER")
+	private int order;
+	
+	@JsonProperty("TOTAL_DOC")
+	private String totalDoc;
+	
 	@JsonProperty("SUB_CATEGORIES")
 	private List<Category> subCategories;
 	
@@ -92,6 +98,26 @@ public class Category {
 
 	public void setDocuments(List<Document> documents) {
 		this.documents = documents;
+	}
+
+
+	public String getTotalDoc() {
+		return totalDoc;
+	}
+
+
+	public void setTotalDoc(String totalDoc) {
+		this.totalDoc = totalDoc;
+	}
+
+
+	public int getOrder() {
+		return order;
+	}
+
+
+	public void setOrder(int order) {
+		this.order = order;
 	}
 	
 }

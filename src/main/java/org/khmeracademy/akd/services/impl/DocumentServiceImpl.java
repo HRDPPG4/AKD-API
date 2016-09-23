@@ -108,6 +108,16 @@ public class DocumentServiceImpl implements DocumentService{
 		return documentRepository.getDocumentByNewPost();
 	}
 
+	/*@Override
+	public int getDocumentCountByCatID(String catID) {
+		return documentRepository.getDocumentCountByCatID(catID);
+	}*/
+
+	@Override
+	public boolean updateTotalDocByCatID(String catID) {
+		return documentRepository.updateTotalDocByCatID(catID);
+	}
+
 	
 
 
