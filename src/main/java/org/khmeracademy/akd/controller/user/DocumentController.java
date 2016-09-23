@@ -29,7 +29,7 @@ public class DocumentController {
 		ArrayList<Object> doc=documentService.findAll();
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.findAll()!=null){
+		if(doc.size()>0){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
@@ -159,7 +159,7 @@ public class DocumentController {
 		ArrayList<Document> doc=documentService.getDocumentByCatID(CatID);
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.getDocumentByCatID(CatID)!=null){
+		if(doc.size()>0){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
@@ -178,7 +178,7 @@ public class DocumentController {
 		ArrayList<Document> doc=documentService.getDocumentAndUserAndCategoryAndCommentByDocID(DocID);
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.getDocumentAndUserAndCategoryAndCommentByDocID(DocID)!=null){
+		if(doc.size()>0){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
@@ -197,7 +197,7 @@ public class DocumentController {
 		ArrayList<Document> doc=documentService.getDocumentByPopular(pagination);
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.getDocumentByPopular(pagination)!=null){
+		if(doc.size()>0){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
@@ -217,7 +217,7 @@ public class DocumentController {
 		ArrayList<Document> doc=documentService.getDocumentByRecommended(userID);
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.getDocumentByRecommended(userID)!=null){
+		if(doc.size()>0){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
@@ -236,7 +236,7 @@ public class DocumentController {
 		ArrayList<Document> doc=documentService.getDocumentByNewPost();
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.getDocumentByNewPost()!=null){
+		if(doc.size()>0){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
@@ -273,10 +273,11 @@ public class DocumentController {
 		ArrayList<Document> doc=documentService.getDocumentByLikeTitle(title);
 		ResponseList<Document> res=new ResponseList<Document>();
 		
-		if(documentService.getDocumentByLikeTitle(title)!=null){
+		if(doc.size()>0){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
+			System.out.println(doc);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);
