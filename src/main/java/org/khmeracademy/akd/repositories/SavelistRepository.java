@@ -47,7 +47,7 @@ public interface SavelistRepository {
 		@Result(property="createdDate", column="created_date"),
 		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
-	
+		
 		@Result(property="status", column="status")	
 		
 	})
@@ -67,6 +67,7 @@ public interface SavelistRepository {
 		@Result(property="savelistdetail", column="save_list_id", many= @Many(select = "getSavelistDetail")),		
 	})
 	ArrayList<Savelist> findSavelistByUserID(int userID );
+	
 	
 	@Select("SELECT * FROM akd_save_lists WHERE user_id = #{userID} AND save_list_id = #{savelistID}")
 	
