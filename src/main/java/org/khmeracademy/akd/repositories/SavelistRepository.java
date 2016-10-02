@@ -63,7 +63,7 @@ public interface SavelistRepository {
 		
 		
 		@Result(property="status", column="status"),
-		@Result(property="user", column="user_id", one = @One(select = "getUser")),
+		@Result(property="users", column="user_id", one = @One(select = "getUser")),
 		@Result(property="savelistdetail", column="save_list_id", many= @Many(select = "getSavelistDetail")),		
 	})
 	ArrayList<Savelist> findSavelistByUserID(int userID );
@@ -79,7 +79,7 @@ public interface SavelistRepository {
 		@Result(property="userID", column="user_id"),
 		
 		@Result(property="status", column="status"),
-		@Result(property="user", column="user_id", one = @One(select = "getUser")),
+		@Result(property="users", column="user_id", one = @One(select = "getUser")),
 		@Result(property="savelistdetail", column="save_list_id", many= @Many(select = "getSavelistDetail")),		
 	})
 	ArrayList<Savelist> findEachSavelistByUserID(@Param("userID")int userID, @Param("savelistID")int savelistID );
@@ -96,7 +96,7 @@ public interface SavelistRepository {
 		
 		
 		@Result(property="status", column="status"),
-		@Result(property="user", column="user_id", one = @One(select = "getUser"))
+		@Result(property="users", column="user_id", one = @One(select = "getUser"))
 				
 	})
 	ArrayList<Savelist> findSavelistMenuByUserID(int userID );
@@ -150,6 +150,7 @@ public interface SavelistRepository {
 		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
 		@Result(property="status", column="status"),
+		@Result(property="users", column="user_id", one = @One(select = "getUser")),
 		
 	})
 	ArrayList<Document> getDocument();
