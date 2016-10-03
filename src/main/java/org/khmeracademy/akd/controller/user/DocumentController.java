@@ -24,15 +24,16 @@ public class DocumentController {
 	private DocumentService documentService;
 	
 	@RequestMapping(value="/document",method=RequestMethod.GET)
-	public ResponseList<Document> findAll()
+	public ResponseList<Document> findAll(Paging pagination)
 	{
-		ArrayList<Object> doc=documentService.findAll();
+		ArrayList<Object> doc=documentService.findAll(pagination);
 		ResponseList<Document> res=new ResponseList<Document>();
 		
 		if(doc.size()>0){
 			res.setCode(ResponseCode.RECORD_FOUND);
 			res.setMessage();
 			res.setData(doc);
+			res.setPaging(pagination);
 		}
 		else{
 			res.setCode(ResponseCode.RECORD_NOT_FOUND);

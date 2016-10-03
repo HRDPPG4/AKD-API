@@ -110,7 +110,7 @@ public interface DocumentRepository {
 		@Result(property="users", column="user_id", one = @One(select = "getUser")),
 		@Result(property="category", column="cat_id", one = @One(select = "getCategory"))		
 	})
-	ArrayList<Document> getDocumentAndUserAndCategory();
+	ArrayList<Document> getDocumentAndUserAndCategory(@Param("pagination") Paging pagination);
 	
 	@Select("SELECT * from akd_documents WHERE doc_id=#{docID}")
 	@Results({

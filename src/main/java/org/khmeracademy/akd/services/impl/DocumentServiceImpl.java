@@ -39,8 +39,9 @@ public class DocumentServiceImpl implements DocumentService{
 	}
 
 	@Override
-	public ArrayList findAll() {
-		return documentRepository.getDocumentAndUserAndCategory();
+	public ArrayList findAll(Paging pagination) {
+		pagination.setTotalCount(documentRepository.count());
+		return documentRepository.getDocumentAndUserAndCategory(pagination);
 	}
 	
 	

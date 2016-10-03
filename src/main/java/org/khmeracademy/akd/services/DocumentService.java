@@ -14,7 +14,7 @@ public interface DocumentService {
 	
 	boolean countView(String docID);
 	
-	ArrayList<Object> findAll();
+	ArrayList<Object> findAll(Paging pagination);
 	
 	ArrayList<Document> getDocumentByCatID(String CatID);
 	
