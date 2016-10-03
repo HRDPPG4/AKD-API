@@ -36,7 +36,7 @@ public interface CategoryRepository {
 	@Select("SELECT COUNT(cat_id) from akd_categories")
 	public Long count();
 	
-	@Select("SELECT * FROM akd_categories ORDER BY cat_id ASC")
+	@Select("SELECT * FROM akd_categories ORDER BY cat_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
 	@Results({
 		@Result(property="catID", column="cat_id"),
 		@Result(property="catName", column="name"),
