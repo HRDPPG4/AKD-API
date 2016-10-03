@@ -79,7 +79,7 @@ public class DocumentController {
 		return res;
 	}
 	
-	@RequestMapping(value="/document/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/document/{id}",method=RequestMethod.PUT)
 	public Response delete(@PathVariable("id") String id)
 	{
 	
@@ -135,6 +135,7 @@ public class DocumentController {
 	
 		return res;
 	}
+	
 	
 	@RequestMapping(value="/document/counview/{docID}",method=RequestMethod.PUT)
 	public Response countView(@PathVariable("docID") String docID)

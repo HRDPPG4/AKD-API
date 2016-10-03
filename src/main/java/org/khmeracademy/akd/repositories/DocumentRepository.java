@@ -22,8 +22,10 @@ import org.apache.ibatis.annotations.One;
 @Repository
 public interface DocumentRepository {
 	
-	@Delete("DELETE FROM akd_documents WHERE doc_id=#{docID}")
+//	@Delete("DELETE FROM akd_documents WHERE doc_id=#{docID}")
+	@Delete("UPDATE akd_documents SET status= 0 WHERE doc_id=#{docID}")
 	boolean delete(String id);
+	
 	@Update("UPDATE akd_documents SET title=#{title},des=#{des},embed_link=#{embedLink},thumbnail_url=#{thumbnailURL},export_link=#{exportLink},view=#{view},share=#{share},created_date=#{createdDate},doc_type_num=#{docTypeNum},user_id=#{userID},cat_id=#{catID},status=#{status} WHERE doc_id=#{docID}")
 	boolean update(Document doc);
 	//@SelectKey(before= false, keyProperty="view",resultType= int.class,statement="SELECT view From akd_documents WHERE doc_id = #{docID}")
