@@ -28,9 +28,11 @@ public interface DocumentRepository {
 	
 	@Update("UPDATE akd_documents SET title=#{title},des=#{des},embed_link=#{embedLink},thumbnail_url=#{thumbnailURL},export_link=#{exportLink},view=#{view},share=#{share},created_date=#{createdDate},doc_type_num=#{docTypeNum},user_id=#{userID},cat_id=#{catID},status=#{status} WHERE doc_id=#{docID}")
 	boolean update(Document doc);
+	
 	//@SelectKey(before= false, keyProperty="view",resultType= int.class,statement="SELECT view From akd_documents WHERE doc_id = #{docID}")
 	@Update("UPDATE akd_documents SET view =(SELECT view FROM akd_documents WHERE doc_id =#{docID})+1 WHERE doc_id= #{docID}")
    	boolean countView(String docID);
+	
 	@Insert("INSERT INTO akd_documents VALUES(#{docID},#{title},#{des},#{embedLink},#{thumbnailURL},#{exportLink},#{view},#{share},#{createdDate},#{docTypeNum},#{userID},#{catID},#{status})")
 	boolean insert(Document doc);
 	

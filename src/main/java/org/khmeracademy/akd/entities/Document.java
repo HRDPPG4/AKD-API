@@ -55,8 +55,7 @@ public class Document {
 	
 	@JsonProperty("LOGS")
 	private List<Log> logs;
-	
-	
+
 	
 	
 	public String getDocID() {

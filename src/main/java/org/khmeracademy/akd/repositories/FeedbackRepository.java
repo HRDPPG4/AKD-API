@@ -51,7 +51,9 @@ public interface FeedbackRepository {
 interface SQL{
 	String SELECT="SELECT * from akd_feedbacks ORDER BY feed_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}";
 	String FIND_ONE="SELECT * from akd_feedbacks WHERE feed_id=#{feedbackID}";
-	String DELETE="DELETE FROM akd_feedbacks WHERE feed_id=#{feedbackID}";
+	
+	String DELETE="UPDATE akd_feedbacks SET status= 0 WHERE feed_id=#{feedbackID}";
+	
 	String UPDATE="UPDATE akd_feedbacks SET "
 			+ "feed_date=#{date},"
 			+ "feed_des=#{des},"

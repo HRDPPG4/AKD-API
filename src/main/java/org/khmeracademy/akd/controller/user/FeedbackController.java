@@ -57,7 +57,7 @@ public class FeedbackController {
 		return res;
 	}
 	
-	@RequestMapping(value="/feedback/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/feedback/{id}",method=RequestMethod.PUT)
 	public Response delete(@PathVariable("id") int id)
 	{
 	
