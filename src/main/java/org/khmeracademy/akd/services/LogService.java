@@ -13,5 +13,6 @@ public interface LogService {
 	ArrayList<Log> findAllByUser(int userID);
 	
 	Log findOne(int id);
+	boolean deleteAllLogByUserID(int userID);
 	
 }

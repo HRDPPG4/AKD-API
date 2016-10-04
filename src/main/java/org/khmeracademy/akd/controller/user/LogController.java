@@ -2,8 +2,6 @@ package org.khmeracademy.akd.controller.user;
 
 import java.util.ArrayList;
 
-import org.apache.ibatis.annotations.Param;
-import org.khmeracademy.akd.entities.Document;
 import org.khmeracademy.akd.entities.Log;
 import org.khmeracademy.akd.response.*;
 import org.khmeracademy.akd.services.LogService;
@@ -117,6 +115,23 @@ public class LogController {
 			res.setMessage();
 		}
 	
+		return res;
+	}
+	
+	@RequestMapping(value="/deleteAllLogByUserID/{userID}",method=RequestMethod.DELETE)
+	public Response deleteAllLogByUserID(@PathVariable("userID") int userID)
+	{
+	
+		boolean status=logService.deleteAllLogByUserID(userID);
+		Response res=new Response();
+		if(status){
+			res.setCode(ResponseCode.DELETE_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.DELETE_FAIL);
+			res.setMessage();
+		}
 		return res;
 	}
 	

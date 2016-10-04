@@ -52,5 +52,10 @@ public class LogServiceImpl implements LogService{
 		return logRepository.findAllByUser(userID);
 	}
 
+	@Override
+	public boolean deleteAllLogByUserID(int userID) {
+		return logRepository.deleteAllLogByUserID(userID);
+	}
+
 	
 }
