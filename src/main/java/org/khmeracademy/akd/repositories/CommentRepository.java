@@ -21,6 +21,7 @@ public interface CommentRepository {
 	
 	@Delete("UPDATE akd_comments SET status= 0 WHERE comment_id =#{commentID}")
 	boolean delete(int id);
+	
 	@Update("UPDATE akd_comments SET created_date=#{createdDate},remark=#{remark},user_id=#{userID},doc_id=#{docID},status=#{status} WHERE comment_id =#{commentID}")
 	boolean update(Comment com);
 	

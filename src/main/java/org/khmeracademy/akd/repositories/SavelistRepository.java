@@ -37,6 +37,7 @@ public interface SavelistRepository {
 	
 	@Insert("INSERT INTO akd_save_lists VALUES(nextval('akd_save_lists_save_list_id_seq'),#{name},#{createdDate},#{remark},#{userID},#{status})")
 	boolean insertSavelistOnly(Savelist list);
+	
 	@Delete("DELETE FROM akd_save_list_detail WHERE doc_id = #{docID}")
 	boolean deleteSaveDetail(String docID);
 	
@@ -47,8 +48,8 @@ public interface SavelistRepository {
 		@Result(property="createdDate", column="created_date"),
 		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
-		
-		@Result(property="status", column="status")	
+		@Result(property="status", column="status"),	
+		@Result(property="users", column="user_id", one = @One(select = "getUser"))
 		
 	})
 	ArrayList<Savelist> findAll(@Param("pagination") Paging pagination);
@@ -60,8 +61,6 @@ public interface SavelistRepository {
 		@Result(property="name", column="name"),
 		@Result(property="createdDate", column="created_date"),
 		@Result(property="remark", column="remark"),
-		
-		
 		@Result(property="status", column="status"),
 		@Result(property="users", column="user_id", one = @One(select = "getUser")),
 		@Result(property="savelistdetail", column="save_list_id", many= @Many(select = "getSavelistDetail")),		
@@ -154,6 +153,8 @@ public interface SavelistRepository {
 		
 	})
 	ArrayList<Document> getDocument();
+	
+	
 	@Select(SAVE_LIST_SQL.FIND_ONE)
 	@Results({
 		@Result(property="savelistID", column="save_list_id"),
@@ -172,15 +173,14 @@ interface SAVE_LIST_SQL{
 	String SELECT="SELECT * from akd_save_lists ORDER BY save_list_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}";
 	
 	String FIND_ONE="SELECT * from akd_save_lists WHERE save_list_id=#{savelistID}";
-	
-	String DELETE="DELETE FROM akd_save_lists WHERE save_list_id=#{savelistID}";
+	 
+	String DELETE="UPDATE akd_save_lists SET status= 0 WHERE save_list_id=#{savelistID}";
 	
 	String UPDATE="UPDATE akd_save_lists SET "
 			+ "name=#{name},"
 			+ "created_date=#{createdDate},"
 			+ "remark=#{remark},"
 			+ "user_id=#{userID},"
-			+ "doc_id=#{docID}, "
 			+ "status=#{status}"
 			+ "WHERE save_list_id=#{savelistID}";
 	

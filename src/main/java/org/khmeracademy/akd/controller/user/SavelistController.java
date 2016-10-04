@@ -133,7 +133,7 @@ public class SavelistController {
 		return res;
 	}
 	
-	@RequestMapping(value="/savelist/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/savelist/{id}",method=RequestMethod.PUT)
 	public Response delete(@PathVariable("id") int id)
 	{
 	
