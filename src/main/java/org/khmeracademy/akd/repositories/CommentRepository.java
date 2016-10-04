@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Comment;
+import org.khmeracademy.akd.entities.Document;
 import org.khmeracademy.akd.entities.User;
 import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.stereotype.Repository;
@@ -29,15 +30,16 @@ public interface CommentRepository {
 	@Select("SELECT COUNT(comment_id) from akd_comments")
 	public Long count();
 	
-	@Select("SELECT * from akd_comments WHERE status = 1 ORDER BY comment_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
+	@Select("SELECT * from akd_comments ORDER BY comment_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
 	@Results({
 		@Result(property="commentID", column="comment_id"),
 		@Result(property="createdDate", column="created_date"),
 		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
 		@Result(property="docID", column="doc_id"),
-		@Result(property="status", column="status")
-			
+		@Result(property="status", column="status"),
+		@Result(property="users", column="user_id", one = @One(select = "getUser")),
+		@Result(property="documents", column="doc_id", one = @One(select = "getDocument"))
 	})
 	ArrayList<Comment> findAll(@Param("pagination") Paging pagination);
 	
@@ -48,7 +50,7 @@ public interface CommentRepository {
 		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
 		@Result(property="docID", column="doc_id"),
-		@Result(property="status", column="status")	
+		@Result(property="status", column="status")
 	})
 	Comment findOne(int id);
 	
@@ -71,5 +73,12 @@ public interface CommentRepository {
 		@Result(property="name", column="name")	
 	})
 	ArrayList<User> getUser();
+	
+	@Select("SELECT * FROM akd_documents WHERE doc_id=#{docID}")
+	@Results({
+		@Result(property="docID", column="doc_id"),
+		@Result(property="title", column="title")	
+	})
+	ArrayList<Document> getDocument();
 	
 }
