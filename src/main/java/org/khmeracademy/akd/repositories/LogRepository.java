@@ -112,4 +112,9 @@ public interface LogRepository {
 		
 	})
 	ArrayList<Log> findAllByUser(int userID);
+	
+	@Delete("DELETE FROM akd_logs WHERE user_id=#{userID}")
+	boolean deleteAllLogByUserID(int userID);
+	
+	
 }
