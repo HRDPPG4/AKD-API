@@ -36,12 +36,16 @@ public class Savelist {
 	}
 	@JsonProperty("USERS")
 	private List<User> users;
+	
 	@JsonProperty("USER")
 	private User user;
 	
 	
 	@JsonProperty("DOCUMENT")
 	private List<Document> document;
+	
+	@JsonProperty("TOTAL_DOCUMENT")
+	private int totalDocument;
 	
 	public User getUser() {
 		return user;
@@ -103,6 +107,12 @@ public class Savelist {
 	}
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+	public int getTotalDocument() {
+		return totalDocument;
+	}
+	public void setTotalDocument(int totalDocument) {
+		this.totalDocument = totalDocument;
 	}
 
 	

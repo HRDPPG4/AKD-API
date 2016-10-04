@@ -299,6 +299,12 @@ public interface DocumentRepository {
 	@Update("UPDATE akd_categories SET total_doc=(SELECT count(*) FROM akd_documents WHERE cat_id=#{catID}) WHERE cat_id=#{catID}")
 	boolean updateTotalDocByCatID(String catID);
 	
+	
+	@Select("SELECT COUNT(*) FROM akd_documents WHERE user_id=#{userID}")	
+	@Results({
+		@Result(property="docID", column="count"),
+	})
+	int countTotalDocByUserID(int userID);
 		
 }
 
