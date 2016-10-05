@@ -11,12 +11,14 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.khmeracademy.akd.entities.Category;
+import org.khmeracademy.akd.entities.User;
 import org.khmeracademy.akd.utilities.Paging;
 import org.springframework.stereotype.Repository;
 
@@ -46,10 +48,17 @@ public interface CategoryRepository {
 		@Result(property="status", column="status"),
 		@Result(property="icon", column="icon"),
 		@Result(property="order", column="rang_order"),
-		@Result(property="totalDoc", column="total_doc")		
+		@Result(property="totalDoc", column="total_doc"),
+		@Result(property="subCategories", column="parent_id", one = @One(select = "getParentName"))
 	})
 	ArrayList<Category>getAllCategoryByLimit(@Param("pagination") Paging pagination);
 	
+	@Select("SELECT name FROM akd_categories WHERE parent_id=#{parentID}")
+	@Results({
+		@Result(property="parentID", column="parent_id"),
+		@Result(property="catName", column="name")	
+	})
+	ArrayList<Category> getParentName();
 	
 	@Select("SELECT * FROM akd_categories WHERE cat_id NOT IN ('0B4RhbtI4DXY_QWVOWkFiSTlRY1E') ORDER BY name ASC ")
 	@Results({
@@ -128,7 +137,6 @@ public interface CategoryRepository {
 	ArrayList<Category>getCategoryByParentIDAndStatusEnable(String ParentID);
 	
 	@Select("SELECT COUNT(*) FROM akd_categories")
-	
 	@Results({
 		@Result(property="catID", column="count"),
 	})
