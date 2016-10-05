@@ -28,6 +28,7 @@ public interface UserRepository {
 	boolean update(User user);
 	
 	
+	
 	@Insert(USER_SQL.INSERT)
 	boolean insert(User user);
 	

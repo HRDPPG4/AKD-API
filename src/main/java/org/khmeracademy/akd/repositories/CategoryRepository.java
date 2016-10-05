@@ -49,16 +49,14 @@ public interface CategoryRepository {
 		@Result(property="icon", column="icon"),
 		@Result(property="order", column="rang_order"),
 		@Result(property="totalDoc", column="total_doc"),
-		@Result(property="subCategories", column="parent_id", one = @One(select = "getParentName"))
+		@Result(property="subCategories", column="cat_id"  
+			, many = @Many(select = "getCategoryByParentIDAndStatusEnable")
+		),
+		@Result(property="parentName", column="parent_id", one = @One(select = "getParentName"))
+		
 	})
 	ArrayList<Category>getAllCategoryByLimit(@Param("pagination") Paging pagination);
 	
-	@Select("SELECT name FROM akd_categories WHERE parent_id=#{parentID}")
-	@Results({
-		@Result(property="parentID", column="parent_id"),
-		@Result(property="catName", column="name")	
-	})
-	ArrayList<Category> getParentName();
 	
 	@Select("SELECT * FROM akd_categories WHERE cat_id NOT IN ('0B4RhbtI4DXY_QWVOWkFiSTlRY1E') ORDER BY name ASC ")
 	@Results({
@@ -141,6 +139,14 @@ public interface CategoryRepository {
 		@Result(property="catID", column="count"),
 	})
 	int getCategoryCount();
+	
+	@Select("SELECT name FROM akd_categories WHERE cat_id=#{catID}")
+	@Results({
+		@Result(property="catName", column="name")	
+	})
+	String getParentName(String catID);
+	
+	
 	
 	
 	

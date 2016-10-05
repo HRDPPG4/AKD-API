@@ -23,4 +23,6 @@ public interface UserService {
 	
 	User findUserByEmail(UserLogin userlogin);
 	
+	
+	
 }

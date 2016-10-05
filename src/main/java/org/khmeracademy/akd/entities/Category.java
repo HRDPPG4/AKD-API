@@ -38,6 +38,9 @@ public class Category {
 	@JsonProperty("DOCUMENTS")
 	private List<Document> documents;
 	
+	@JsonProperty("PARENT_NAME")
+	private String parentName;
+	
 	public Category() {
 		
 	}
@@ -118,6 +121,26 @@ public class Category {
 
 	public void setOrder(int order) {
 		this.order = order;
+	}
+
+
+	public String getParentName() {
+		return parentName;
+	}
+
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
+
+
+	public List<Category> getSubCategories() {
+		return subCategories;
+	}
+
+
+	public void setSubCategories(List<Category> subCategories) {
+		this.subCategories = subCategories;
 	}
 	
 }
