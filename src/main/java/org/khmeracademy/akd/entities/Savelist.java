@@ -37,8 +37,8 @@ public class Savelist {
 	@JsonProperty("USERS")
 	private List<User> users;
 	
-	@JsonProperty("USER")
-	private User user;
+	/*@JsonProperty("USER")
+	private User user;*/
 	
 	
 	@JsonProperty("DOCUMENT")
@@ -47,12 +47,12 @@ public class Savelist {
 	@JsonProperty("TOTAL_DOCUMENT")
 	private int totalDocument;
 	
-	public User getUser() {
+	/*public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
-	}
+	}*/
 	
 	public List<Document> getDocument() {
 		return document;
