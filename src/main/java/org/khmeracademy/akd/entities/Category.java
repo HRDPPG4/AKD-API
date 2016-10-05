@@ -41,6 +41,9 @@ public class Category {
 	@JsonProperty("PARENT_NAME")
 	private String parentName;
 	
+	@JsonProperty("CAT_LEVEL")
+	private int level;
+	
 	public Category() {
 		
 	}
@@ -141,6 +144,16 @@ public class Category {
 
 	public void setSubCategories(List<Category> subCategories) {
 		this.subCategories = subCategories;
+	}
+
+
+	public int getLevel() {
+		return level;
+	}
+
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 	
 }

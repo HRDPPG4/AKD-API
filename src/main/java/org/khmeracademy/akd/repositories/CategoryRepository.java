@@ -68,7 +68,8 @@ public interface CategoryRepository {
 		@Result(property="status", column="status"),
 		@Result(property="icon", column="icon"),
 		@Result(property="order", column="rang_order"),
-		@Result(property="totalDoc", column="total_doc")
+		@Result(property="totalDoc", column="total_doc"),
+		@Result(property="level", column="level")
 	})
 	ArrayList<Category>findAll();
 	
