@@ -119,6 +119,11 @@ public class DocumentServiceImpl implements DocumentService{
 		return documentRepository.updateTotalDocByCatID(catID);
 	}
 
+	@Override
+	public int countTotalDocByUserID(int userID) {
+		return documentRepository.countTotalDocByUserID(userID);
+	}
+
 	
 
 	

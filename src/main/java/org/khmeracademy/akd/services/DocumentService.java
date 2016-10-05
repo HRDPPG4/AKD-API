@@ -38,6 +38,8 @@ public interface DocumentService {
 	/*int getDocumentCountByCatID(String catID);*/
 
 	boolean updateTotalDocByCatID(String catID);
+	
+	int countTotalDocByUserID(int userID);
 
 	
 	

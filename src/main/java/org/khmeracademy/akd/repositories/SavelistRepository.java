@@ -92,9 +92,8 @@ public interface SavelistRepository {
 		@Result(property="name", column="name"),
 		@Result(property="createdDate", column="created_date"),
 		@Result(property="remark", column="remark"),
-		
-		
 		@Result(property="status", column="status"),
+		@Result(property="totalDocument", column="save_list_id", one = @One(select = "getTotalDocumentBySavelistID")),	// UPDATE BY CHIVORN
 		@Result(property="users", column="user_id", one = @One(select = "getUser"))
 				
 	})
@@ -111,10 +110,10 @@ public interface SavelistRepository {
 		@Result(property="remark", column="remark"),
 		@Result(property="userID", column="user_id"),
 		@Result(property="docID", column="doc_id"),
-		@Result(property="status", column="status"),
+		@Result(property="status", column="status"),		
 		@Result(property="document", column="doc_id", one = @One(select = "getDocument"))
 	})
-	ArrayList<Savelist> getSavelistDetail();
+	ArrayList<Savelist> getSavelistDetail();		
 	
 	@Select("SELECT COUNT(save_list_id) from akd_save_lists")
 	public Long count();
@@ -166,6 +165,9 @@ public interface SavelistRepository {
 		@Result(property="status", column="status")	
 	})
 	Savelist findOne(int id);
+	// UPDATE BY CHIVORN
+	@Select("SELECT COUNT(*) FROM akd_save_list_detail WHERE save_list_id=#{save_list_id}")
+	int getTotalDocumentBySavelistID();
 	
 }
 
