@@ -61,6 +61,11 @@ public class UserServiceImpl implements UserService{
 		return userRepository.findUserByEmail(userlogin);
 	}
 
+	@Override
+	public User findUserByUserHash(String userHash) {
+		return userRepository.findUserByUserHash(userHash);
+	}
+
 	
 	
 }

@@ -36,12 +36,13 @@ public class User{
 	private String role;
 	
 	@JsonProperty("PROFILE")
-	private String profile;
-	
-	
+	private String profile;	
 	
 	@JsonProperty("ROLES")
 	private List<Role> roles;
+	
+	@JsonProperty("USER_HASH")
+	private String userHash;
 	
 	
 	public int getUserID() {
@@ -103,6 +104,12 @@ public class User{
 	}
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+	public String getUserHash() {
+		return userHash;
+	}
+	public void setUserHash(String userHash) {
+		this.userHash = userHash;
 	}
 	
 	

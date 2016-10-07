@@ -23,6 +23,8 @@ public interface UserService {
 	
 	User findUserByEmail(UserLogin userlogin);
 	
+	User findUserByUserHash(String userHash);
+	
 	
 	
 }

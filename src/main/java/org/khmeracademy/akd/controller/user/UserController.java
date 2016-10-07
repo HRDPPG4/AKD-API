@@ -182,6 +182,24 @@ public class UserController {
 		return res;
 	}
 	
+	@RequestMapping(value="/user/findUserByUserHash/{userHash}",method=RequestMethod.GET)
+	public ResponseObject<User> findUserByUserHash(@PathVariable("userHash") String userHash)
+	{
+		User user=userService.findUserByUserHash(userHash);
+		ResponseObject<User> res=new ResponseObject<User>();
+		if(user!=null){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(user);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	
 	
 	
 	

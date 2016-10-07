@@ -98,6 +98,22 @@ public interface UserRepository {
 	@Update("UPDATE akd_users SET profile=#{profile} WHERE user_id=#{userID}")
 	boolean uploadUserProfile(@Param("profile") String profile,@Param("userID")int userID);
 	
+	@Select("SELECT * FROM akd_users WHERE user_hash=#{userHash}")
+	@Results({
+		@Result(property="userID", column="user_id"),
+		@Result(property="name", column="name"),
+		@Result(property="password", column="password"),
+		@Result(property="email", column="email"),
+		@Result(property="phone", column="phone"),
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="remark", column="remark"),
+		@Result(property="status", column="status"),		
+		@Result(property="role", column="role"),
+		@Result(property="profile", column="profile"),
+		@Result(property="userHash", column="user_hash")
+	})
+	User findUserByUserHash(String userHash);
+	
 	
 }
 
@@ -128,7 +144,7 @@ interface USER_SQL{
 	String INSERT="INSERT INTO "
 			+ "akd_users("
 			+ "name,"
-			+ "password,email,phone,created_date,remark,status,role,profile)"
+			+ "password,email,phone,created_date,remark,status,role,user_hash,profile)"
 			+ "VALUES("
 			+ "#{name},"
 			+ "#{password},"
@@ -138,6 +154,7 @@ interface USER_SQL{
 			+ "#{remark},"
 			+ "#{status},"
 			+ "#{role},"
+			+ "#{userHash},"
 			+ "'default.png')";	
 	
 	String COUNT="SELECT COUNT(user_id) FROM akd_users";
