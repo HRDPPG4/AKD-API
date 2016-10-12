@@ -20,7 +20,7 @@ public class UploadToDBServiceImpl implements UploadToDBService{
 	
 	
 	@Override
-	public boolean uploadFile(Document doc) {
+	public boolean uploadDocument(Document doc) {
 		return documentRepository.insert(doc);		
 	}
 

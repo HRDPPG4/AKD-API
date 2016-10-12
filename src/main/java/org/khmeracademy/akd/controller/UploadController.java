@@ -30,6 +30,47 @@ public class UploadController {
 	@Autowired
 	private DocumentRepository documentRepository;
 	
+	@RequestMapping(value="/api/uploadDocument", method = RequestMethod.POST)
+	public Map<String, Object> uploadFile(@RequestParam("files") List<MultipartFile> file,@RequestParam("title") List<String> title,@RequestParam("des") String des,@RequestParam("catID") String catID,@RequestParam("usreID") int userID) throws GeneralSecurityException, IOException{
+		System.out.println("File length: " + file.size());
+		System.out.println("Title length: " + title.size());
+		String path = null;
+		String fileTitles = null;
+		int typeNum=0;
+		String type = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		for (int i = 0; i < file.size(); i++) {
+//			fileTitles = file.get(i).getOriginalFilename();
+			path = fileUpload.uploadFile(file.get(i), null);
+			type=path.substring(path.lastIndexOf('.')+1,path.length());
+			if(type.toLowerCase().equals("ppt") || type.toLowerCase().equals("pptx")){
+				typeNum=1;
+			}
+			else if(type.toLowerCase().equals("pdf")){
+				typeNum=2;
+			}
+			else if(type.toLowerCase().equals("doc") || type.toLowerCase().equals("docx")){
+				typeNum=3;
+			}
+			else{
+				typeNum=0;
+			}
+			
+			if(path!=null){
+				UploadFileToGoogleService up=new UploadFileToGoogleService();
+				uploadToDBService.uploadDocument(up.uploadDocument(path,title.get(i),des,catID,typeNum,userID));
+			}
+			
+			
+			map.put("CODE","0000");
+			map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
+			map.put("DATA",path);
+			
+			
+		}
+		return map;
+	}
+	
 	@RequestMapping(value="/api/uploadFolder", method = RequestMethod.POST)
 	public void uploadFolder(@RequestParam("folderID") String id,@RequestParam("folderName") String name,@RequestParam("folderDes") String des,@RequestParam("folderStatus") String sta ) throws GeneralSecurityException, IOException{
 		System.out.println("Status: "+sta);
@@ -92,48 +133,5 @@ public class UploadController {
 		map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
 		map.put("DATA",path);
 		return map;
-	}
-	
-	
-	@RequestMapping(value="/api/uploadDocument", method = RequestMethod.POST)
-	public Map<String, Object> uploadFile(@RequestParam("files") List<MultipartFile> file,@RequestParam("title") List<String> title,@RequestParam("des") String des,@RequestParam("catID") String catID,@RequestParam("usreID") int userID) throws GeneralSecurityException, IOException{
-		System.out.println("File length: " + file.size());
-		System.out.println("Title length: " + title.size());
-		String path = null;
-		String fileTitles = null;
-		int typeNum=0;
-		String type = null;
-		Map<String, Object> map = new HashMap<String, Object>();
-		for (int i = 0; i < file.size(); i++) {
-//			fileTitles = file.get(i).getOriginalFilename();
-			path = fileUpload.uploadFile(file.get(i), null);
-			type=path.substring(path.lastIndexOf('.')+1,path.length());
-			if(type.toLowerCase().equals("ppt") || type.toLowerCase().equals("pptx")){
-				typeNum=1;
-			}
-			else if(type.toLowerCase().equals("pdf")){
-				typeNum=2;
-			}
-			else if(type.toLowerCase().equals("doc") || type.toLowerCase().equals("docx")){
-				typeNum=3;
-			}
-			else{
-				typeNum=0;
-			}
-			
-			if(path!=null){
-				UploadFileToGoogleService up=new UploadFileToGoogleService();
-				uploadToDBService.uploadFile(up.uploadDocument(path,title.get(i),des,catID,typeNum,userID));
-			}
-			
-			
-			map.put("CODE","0000");
-			map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
-			map.put("DATA",path);
-			
-			
-		}
-		return map;
-	}
-	
+	}		
 }
