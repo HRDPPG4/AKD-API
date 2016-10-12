@@ -58,7 +58,7 @@ public interface DocumentRepository {
 	})
 	ArrayList<Document> findAll();*/
 	
-	@Select("SELECT * from akd_documents WHERE cat_id=#{catID}")
+	@Select("SELECT * from akd_documents WHERE cat_id=#{catID} AND status=1")
 	@Results({
 		@Result(property="docID", column="doc_id"),
 		@Result(property="title", column="title"),
@@ -176,7 +176,7 @@ public interface DocumentRepository {
 	ArrayList<Comment>getComments();
 	
 	
-	@Select("SELECT * FROM akd_documents WHERE user_id= #{userID} AND doc_type_num= #{docTypeNum}")
+	@Select("SELECT * FROM akd_documents WHERE user_id= #{userID} AND doc_type_num= #{docTypeNum} AND status=1")
 	@Results({
 		@Result(property="docID", column="doc_id"),
 		@Result(property="title", column="title"),
@@ -192,6 +192,7 @@ public interface DocumentRepository {
 		@Result(property="catID", column="cat_id"),
 		@Result(property="status", column="status")		
 	})
+	// WE GET BY STATUS ENABLE ONLY
 	ArrayList<Document>getDocByUser(@Param("userID")int userID, @Param("docTypeNum")int docTypeNum);
 	
 	
@@ -266,7 +267,7 @@ public interface DocumentRepository {
 	})
 	int getDocumentCount();
 	
-@Select("SELECT * FROM akd_documents WHERE title LIKE '%' || #{title} || '%'")
+@Select("SELECT * FROM akd_documents WHERE title LIKE '%' || #{title} || '%' AND status=1")
 	
 	@Results({
 		@Result(property="docID", column="doc_id"),
@@ -302,11 +303,15 @@ public interface DocumentRepository {
 	boolean updateTotalDocByCatID(String catID);
 	
 	
-	@Select("SELECT COUNT(*) FROM akd_documents WHERE user_id=#{userID}")	
+	@Select("SELECT COUNT(*) FROM akd_documents WHERE user_id=#{userID} AND status=1")	
 	@Results({
 		@Result(property="docID", column="count"),
 	})
+	//	NOW WE GET BY STATUS ENDABLE
 	int countTotalDocByUserID(int userID);
+	
+	@Update("UPDATE akd_documents SET share = (SELECT share FROM akd_documents WHERE doc_id=#{docID}) + 1 WHERE doc_id=#{docID}")
+	boolean updateShareAmount(String docID);
 		
 }
 

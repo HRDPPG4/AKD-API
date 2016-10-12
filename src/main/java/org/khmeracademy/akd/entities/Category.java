@@ -30,7 +30,7 @@ public class Category {
 	private int order;
 	
 	@JsonProperty("TOTAL_DOC")
-	private String totalDoc;
+	private int totalDoc;
 	
 	@JsonProperty("SUB_CATEGORIES")
 	private List<Category> subCategories;
@@ -107,12 +107,12 @@ public class Category {
 	}
 
 
-	public String getTotalDoc() {
+	public int getTotalDoc() {
 		return totalDoc;
 	}
 
 
-	public void setTotalDoc(String totalDoc) {
+	public void setTotalDoc(int totalDoc) {
 		this.totalDoc = totalDoc;
 	}
 

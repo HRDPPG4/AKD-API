@@ -60,7 +60,7 @@ public class DocumentController {
 		return res;
 	
 	}
-	
+	// FOR NOW WE CHANGE TO GET BY STATUS ENABLE ONLY
 	@RequestMapping(value="/document/user/{userID}",method=RequestMethod.GET)
 	public ResponseObject<Document> getDocByUser(@PathVariable("userID") int userID, @RequestParam(value="docTypeNum", defaultValue="2") int docTypeNum)
 	{
@@ -342,6 +342,25 @@ public class DocumentController {
 			res.setMessage();
 		}
 		
+		return res;
+	}
+	
+	@RequestMapping(value="/document/updateShare/{docID}",method=RequestMethod.PUT)
+	public Response updateShareAmount(@PathVariable("docID") String docID)
+	{
+		Response res=new Response();
+		boolean status = documentService.updateShareAmount(docID);
+		if(status)
+		{
+			res.setCode(ResponseCode.UPDATE_SUCCESS);
+			res.setMessage();
+		}
+		else
+		{
+			res.setCode(ResponseCode.UPDATE_FAIL);
+			res.setMessage();
+		}
+	
 		return res;
 	}
 	

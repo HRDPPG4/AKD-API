@@ -48,7 +48,8 @@ public interface CategoryRepository {
 		@Result(property="status", column="status"),
 		@Result(property="icon", column="icon"),
 		@Result(property="order", column="rang_order"),
-		@Result(property="totalDoc", column="total_doc"),
+		/*@Result(property="totalDoc", column="total_doc"),*/
+		@Result(property="totalDoc", column="cat_id", one = @One(select = "getTotalDocByCatID")),
 		@Result(property="subCategories", column="cat_id"  
 			, many = @Many(select = "getCategoryByParentIDAndStatusEnable")
 		),
@@ -68,7 +69,8 @@ public interface CategoryRepository {
 		@Result(property="status", column="status"),
 		@Result(property="icon", column="icon"),
 		@Result(property="order", column="rang_order"),
-		@Result(property="totalDoc", column="total_doc"),
+		/*@Result(property="totalDoc", column="total_doc"),*/
+		@Result(property="totalDoc", column="cat_id", one = @One(select = "getTotalDocByCatID")),
 		@Result(property="level", column="level")
 	})
 	ArrayList<Category>findAll();
@@ -83,7 +85,8 @@ public interface CategoryRepository {
 		@Result(property="status", column="status"),
 		@Result(property="icon", column="icon"),
 		@Result(property="order", column="rang_order"),
-		@Result(property="totalDoc", column="total_doc")
+		/*@Result(property="totalDoc", column="total_doc")*/
+		@Result(property="totalDoc", column="cat_id", one = @One(select = "getTotalDocByCatID")),
 			
 	})
 	Category findOne(String id);
@@ -98,7 +101,8 @@ public interface CategoryRepository {
 		@Result(property="status", column="status"),
 		@Result(property="icon", column="icon"),
 		@Result(property="order", column="rang_order"),
-		@Result(property="totalDoc", column="total_doc"),
+		/*@Result(property="totalDoc", column="total_doc"),*/
+		@Result(property="totalDoc", column="cat_id", one = @One(select = "getTotalDocByCatID")),
 		@Result(property="subCategories", column="cat_id"  
 			, many = @Many(select = "getCategoryByParentIDAndStatusEnable")
 		)
@@ -130,7 +134,8 @@ public interface CategoryRepository {
 		@Result(property="status", column="status"),
 		@Result(property="icon", column="icon"),
 		@Result(property="order", column="rang_order"),
-		@Result(property="totalDoc", column="total_doc")
+		/*@Result(property="totalDoc", column="total_doc")*/
+		@Result(property="totalDoc", column="cat_id", one = @One(select = "getTotalDocByCatID"))
 			
 	})
 	ArrayList<Category>getCategoryByParentIDAndStatusEnable(String ParentID);
@@ -150,6 +155,13 @@ public interface CategoryRepository {
 	
 	
 	
+	
+	@Select("SELECT COUNT(*) FROM akd_documents WHERE cat_id=#{catID} AND status=1")	
+	@Results({
+		@Result(property="totalDoc", column="count"),
+	})
+	//	NOW WE GET BY STATUS ENDABLE
+	int getTotalDocByCatID(String catID);
 	
 	
 	

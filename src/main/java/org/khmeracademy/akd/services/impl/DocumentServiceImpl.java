@@ -124,6 +124,11 @@ public class DocumentServiceImpl implements DocumentService{
 		return documentRepository.countTotalDocByUserID(userID);
 	}
 
+	@Override
+	public boolean updateShareAmount(String docID) {
+		return documentRepository.updateShareAmount(docID);
+	}
+
 	
 
 	

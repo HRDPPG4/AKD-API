@@ -41,7 +41,7 @@ public interface DocumentService {
 	
 	int countTotalDocByUserID(int userID);
 
-	
+	boolean updateShareAmount(String docID);
 	
 	
 	
