@@ -21,8 +21,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SavelistRepository {
 	
-	@Delete(SAVE_LIST_SQL.DELETE)
-	boolean delete(int id);
+	@Update(SAVE_LIST_SQL.UPDATE_DISABLE)
+	boolean updateToDisable(int id);
 
 	@Update(SAVE_LIST_SQL.UPDATE)
 	boolean update(Savelist list);
@@ -169,6 +169,9 @@ public interface SavelistRepository {
 	@Select("SELECT COUNT(*) FROM akd_save_list_detail WHERE save_list_id=#{save_list_id}")
 	int getTotalDocumentBySavelistID();
 	
+	
+	@Update("DELETE FROM akd_save_lists WHERE save_list_id=#{listID}")
+	boolean deleteSavelist(int listID);
 }
 
 interface SAVE_LIST_SQL{
@@ -176,7 +179,7 @@ interface SAVE_LIST_SQL{
 	
 	String FIND_ONE="SELECT * from akd_save_lists WHERE save_list_id=#{savelistID}";
 	 
-	String DELETE="UPDATE akd_save_lists SET status= 0 WHERE save_list_id=#{savelistID}";
+	String UPDATE_DISABLE="UPDATE akd_save_lists SET status= 0 WHERE save_list_id=#{savelistID}";
 	
 	String UPDATE="UPDATE akd_save_lists SET "
 			+ "name=#{name},"

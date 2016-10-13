@@ -364,6 +364,24 @@ public class DocumentController {
 		return res;
 	}
 	
+	@RequestMapping(value="/updateDocumentStatus",method=RequestMethod.PUT)
+	public ResponseObject<Document> updateDocumentStatus(@RequestParam("docID") String docID,@RequestParam("status") int status)
+	{
+		boolean doc=documentService.updateDocumentStatus(docID,status);
+		ResponseObject<Document> res=new ResponseObject<Document>();
+		if(doc){
+			res.setCode(ResponseCode.UPDATE_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.UPDATE_FAIL);
+			res.setMessage();
+		}
+		
+		return res;
+	
+	}
+	
 	
 	
 }

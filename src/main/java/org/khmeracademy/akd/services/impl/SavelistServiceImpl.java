@@ -19,9 +19,9 @@ public class SavelistServiceImpl implements SavelistService{
 	
 	
 	@Override
-	public boolean delete(int id) {
+	public boolean updateToDisable(int id) {
 		try{
-			return savelistRepository.delete(id);
+			return savelistRepository.updateToDisable(id);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -88,6 +88,11 @@ public class SavelistServiceImpl implements SavelistService{
 	public boolean deleteSavelistDetail(String docID) {
 		// TODO Auto-generated method stub
 		return savelistRepository.deleteSaveDetail(docID);
+	}
+
+	@Override
+	public boolean deleteSavelist(int listID) {
+		return savelistRepository.deleteSavelist(listID);
 	}
 
 	

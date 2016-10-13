@@ -134,10 +134,10 @@ public class SavelistController {
 	}
 	
 	@RequestMapping(value="/savelist/{id}",method=RequestMethod.PUT)
-	public Response delete(@PathVariable("id") int id)
+	public Response updateStatus(@PathVariable("id") int id)
 	{
 	
-		boolean status=savelistService.delete(id);
+		boolean status=savelistService.updateToDisable(id);
 		Response res=new Response();
 		if(status){
 			res.setCode(ResponseCode.DELETE_SUCCESS);
@@ -214,6 +214,23 @@ public class SavelistController {
 			res.setMessage();
 		}
 	
+		return res;
+	}
+	
+	@RequestMapping(value="/savelist/{id}",method=RequestMethod.DELETE)
+	public Response deleteSavelist(@PathVariable("id") int id)
+	{
+	
+		boolean status=savelistService.deleteSavelist(id);
+		Response res=new Response();
+		if(status){
+			res.setCode(ResponseCode.DELETE_SUCCESS);
+			res.setMessage();
+		}
+		else{
+			res.setCode(ResponseCode.DELETE_FAIL);
+			res.setMessage();
+		}
 		return res;
 	}
 	

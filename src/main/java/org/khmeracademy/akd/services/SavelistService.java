@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import org.khmeracademy.akd.entities.Savelist;
 import org.khmeracademy.akd.utilities.Paging;
 public interface SavelistService {	
-	boolean delete(int id);
+	boolean updateToDisable(int id);
 	
 	boolean insert(Savelist list);
 	boolean update(Savelist list);
@@ -19,5 +19,6 @@ public interface SavelistService {
 	ArrayList<Savelist> findEachSavelistByUserID(int userID,int savelistID);
 	
 	Savelist findOne(int id);
+	boolean deleteSavelist(int id);
 	
 }

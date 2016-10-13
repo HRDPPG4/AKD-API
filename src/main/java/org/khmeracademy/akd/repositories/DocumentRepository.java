@@ -73,7 +73,8 @@ public interface DocumentRepository {
 		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
 		@Result(property="status", column="status"),
-		@Result(property="users", column="user_id", one = @One(select = "getUser"))
+		@Result(property="users", column="user_id", one = @One(select = "getUser")),
+		@Result(property="catName", column="cat_id", one = @One(select = "getCategoryNameByCatID"))
 	})
 	ArrayList<Document> getDocumentByCatID(String CatID);
 	
@@ -92,7 +93,9 @@ public interface DocumentRepository {
 		@Result(property="docTypeNum", column="doc_type_num"),
 		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
-		@Result(property="status", column="status")	
+		@Result(property="status", column="status"),
+		@Result(property="catName", column="cat_id", one = @One(select = "getCategoryNameByCatID"))
+		
 	})
 	Document findOne(String id);
 	
@@ -112,7 +115,8 @@ public interface DocumentRepository {
 		@Result(property="catID", column="cat_id"),
 		@Result(property="status", column="status"),
 		@Result(property="users", column="user_id", one = @One(select = "getUser")),
-		@Result(property="category", column="cat_id", one = @One(select = "getCategory"))		
+		@Result(property="category", column="cat_id", one = @One(select = "getCategory")),
+		@Result(property="catName", column="cat_id", one = @One(select = "getCategoryNameByCatID"))
 	})
 	ArrayList<Document> getDocumentAndUserAndCategory(@Param("pagination") Paging pagination);
 	
@@ -133,7 +137,8 @@ public interface DocumentRepository {
 		@Result(property="status", column="status"),
 		@Result(property="users", column="user_id", one = @One(select = "getUser")),
 		@Result(property="category", column="cat_id", one = @One(select = "getCategory")),
-		@Result(property="comment", column="doc_id", many = @Many(select = "getComments"))
+		@Result(property="comment", column="doc_id", many = @Many(select = "getComments")),
+		@Result(property="catName", column="cat_id", one = @One(select = "getCategoryNameByCatID"))
 	})
 	ArrayList<Document> getDocumentAndUserAndCategoryAndComment(String DocID);
 	
@@ -190,7 +195,8 @@ public interface DocumentRepository {
 		@Result(property="docTypeNum", column="doc_type_num"),
 		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
-		@Result(property="status", column="status")		
+		@Result(property="status", column="status"),
+		@Result(property="catName", column="cat_id", one = @One(select = "getCategoryNameByCatID"))
 	})
 	// WE GET BY STATUS ENABLE ONLY
 	ArrayList<Document>getDocByUser(@Param("userID")int userID, @Param("docTypeNum")int docTypeNum);
@@ -212,7 +218,8 @@ public interface DocumentRepository {
 		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
 		@Result(property="status", column="status"),
-		@Result(property="users", column="user_id", one = @One(select = "getUser"))
+		@Result(property="users", column="user_id", one = @One(select = "getUser")),
+		@Result(property="catName", column="cat_id", one = @One(select = "getCategoryNameByCatID"))
 	})
 	ArrayList<Document> getDocumentByPopular(@Param("pagination") Paging pagination);
 	
@@ -233,7 +240,8 @@ public interface DocumentRepository {
 		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
 		@Result(property="status", column="status"),
-		@Result(property="users", column="user_id", one = @One(select = "getUser"))
+		@Result(property="users", column="user_id", one = @One(select = "getUser")),
+		@Result(property="catName", column="cat_id", one = @One(select = "getCategoryNameByCatID"))
 		
 	})
 	ArrayList<Document> getDocumentByRecommended(int userID);
@@ -254,7 +262,8 @@ public interface DocumentRepository {
 		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
 		@Result(property="status", column="status"),
-		@Result(property="users", column="user_id", one = @One(select = "getUser"))
+		@Result(property="users", column="user_id", one = @One(select = "getUser")),
+		@Result(property="catName", column="cat_id", one = @One(select = "getCategoryNameByCatID"))
 		
 	})
 	ArrayList<Document> getDocumentByNewPost();
@@ -283,7 +292,8 @@ public interface DocumentRepository {
 		@Result(property="userID", column="user_id"),
 		@Result(property="catID", column="cat_id"),
 		@Result(property="status", column="status"),
-		@Result(property="users", column="user_id", one = @One(select = "getUser"))
+		@Result(property="users", column="user_id", one = @One(select = "getUser")),
+		@Result(property="catName", column="cat_id", one = @One(select = "getCategoryNameByCatID"))
 		
 	})
 	ArrayList<Document> getDocumentByLikeTitle(String title);
@@ -312,6 +322,16 @@ public interface DocumentRepository {
 	
 	@Update("UPDATE akd_documents SET share = (SELECT share FROM akd_documents WHERE doc_id=#{docID}) + 1 WHERE doc_id=#{docID}")
 	boolean updateShareAmount(String docID);
+	
+	//	USE TO UPDATE ALL STATUS NUMBER SO WE CAN DELETE OLD FUNCTION
+	@Update("UPDATE akd_documents SET status=#{status} WHERE doc_id=#{docID}")
+	boolean updateDocumentStatus(@Param("docID")String docID,@Param("status")int status);
+	
+	@Select("SELECT name FROM akd_categories WHERE cat_id=#{catID}")
+	@Results({
+		@Result(property="catName", column="name")	
+	})
+	String getCategoryNameByCatID(String catID);
 		
 }
 

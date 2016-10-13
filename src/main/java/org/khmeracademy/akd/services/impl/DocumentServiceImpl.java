@@ -129,6 +129,11 @@ public class DocumentServiceImpl implements DocumentService{
 		return documentRepository.updateShareAmount(docID);
 	}
 
+	@Override
+	public boolean updateDocumentStatus(String docID,int status) {
+		return documentRepository.updateDocumentStatus(docID,status);
+	}
+
 	
 
 	

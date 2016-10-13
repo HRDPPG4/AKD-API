@@ -43,6 +43,8 @@ public interface DocumentService {
 
 	boolean updateShareAmount(String docID);
 	
+	boolean updateDocumentStatus(String docID,int status);
+	
 	
 	
 	

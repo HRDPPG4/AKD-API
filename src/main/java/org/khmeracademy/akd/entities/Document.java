@@ -41,6 +41,9 @@ public class Document {
 	@JsonProperty("CAT_ID")
 	private String catID;
 	
+	@JsonProperty("CAT_NAME")
+	private String catName;
+	
 	@JsonProperty("STATUS")
 	private int status;
 	
@@ -160,6 +163,12 @@ public class Document {
 	}
 	public void setLogs(List<Log> logs) {
 		this.logs = logs;
+	}
+	public String getCatName() {
+		return catName;
+	}
+	public void setCatName(String catName) {
+		this.catName = catName;
 	}
 	
 	
