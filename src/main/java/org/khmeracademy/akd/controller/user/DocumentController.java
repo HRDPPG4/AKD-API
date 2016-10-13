@@ -382,6 +382,43 @@ public class DocumentController {
 	
 	}
 	
+	@RequestMapping(value="/document/getAllDocumentByStatus",method=RequestMethod.GET)
+	public ResponseList<Document> getAllDocumentByStatus(@RequestParam("status") int status,Paging pagination)
+	{
+		ArrayList<Document> doc=documentService.getAllDocumentByStatus(status,pagination);
+		ResponseList<Document> res=new ResponseList<Document>();
+		
+		if(doc.size()>0){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setData(doc);
+			res.setPaging(pagination);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		return res;
+	}
+	
+	@RequestMapping(value="/getTotalDocumentByStatus",method=RequestMethod.GET)
+	public Response getTotalDocumentByStatus(@RequestParam("status") int status)
+	{
+		long count =documentService.getTotalDocumentByStatus(status);
+		Response res=new Response();
+		if(count!=0){
+			res.setCode(ResponseCode.RECORD_FOUND);
+			res.setMessage();
+			res.setCount(count);
+		}
+		else{
+			res.setCode(ResponseCode.RECORD_NOT_FOUND);
+			res.setMessage();
+		}
+		
+		return res;
+	}
+	
 	
 	
 }

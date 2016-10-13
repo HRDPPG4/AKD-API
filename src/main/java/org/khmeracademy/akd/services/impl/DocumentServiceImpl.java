@@ -134,6 +134,18 @@ public class DocumentServiceImpl implements DocumentService{
 		return documentRepository.updateDocumentStatus(docID,status);
 	}
 
+	@Override
+	public ArrayList<Document> getAllDocumentByStatus(int status,Paging pagination) {
+		//pagination.setTotalCount(documentRepository.count());
+		pagination.setTotalCount(documentRepository.countTotalDocByStatus(status));
+		return documentRepository.getAllDocumentByStatus(status,pagination);
+	}
+
+	@Override
+	public long getTotalDocumentByStatus(int status) {
+		return documentRepository.countTotalDocByStatus(status);
+	}
+
 	
 
 	

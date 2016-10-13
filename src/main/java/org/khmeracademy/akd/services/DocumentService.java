@@ -45,7 +45,9 @@ public interface DocumentService {
 	
 	boolean updateDocumentStatus(String docID,int status);
 	
+	ArrayList<Document> getAllDocumentByStatus(int status,Paging pagination);
 	
+	long getTotalDocumentByStatus(int status);
 	
 	
 	

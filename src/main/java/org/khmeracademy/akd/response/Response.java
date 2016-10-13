@@ -7,7 +7,7 @@ public class Response {
 	public String code=ResponseCode.FAIL;
 	
 	@JsonProperty("COUNT")
-	private int count=0;
+	private long count=0;
 	
 	
 
@@ -66,11 +66,11 @@ public class Response {
 		}
 	}
 
-	public int getCount() {
+	public long getCount() {
 		return count;
 	}
 
-	public void setCount(int count) {
+	public void setCount(long count) {
 		this.count = count;
 	}	
 }

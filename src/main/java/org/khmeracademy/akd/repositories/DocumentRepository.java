@@ -99,7 +99,7 @@ public interface DocumentRepository {
 	})
 	Document findOne(String id);
 	
-	@Select("SELECT * from akd_documents ORDER BY doc_id ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
+	@Select("SELECT * from akd_documents ORDER BY title ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
 	@Results({
 		@Result(property="docID", column="doc_id"),
 		@Result(property="title", column="title"),
@@ -332,6 +332,30 @@ public interface DocumentRepository {
 		@Result(property="catName", column="name")	
 	})
 	String getCategoryNameByCatID(String catID);
+	
+	@Select("SELECT * from akd_documents WHERE status=#{status} ORDER BY title ASC LIMIT #{pagination.limit} OFFSET #{pagination.offset}")
+	@Results({
+		@Result(property="docID", column="doc_id"),
+		@Result(property="title", column="title"),
+		@Result(property="des", column="des"),
+		@Result(property="embedLink", column="embed_link"),
+		@Result(property="thumbnailURL", column="thumbnail_url"),
+		@Result(property="exportLink", column="export_link"),
+		@Result(property="view", column="view"),
+		@Result(property="share", column="share"),		
+		@Result(property="createdDate", column="created_date"),
+		@Result(property="docTypeNum", column="doc_type_num"),
+		@Result(property="userID", column="user_id"),
+		@Result(property="catID", column="cat_id"),
+		@Result(property="status", column="status"),
+		@Result(property="users", column="user_id", one = @One(select = "getUser")),
+		@Result(property="category", column="cat_id", one = @One(select = "getCategory")),
+		@Result(property="catName", column="cat_id", one = @One(select = "getCategoryNameByCatID"))
+	})
+	ArrayList<Document> getAllDocumentByStatus(@Param("status") int status,@Param("pagination") Paging pagination);
+	
+	@Select("SELECT COUNT(doc_id) from	akd_documents WHERE status=#{status}")
+	public Long countTotalDocByStatus(@Param("status") int status);
 		
 }
 
