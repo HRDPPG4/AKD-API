@@ -48,7 +48,7 @@ public class UploadFileToGoogleService {
 		boolean viewed=true;
 		boolean restricted=false;
 		String embedLink=null;			//default
-		int status=1;				//default
+		int status=0;				//default
 
 									
 		//TODO: TO SET THE SCOPE FOR ACCESSING TO OUR GOOGLE DRIVE
