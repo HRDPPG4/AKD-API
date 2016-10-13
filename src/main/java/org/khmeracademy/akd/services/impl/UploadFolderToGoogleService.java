@@ -23,7 +23,7 @@ public class UploadFolderToGoogleService {
 	private SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     private Date d=null;
     private String date=null;
-	public Category upload(String parentID,String folderName,String folderDes,String status) throws GeneralSecurityException, IOException{
+	public Category upload(String parentID,String folderName,String folderDes,String status,String catIcon,int catLevel,int catNumOrder) throws GeneralSecurityException, IOException{
 		//	CODE CONNECT WITH GOOGLE API
 		String scope="https://www.googleapis.com/auth/drive";
 		String serviceAccountID="all-khmer-docs@akd-api.iam.gserviceaccount.com";
@@ -51,6 +51,7 @@ public class UploadFolderToGoogleService {
 		DriveFile folder = google.driveOperations().createFolder(parentID, folderName);
 		Category cat=null;
 		
+		System.out.println("Cat Level in Upload to google service: "+catLevel);
 		if(folder.getId()!=null && folder.getTitle()!=null){
 			d=new Date();
 			date=sdf.format(d);
@@ -61,6 +62,10 @@ public class UploadFolderToGoogleService {
 			cat.setParentID(parentID);
 			cat.setRemark(folderDes);
 			cat.setStatus(Integer.valueOf(status));
+			cat.setIcon(catIcon);
+			cat.setLevel(catLevel);
+			cat.setOrder(catNumOrder);
+			
 		}
 		
 		return cat;		

@@ -32,7 +32,7 @@ public interface CategoryRepository {
 	boolean update(Category cat);
 	
 	
-	@Insert("INSERT INTO akd_categories (cat_id,name,created_date,remark ,parent_id,status,icon) VALUES(#{catID},#{catName},#{createdDate},#{remark},#{parentID},#{status},#{icon})")
+	@Insert("INSERT INTO akd_categories (cat_id,name,created_date,remark ,parent_id,status,icon,rang_order,level) VALUES(#{catID},#{catName},#{createdDate},#{remark},#{parentID},#{status},#{icon},#{order},#{level})")
 	boolean insert(Category cat);
 	
 	@Select("SELECT COUNT(cat_id) from akd_categories")

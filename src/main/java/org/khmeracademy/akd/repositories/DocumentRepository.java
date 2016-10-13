@@ -33,7 +33,7 @@ public interface DocumentRepository {
 	@Update("UPDATE akd_documents SET view =(SELECT view FROM akd_documents WHERE doc_id =#{docID})+1 WHERE doc_id= #{docID}")
    	boolean countView(String docID);
 	
-	@Insert("INSERT INTO akd_documents VALUES(#{docID},#{title},#{des},#{embedLink},#{thumbnailURL},#{exportLink},#{view},#{share},#{createdDate},#{docTypeNum},#{userID},#{catID},#{status})")
+	@Insert("INSERT INTO akd_documents VALUES(#{docID},#{title},#{des},#{embedLink},#{thumbnailURL},#{exportLink},#{view},#{share},#{docTypeNum},#{userID},#{catID},#{status},#{createdDate})")
 	boolean insert(Document doc);
 	
 	@Select("SELECT COUNT(doc_id) from	akd_documents")
