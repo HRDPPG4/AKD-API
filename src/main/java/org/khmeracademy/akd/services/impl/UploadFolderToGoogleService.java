@@ -26,11 +26,22 @@ public class UploadFolderToGoogleService {
 	public Category upload(String parentID,String folderName,String folderDes,String status,String catIcon,int catLevel,int catNumOrder) throws GeneralSecurityException, IOException{
 		//	CODE CONNECT WITH GOOGLE API
 		String scope="https://www.googleapis.com/auth/drive";
-		String serviceAccountID="all-khmer-docs@akd-api.iam.gserviceaccount.com";
+		
+		//	CHIVORN GOOGLE DRIVE API
+		/*String serviceAccountID="all-khmer-docs@akd-api.iam.gserviceaccount.com";
 		String ServiceAccountPrivateKey="AKD-API-3512d7454018.p12";
 		
+		
 		if(parentID==null ||parentID=="" || parentID==" "){
+			
 			parentID="0B4RhbtI4DXY_QWVOWkFiSTlRY1E";
+		}*/
+		
+		//	ALL KHMER DOCS GOOGLE DRIVE API
+		String serviceAccountID="all-khmer-docs@all-khmer-docs-146405.iam.gserviceaccount.com";
+		String ServiceAccountPrivateKey="ALL-KHMER-DOCS-4ef8850572e9.p12";		
+		if(parentID==null ||parentID=="" || parentID==" "){				
+			parentID="0BybKdIgWtK8tbVNqQWlXM0Q2dlE";
 		}
 		
 		
