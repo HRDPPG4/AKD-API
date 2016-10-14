@@ -41,6 +41,7 @@ public class UploadController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		for (int i = 0; i < file.size(); i++) {
 //			fileTitles = file.get(i).getOriginalFilename();
+			System.out.println();
 			path = fileUpload.uploadFile(file.get(i), null);
 			type=path.substring(path.lastIndexOf('.')+1,path.length());
 			if(type.toLowerCase().equals("ppt") || type.toLowerCase().equals("pptx")){
