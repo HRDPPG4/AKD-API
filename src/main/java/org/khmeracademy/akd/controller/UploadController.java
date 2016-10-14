@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
+@RequestMapping("/api/v1")
 public class UploadController {
 
 	@Autowired
@@ -30,7 +31,7 @@ public class UploadController {
 	@Autowired
 	private DocumentRepository documentRepository;
 	
-	@RequestMapping(value="/api/uploadDocument", method = RequestMethod.POST)
+	@RequestMapping(value="/uploadDocument", method = RequestMethod.POST)
 	public Map<String, Object> uploadFile(@RequestParam("files") List<MultipartFile> file,@RequestParam("title") List<String> title,@RequestParam("des") String des,@RequestParam("catID") String catID,@RequestParam("usreID") int userID) throws GeneralSecurityException, IOException{
 		System.out.println("File length: " + file.size());
 		System.out.println("Title length: " + title.size());
@@ -72,7 +73,7 @@ public class UploadController {
 		return map;
 	}
 	
-	@RequestMapping(value="/api/uploadFolder", method = RequestMethod.POST)
+	@RequestMapping(value="/uploadFolder", method = RequestMethod.POST)
 	public void uploadFolder(@RequestParam("folderID") String id,@RequestParam("folderName") String name,@RequestParam("folderDes") String des,@RequestParam("folderStatus") String sta,@RequestParam("catIcon") String catIcon,@RequestParam("catLevel") int catLevel,@RequestParam("catNumOrder") int catNumOrder ) throws GeneralSecurityException, IOException{
 		System.out.println("Status: "+sta);
 		UploadFolderToGoogleService folder=new UploadFolderToGoogleService();	
@@ -89,7 +90,7 @@ public class UploadController {
 	}
 	
 	
-	@RequestMapping(value="/api/uploadUserProfile", method = RequestMethod.POST)
+	@RequestMapping(value="/uploadUserProfile", method = RequestMethod.POST)
 	public Map<String, Object> uploadUserProfile(@RequestParam("files") MultipartFile file,@RequestParam("userID") int userID) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
 		String path = fileUpload.uploadUserProfile(file, null);
@@ -111,7 +112,7 @@ public class UploadController {
 		return map;
 	}
 	
-	@RequestMapping(value="/api/uploadDocThumbnail", method = RequestMethod.POST)
+	@RequestMapping(value="/uploadDocThumbnail", method = RequestMethod.POST)
 	public Map<String, Object> uploadDocThumbnail(@RequestParam("files") MultipartFile file,@RequestParam("docID") String docID) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
 		String path = fileUpload.uploadDocThumbnail(file, null);
