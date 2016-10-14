@@ -51,7 +51,7 @@ public class UploadFileToGoogleService {
 		String serviceAccountID="all-khmer-docs@all-khmer-docs-146405.iam.gserviceaccount.com";
 		String ServiceAccountPrivateKey="ALL-KHMER-DOCS-4ef8850572e9.p12";		
 		if(parentID==null ||parentID=="" || parentID==" "){				
-			parentID="0BybKdIgWtK8tbVNqQWlXM0Q2dlE";
+			parentID="0BybKdIgWtK8tNTZUbGQwMzVpYjQ";
 		}
 		
 		
