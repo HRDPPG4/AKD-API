@@ -19,7 +19,7 @@ public class UploadToServerServiceImpl implements UploadToServerService{
 			return null;
 		}
 		if(folder=="" || folder==null)
-			folder = "D:/KSHRD/ALL KHMER DOCS/AKD File";
+			folder = "C:/KSHRD/ALL KHMER DOCS/AKD File";
 		
 	//	String UPLOAD_PATH = "file" + folder;
 		String UPLOAD_PATH =folder;
