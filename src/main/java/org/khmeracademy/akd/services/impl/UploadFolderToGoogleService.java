@@ -14,6 +14,7 @@ import org.springframework.social.google.api.drive.DriveFile;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.stereotype.Service;
 
+import com.arjuna.ats.internal.jdbc.drivers.modifiers.extensions;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -26,24 +27,21 @@ public class UploadFolderToGoogleService {
 	public Category upload(String parentID,String folderName,String folderDes,String status,String catIcon,int catLevel,int catNumOrder) throws GeneralSecurityException, IOException{
 		//	CODE CONNECT WITH GOOGLE API
 		String scope="https://www.googleapis.com/auth/drive";
+
 		
-		//	CHIVORN GOOGLE DRIVE API
-		/*String serviceAccountID="all-khmer-docs@akd-api.iam.gserviceaccount.com";
-		String ServiceAccountPrivateKey="AKD-API-3512d7454018.p12";
-		
-		
-		if(parentID==null ||parentID=="" || parentID==" "){
-			
-			parentID="0B4RhbtI4DXY_QWVOWkFiSTlRY1E";
-		}*/
+		System.out.println("ParentID: "+parentID);
 		
 		//	ALL KHMER DOCS GOOGLE DRIVE API
 		String serviceAccountID="all-khmer-docs@all-khmer-docs-146405.iam.gserviceaccount.com";
-		String ServiceAccountPrivateKey="ALL-KHMER-DOCS-4ef8850572e9.p12";		
-		if(parentID==null ||parentID=="" || parentID==" "){				
+		String ServiceAccountPrivateKey="ALL-KHMER-DOCS-4ef8850572e9.p12";	
+		
+		String con = parentID.toLowerCase();
+		
+		if(con.equals(null) || con.equals("") || con.equals(" ")){				
 			parentID="0BybKdIgWtK8tNTZUbGQwMzVpYjQ";
 		}
 		
+		System.out.println("ParentID2: "+parentID);
 		
 		Set<String> scopes = new HashSet<>();
 		scopes.add(scope);		
@@ -60,6 +58,12 @@ public class UploadFolderToGoogleService {
                 
 		Google google = new GoogleTemplate(googleCredential.getAccessToken());
 		DriveFile folder = google.driveOperations().createFolder(parentID, folderName);
+		
+		if(con.equals(null) || con.equals("") || con.equals(" ")){				
+			parentID="0";	//	SET PARENT_ID TO 0 BECAUSE DEFAULT VALUE OF PARENT ID IN DATABASE IS 0 BUT DEFAILT VALUE OF PARENT_ID IN GOOGLE DRIVE IS NOT.
+							//	IF WE WANT TO USE THE SAME PARENT_ID IN DB AND GOOGLE DRIVE WE SHOULD CREATE ONE CATEGORY IN DB HAS ID LIKE IN DEFAULT FOLDER IN GOOGLE DRIVE.
+		}
+		
 		Category cat=null;
 		
 		System.out.println("Cat Level in Upload to google service: "+catLevel);

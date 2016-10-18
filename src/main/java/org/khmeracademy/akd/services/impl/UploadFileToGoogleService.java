@@ -1,7 +1,9 @@
 package org.khmeracademy.akd.services.impl;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.security.GeneralSecurityException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -32,39 +34,28 @@ public class UploadFileToGoogleService {
 		//	CODE CONNECT WITH GOOGLE API
 		String scope="https://www.googleapis.com/auth/drive";
 		
-		/*
-		// START CHIVORN GOOGLE DRIVE API 
-		String serviceAccountID="all-khmer-docs@akd-api.iam.gserviceaccount.com";
-		String ServiceAccountPrivateKey="AKD-API-3512d7454018.p12";
-		
-		// String parentID="0B4RhbtI4DXY_QWVOWkFiSTlRY1E";	// SET DEFAULT FOLDER TO STORE FILE
-			if(parentID==null ||parentID=="" || parentID==" "){				
-				parentID="0B4RhbtI4DXY_QWVOWkFiSTlRY1E";
-			}
-		// STOP CHIVORN GOOGLE DRIVE API
-			
-		*/
-		
 		
 		// ALL KHMER DOCS GOOGLE DRIVE API
 		
 		String serviceAccountID="all-khmer-docs@all-khmer-docs-146405.iam.gserviceaccount.com";
-		String ServiceAccountPrivateKey="ALL-KHMER-DOCS-4ef8850572e9.p12";		
-		if(parentID==null ||parentID=="" || parentID==" "){				
+		String ServiceAccountPrivateKey="ALL-KHMER-DOCS-4ef8850572e9.p12";	
+		
+		String con = parentID.toLowerCase();
+		
+		if(con.equals(null) || con.equals("") || con.equals(" ")){				
 			parentID="0BybKdIgWtK8tNTZUbGQwMzVpYjQ";
 		}
+				
 		
-		
-		
-	
-		
-		System.out.println("CatID: "+parentID);
+		System.out.println("CatID for file: "+parentID);
 		
 		//String title="My File";
 		//String description="";
 		boolean viewed=true;
 		boolean restricted=false;
 		String embedLink=null;			//default
+		String exportLink="";
+		String thumbnailURL="";
 		int status=1;				//default
 
 									
@@ -105,7 +96,7 @@ public class UploadFileToGoogleService {
 											.setViewed(viewed)
 											.setRestricted(restricted);				
 		
-		if(fileName.endsWith(".pptx") || fileName.endsWith(".ppt")){
+		if(fileName.toLowerCase().endsWith(".pptx") || fileName.toLowerCase().endsWith(".ppt")){
 			 metaData.setMimeType("application/vnd.google-apps.presentation");
 		}
 		
@@ -117,41 +108,46 @@ public class UploadFileToGoogleService {
 		
 
 	
-		System.out.println("getEmbedLink:  "+file1.getEmbedLink());
+		/*System.out.println("getEmbedLink:  "+file1.getEmbedLink());
 		System.out.println("size:  "+file1.getFileSize());
 
 		System.out.println("getMimeType:  "+file1.getMimeType());
 		System.out.println("getExportLinks:  "+file1.getExportLinks());
 		
-		System.out.println("isFolder:  "+file1.isFolder());	
+		System.out.println("isFolder:  "+file1.isFolder());*/	
 		
+	
 		
 		if(fileName.toLowerCase().endsWith(".pptx") || fileName.toLowerCase().endsWith(".ppt")){
 			embedLink="https://docs.google.com/presentation/d/"+ file1.getId()+"/embed?start=false&loop=false&delayms=3000";
+			exportLink="https://docs.google.com/presentation/d/"+file1.getId()+"/export/pptx";
 		}
 		
 		else if(fileName.toLowerCase().endsWith(".pdf")){
 			embedLink="https://drive.google.com/file/d/"+ file1.getId()+"/preview";
+			exportLink="https://drive.google.com/uc?export=download&id="+file1.getId();
 		}
 		else if(fileName.toLowerCase().endsWith(".doc") || fileName.toLowerCase().endsWith("docx")){
 			embedLink="https://drive.google.com/file/d/"+ file1.getId()+"/preview";
+			exportLink="https://drive.google.com/uc?export=download&id="+file1.getId();
 		}
 		else{
 			embedLink="";
 		}
 
+		thumbnailURL="https://drive.google.com/thumbnail?&sz=w320&id="+file1.getId();
 		Document doc = new Document();
 		d=new Date();
 		date=sdf.format(d);
 		
-		
+		System.out.println(file1.getTitle()+" Upload to Google Drive Successful!");
 		
 		doc.setDocID(file1.getId());
 		doc.setTitle(file1.getTitle());
 		doc.setDes(file1.getDescription());
 		doc.setEmbedLink(embedLink);
-		doc.setThumbnailURL("https://drive.google.com/thumbnail?&sz=w320&id="+file1.getId());
-		doc.setExportLink("");
+		doc.setThumbnailURL(thumbnailURL);
+		doc.setExportLink(exportLink);
 		doc.setView(0);
 		doc.setShare(0);
 		doc.setCreatedDate(date);

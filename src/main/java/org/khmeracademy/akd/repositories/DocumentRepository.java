@@ -246,7 +246,7 @@ public interface DocumentRepository {
 	})
 	ArrayList<Document> getDocumentByRecommended(int userID);
 	
-	@Select("SELECT * FROM akd_documents ORDER BY created_date DESC ")
+	@Select("SELECT * FROM akd_documents ORDER BY to_timestamp(created_date, 'dd-MM-yyyy HH24:MI:SS') DESC")
 	
 	@Results({
 		@Result(property="docID", column="doc_id"),
