@@ -67,6 +67,8 @@ public class UploadFileToGoogleService {
 		boolean viewed=true;
 		boolean restricted=false;
 		String embedLink=null;			//default
+		String exportLink="";
+		String thumbnailURL="";
 		int status=1;				//default
 
 									
@@ -119,42 +121,46 @@ public class UploadFileToGoogleService {
 		
 
 	
-		System.out.println("getEmbedLink:  "+file1.getEmbedLink());
+		/*System.out.println("getEmbedLink:  "+file1.getEmbedLink());
 		System.out.println("size:  "+file1.getFileSize());
 
 		System.out.println("getMimeType:  "+file1.getMimeType());
 		System.out.println("getExportLinks:  "+file1.getExportLinks());
 		
-		System.out.println("isFolder:  "+file1.isFolder());	
+		System.out.println("isFolder:  "+file1.isFolder());*/	
 		
 	
 		
 		if(fileName.toLowerCase().endsWith(".pptx") || fileName.toLowerCase().endsWith(".ppt")){
-			embedLink="https://docs.google.com/presentation/d/"+ file1.getId()+"/embed?start=false&loop=false&delayms=3000";		
+			embedLink="https://docs.google.com/presentation/d/"+ file1.getId()+"/embed?start=false&loop=false&delayms=3000";
+			exportLink="https://docs.google.com/presentation/d/"+file1.getId()+"/export/pptx";
 		}
 		
 		else if(fileName.toLowerCase().endsWith(".pdf")){
 			embedLink="https://drive.google.com/file/d/"+ file1.getId()+"/preview";
+			exportLink="https://drive.google.com/uc?export=download&id="+file1.getId();
 		}
 		else if(fileName.toLowerCase().endsWith(".doc") || fileName.toLowerCase().endsWith("docx")){
 			embedLink="https://drive.google.com/file/d/"+ file1.getId()+"/preview";
+			exportLink="https://drive.google.com/uc?export=download&id="+file1.getId();
 		}
 		else{
 			embedLink="";
 		}
 
+		thumbnailURL="https://drive.google.com/thumbnail?&sz=w320&id="+file1.getId();
 		Document doc = new Document();
 		d=new Date();
 		date=sdf.format(d);
 		
-		
+		System.out.println(file1.getTitle()+" Upload to Google Drive Successful!");
 		
 		doc.setDocID(file1.getId());
 		doc.setTitle(file1.getTitle());
 		doc.setDes(file1.getDescription());
 		doc.setEmbedLink(embedLink);
-		doc.setThumbnailURL("https://drive.google.com/thumbnail?&sz=w320&id="+file1.getId());
-		doc.setExportLink("");
+		doc.setThumbnailURL(thumbnailURL);
+		doc.setExportLink(exportLink);
 		doc.setView(0);
 		doc.setShare(0);
 		doc.setCreatedDate(date);

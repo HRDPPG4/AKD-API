@@ -46,7 +46,7 @@ public class UploadController {
 		}
 		
 		
-		String fileTitles = null;
+	//	String fileTitles = null;
 		int typeNum=0;
 		String type = null;
 		Map<String, Object> map = new HashMap<String, Object>();
