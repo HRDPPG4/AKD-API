@@ -1,7 +1,9 @@
 package org.khmeracademy.akd.services.impl;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.security.GeneralSecurityException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -125,9 +127,10 @@ public class UploadFileToGoogleService {
 		
 		System.out.println("isFolder:  "+file1.isFolder());	
 		
+	
 		
 		if(fileName.toLowerCase().endsWith(".pptx") || fileName.toLowerCase().endsWith(".ppt")){
-			embedLink="https://docs.google.com/presentation/d/"+ file1.getId()+"/embed?start=false&loop=false&delayms=3000";
+			embedLink="https://docs.google.com/presentation/d/"+ file1.getId()+"/embed?start=false&loop=false&delayms=3000";		
 		}
 		
 		else if(fileName.toLowerCase().endsWith(".pdf")){

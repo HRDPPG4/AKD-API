@@ -36,6 +36,16 @@ public class UploadController {
 		System.out.println("File length: " + file.size());
 		System.out.println("Title length: " + title.size());
 		String path = null;
+		
+		for(int i=0;i<title.size();i++){
+			System.out.println("Title: "+title.get(i));
+		}
+		
+		for(int i=0;i<file.size();i++){
+			System.out.println("FileName: "+file.get(i).getOriginalFilename());
+		}
+		
+		
 		String fileTitles = null;
 		int typeNum=0;
 		String type = null;
