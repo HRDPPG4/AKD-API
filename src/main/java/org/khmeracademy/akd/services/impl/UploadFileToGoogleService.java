@@ -34,33 +34,20 @@ public class UploadFileToGoogleService {
 		//	CODE CONNECT WITH GOOGLE API
 		String scope="https://www.googleapis.com/auth/drive";
 		
-		/*
-		// START CHIVORN GOOGLE DRIVE API 
-		String serviceAccountID="all-khmer-docs@akd-api.iam.gserviceaccount.com";
-		String ServiceAccountPrivateKey="AKD-API-3512d7454018.p12";
-		
-		// String parentID="0B4RhbtI4DXY_QWVOWkFiSTlRY1E";	// SET DEFAULT FOLDER TO STORE FILE
-			if(parentID==null ||parentID=="" || parentID==" "){				
-				parentID="0B4RhbtI4DXY_QWVOWkFiSTlRY1E";
-			}
-		// STOP CHIVORN GOOGLE DRIVE API
-			
-		*/
-		
 		
 		// ALL KHMER DOCS GOOGLE DRIVE API
 		
 		String serviceAccountID="all-khmer-docs@all-khmer-docs-146405.iam.gserviceaccount.com";
-		String ServiceAccountPrivateKey="ALL-KHMER-DOCS-4ef8850572e9.p12";		
-		if(parentID==null ||parentID=="" || parentID==" "){				
+		String ServiceAccountPrivateKey="ALL-KHMER-DOCS-4ef8850572e9.p12";	
+		
+		String con = parentID.toLowerCase();
+		
+		if(con.equals(null) || con.equals("") || con.equals(" ")){				
 			parentID="0BybKdIgWtK8tNTZUbGQwMzVpYjQ";
 		}
+				
 		
-		
-		
-	
-		
-		System.out.println("CatID: "+parentID);
+		System.out.println("CatID for file: "+parentID);
 		
 		//String title="My File";
 		//String description="";

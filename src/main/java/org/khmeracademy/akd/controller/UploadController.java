@@ -87,7 +87,9 @@ public class UploadController {
 	public void uploadFolder(@RequestParam("folderID") String id,@RequestParam("folderName") String name,@RequestParam("folderDes") String des,@RequestParam("folderStatus") String sta,@RequestParam("catIcon") String catIcon,@RequestParam("catLevel") int catLevel,@RequestParam("catNumOrder") int catNumOrder ) throws GeneralSecurityException, IOException{
 		System.out.println("Status: "+sta);
 		UploadFolderToGoogleService folder=new UploadFolderToGoogleService();	
-		System.out.println("Cat Level in controller: "+catLevel);
+		
+		
+		
 		boolean status=uploadToDBService.uploadFolder(folder.upload(id, name,des,sta,catIcon,catLevel,catNumOrder));	
 		if(status){
 			//SET CODE
