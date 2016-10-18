@@ -105,7 +105,7 @@ public class UploadFileToGoogleService {
 											.setViewed(viewed)
 											.setRestricted(restricted);				
 		
-		if(fileName.endsWith(".pptx") || fileName.endsWith(".ppt")){
+		if(fileName.toLowerCase().endsWith(".pptx") || fileName.toLowerCase().endsWith(".ppt")){
 			 metaData.setMimeType("application/vnd.google-apps.presentation");
 		}
 		
