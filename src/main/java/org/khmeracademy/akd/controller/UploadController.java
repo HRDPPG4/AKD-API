@@ -9,8 +9,8 @@ import java.util.Map;
 import org.khmeracademy.akd.repositories.DocumentRepository;
 import org.khmeracademy.akd.services.UploadToDBService;
 import org.khmeracademy.akd.services.UploadToServerService;
-import org.khmeracademy.akd.services.impl.UploadFileToGoogleService;
-import org.khmeracademy.akd.services.impl.UploadFolderToGoogleService;
+import org.khmeracademy.akd.services.impl.UploadFileToGoogleServiceImpl;
+import org.khmeracademy.akd.services.impl.UploadFolderToGoogleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,16 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1")
-public class UploadController {
-
-	@Autowired
-	UploadToServerService fileUpload;
+public class UploadController {	
 	
 	@Autowired
 	private UploadToDBService uploadToDBService;
 	
 	@Autowired
-	private DocumentRepository documentRepository;
+	private UploadToServerService uploadToServerService;
 	
 	@RequestMapping(value="/uploadDocument", method = RequestMethod.POST)
 	public Map<String, Object> uploadFile(@RequestParam("files") List<MultipartFile> file,@RequestParam("title") List<String> title,@RequestParam("des") String des,@RequestParam("catID") String catID,@RequestParam("usreID") int userID) throws GeneralSecurityException, IOException{
@@ -37,23 +34,20 @@ public class UploadController {
 		System.out.println("Title length: " + title.size());
 		String path = null;
 		
-		for(int i=0;i<title.size();i++){
+		/*for(int i=0;i<title.size();i++){
 			System.out.println("Title: "+title.get(i));
 		}
 		
 		for(int i=0;i<file.size();i++){
 			System.out.println("FileName: "+file.get(i).getOriginalFilename());
-		}
+		}*/
 		
 		
-	//	String fileTitles = null;
 		int typeNum=0;
 		String type = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		for (int i = 0; i < file.size(); i++) {
-//			fileTitles = file.get(i).getOriginalFilename();
-			System.out.println();
-			path = fileUpload.uploadFile(file.get(i), null);
+			path = uploadToServerService.uploadDocument(file.get(i), null);
 			type=path.substring(path.lastIndexOf('.')+1,path.length());
 			if(type.toLowerCase().equals("ppt") || type.toLowerCase().equals("pptx")){
 				typeNum=1;
@@ -68,17 +62,18 @@ public class UploadController {
 				typeNum=0;
 			}
 			
+			boolean status=false;
+			
 			if(path!=null){
-				UploadFileToGoogleService up=new UploadFileToGoogleService();
-				uploadToDBService.uploadDocument(up.uploadDocument(path,title.get(i),des,catID,typeNum,userID));
+				UploadFileToGoogleServiceImpl up=new UploadFileToGoogleServiceImpl();
+				status = uploadToDBService.uploadDocument(up.uploadDocument(path,title.get(i),des,catID,typeNum,userID));
 			}
 			
-			
-			map.put("CODE","0000");
-			map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
-			map.put("DATA",path);
-			
-			
+			if(status){
+				map.put("CODE","10000");
+				map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
+				map.put("DATA",path);				
+			}			
 		}
 		return map;
 	}
@@ -86,10 +81,7 @@ public class UploadController {
 	@RequestMapping(value="/uploadFolder", method = RequestMethod.POST)
 	public void uploadFolder(@RequestParam("folderID") String id,@RequestParam("folderName") String name,@RequestParam("folderDes") String des,@RequestParam("folderStatus") String sta,@RequestParam("catIcon") String catIcon,@RequestParam("catLevel") int catLevel,@RequestParam("catNumOrder") int catNumOrder ) throws GeneralSecurityException, IOException{
 		System.out.println("Status: "+sta);
-		UploadFolderToGoogleService folder=new UploadFolderToGoogleService();	
-		
-		
-		
+		UploadFolderToGoogleServiceImpl folder=new UploadFolderToGoogleServiceImpl();	
 		boolean status=uploadToDBService.uploadFolder(folder.upload(id, name,des,sta,catIcon,catLevel,catNumOrder));	
 		if(status){
 			//SET CODE
@@ -105,29 +97,32 @@ public class UploadController {
 	@RequestMapping(value="/uploadUserProfile", method = RequestMethod.POST)
 	public Map<String, Object> uploadUserProfile(@RequestParam("files") MultipartFile file,@RequestParam("userID") int userID) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
-		String path = fileUpload.uploadUserProfile(file, null);
+		String path = uploadToServerService.uploadUserProfile(file, null);
 		System.out.println(userID);
 		
 		String fileName=path.substring(path.lastIndexOf('/')+1,path.length());
 		System.out.println(fileName);
 		
-		
+		boolean status=false;
 		if(path!=null)
 		{
-			uploadToDBService.uploadUserProfile(fileName,userID);	
+			status = uploadToDBService.uploadUserProfile(fileName,userID);	
 		}
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("CODE","0000");
-		map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
-		map.put("DATA",path);
-		return map;
+		if(status){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("CODE","10000");
+			map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
+			map.put("DATA",path);
+			return map;
+		}
+		return null;
 	}
 	
 	@RequestMapping(value="/uploadDocThumbnail", method = RequestMethod.POST)
 	public Map<String, Object> uploadDocThumbnail(@RequestParam("files") MultipartFile file,@RequestParam("docID") String docID) throws GeneralSecurityException, IOException{
 		//upload file to server -> get full path
-		String path = fileUpload.uploadDocThumbnail(file, null);
+		String path = uploadToServerService.uploadDocThumbnail(file, null);
 		System.out.println("DocID"+docID);
 		
 		String fileName=path.substring(path.lastIndexOf('/')+1,path.length());
@@ -135,18 +130,21 @@ public class UploadController {
 		String finalFilePath="http://localhost:1111/resources/img/doc-thumbnail/"+fileName;
 		
 		
-			
+		boolean status=false;	
 		
 		if(path!=null)
 		{
 //			uploadToDBService.uploadDocThumbnail(fileName,docID);	
-			uploadToDBService.uploadDocThumbnail(finalFilePath,docID);	
+			status = uploadToDBService.uploadDocThumbnail(finalFilePath,docID);	
 		}
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("CODE","0000");
-		map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
-		map.put("DATA",path);
-		return map;
+		if(status){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("CODE","10000");
+			map.put("MESSAGE","YOU HAVE BEEN UPLOADED SUCCESSFULLY!!!");
+			map.put("DATA",path);
+			return map;
+		}
+		return null;
 	}		
 }
